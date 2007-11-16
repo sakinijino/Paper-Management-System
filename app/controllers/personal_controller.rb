@@ -13,7 +13,7 @@ class PersonalController < ApplicationController
       flash[:notice] = 'You have already added this paper.'
       redirect_to :action => 'show_paper_detail', :id => paper.id
     else
-      for tag_name in params[:paper][:tags].split
+      for tag_name in params[:paper][:tags].split.uniq
         collection = Collection.new
         collection.paper = paper
         collection.user = current_user
