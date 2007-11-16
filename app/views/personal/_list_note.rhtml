@@ -1,0 +1,16 @@
+<%if show_notes == nil%>
+<%
+  return "No notes"
+  end
+%>
+
+<% for note in show_notes%>
+    <%= h(note.user.realname)%>
+    -
+    <%= h(note.publish_time.strftime("%Y-%m-%d %H:%M"))%>
+    <% if note.user.id == current_user.id%>
+      <%= link_to "Edit", {:action => :edit_note, :id => note.id} %>
+   <% end %>
+   <br />
+    <%= h(note.content)%>
+<% end %>

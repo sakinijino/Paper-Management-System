@@ -1,0 +1,25 @@
+<h2>To Read...</h2>
+<%for to_read_paper in @to_read_papers%> 
+  <%= link_to to_read_paper.title, {:action=>"show_paper_detail",:id=>to_read_paper.id} %>
+<% end %>
+
+<h2>Reading...</h2>
+<%for reading_paper in @reading_papers%> 
+  <%= link_to reading_paper.title, {:action=>"show_paper_detail",:id=>reading_paper.id} %>
+<% end %>
+
+<h2>Finished...</h2>
+<%for finished_paper in @finished_papers%> 
+  <%= link_to finished_paper.title, {:action=>"show_paper_detail",:id=>finished_paper.id} %>
+<% end %>
+
+<hr />
+<h2>My Tags...</h2>
+  <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+    <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+  <% end %>
+  
+<hr />
+<h2>My Notes...</h2>
+<%= render :partial=>"list_note", :locals=>{:show_notes=>@my_notes} %>
+

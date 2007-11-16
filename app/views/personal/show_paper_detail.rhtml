@@ -1,0 +1,19 @@
+<%= render :partial=>"shared/show_paper_basic_info", :object=>@paper%>
+
+<hr />
+
+<label for="personal_tags">Personal Tags:</label>
+<%for tag in @tags%>
+  <%= link_to tag.name, { :controller=>:public, :action => :list_tagged_paper, :id => tag.id } %>
+<%end%>
+
+<div>
+<h3>Public Notes...</h3>
+<%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes}%>
+  
+<h3>Personal Notes...</h3>
+<%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes}%>
+</div>
+
+<hr />
+<%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>

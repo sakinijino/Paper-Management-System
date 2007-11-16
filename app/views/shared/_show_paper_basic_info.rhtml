@@ -1,0 +1,33 @@
+<% paper = show_paper_basic_info %>
+
+<label for="paper_title">Title:</label>
+<%=h paper.title %>
+<br />
+
+<label for="paper_abstract">Abstract:</label>
+<%=h paper.abstract %>
+<br />
+
+<label for="paper_publish_time">Publish Time:</label>
+<%=h paper.publish_time%>
+<br />
+  
+<label for="paper_PMID">PMID:</label>
+<%=h paper.identifier%>
+<br />
+
+<label for="paper_PMID">Author(s):</label>
+<% for author in paper.authors%>
+<%=h author.name%>
+<%end%>
+<br />
+
+<label for="paper_source">Source:</label>
+<%=h paper.source%>
+<br />
+
+<label for="paper_attachment">Attachment:</label>
+<%if(paper.attachment!=nil)%>
+<%= link_to paper.title, url_for_file_column(:paper, :attachment) %>
+<%end%>
+<br />

@@ -1,0 +1,29 @@
+<% form_tag({:action => 'create_paper'}, {:multipart => 'true'}) do%>
+  <%= error_messages_for 'paper' %>
+
+  <label for="paper_title">Title:</label>
+  <%= text_field 'paper', 'title'  %>
+
+  <label for="paper_abstract">Abstract:</label>
+  <%= text_area 'paper', 'abstract'  %>
+
+  <label for="paper_publish_time">Publish Time:</label>
+  <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true  %>
+  
+  <label for="paper_PMID">PMID:</label>
+  <%= text_field 'paper', 'identifier'  %>
+
+  <label for="paper_author">Author1:</label>
+  <%= text_field_tag 'author_name[]'%>
+  
+   <label for="paper_author">Author2:</label>
+  <%= text_field_tag 'author_name[]'%>
+
+  <label for="paper_source">Source:</label>
+  <%= text_field 'paper', 'source'  %>    
+
+  <label for="paper_attachment">Attachment:</label>
+  <%= file_column_field 'paper', "attachment" %>
+  <br />
+  <%= submit_tag 'Save' %>
+<% end %>
