@@ -9,7 +9,7 @@ class PublicController < ApplicationController
     @paper = Paper.new(params[:paper])
     
     if @paper.save
-      for name in params[:author_name]
+      for name in params[:author_name].uniq
         new_author = Author.find_by_name(name)
         if new_author == nil
           new_author = Author.create({:name=>name})
