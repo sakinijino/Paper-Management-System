@@ -9,4 +9,5 @@
 9 notes删除、collection删除、关联删除
 10 权限判断
 11 个人首页中my notes加上到paper的link
+12 tag搜索，用ferret
 end 删除本文件
