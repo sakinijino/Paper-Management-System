@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag 'common' %>
+
+<% form_tag({:action => 'list_searched_paper'} ) do%>
+  
+  <%= text_field_tag 'query'  %>
+  <%= submit_tag 'Search' %>
+  
+  <h2>Popular Tags...</h2>
+    <% tag_cloud @tags, @tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+    <% end %>  
+
+<% end %>

@@ -1,5 +1,13 @@
 class PublicController < ApplicationController
   def index
+    @tags = Collection.find(:all,
+                                    :select => 'name, count(tag_id) as tag_amount, t.id as id',
+                                    :order => 'tag_amount desc',
+                                    :group => 'tag_id',
+                                    :limit => 60,
+                                    :joins => 'as c inner join tags as t on c.tag_id=t.id')
+    #@tags = @results.map {|t| t.name}
+    @tag_counts = @tags.map {|t| t.tag_amount.to_i}    
   end
   
   def contribute_paper
@@ -44,12 +52,31 @@ class PublicController < ApplicationController
     
     #如果性能有问题的话
     @related_tags = Array.new
-    for other_tag in Tag.find_all - [@tag]
-      if @papers.size > (@papers - other_tag.papers).size
+    for other_tag in Tag.find_all
+      if (@papers & other_tag.papers).empty? == false
         @related_tags << other_tag
       end
     end
     @related_tags = @related_tags.sort
-  end    
-  
+  end
+
+  def list_searched_paper
+    #这里有可能要扩展
+    @papers = getSearchResult(params[:query])
+    
+    @related_tags = Array.new
+    for other_tag in Tag.find_all
+      if (@papers & other_tag.papers).empty? == false
+        @related_tags << other_tag
+      end
+    end
+    @related_tags = @related_tags.sort
+  end
+
+  private
+  def getSearchResult(query)
+    Paper.find_by_contents(query)
+    #render :text => 'hello'#Paper.find_id_by_contents(query)
+  end
+
 end

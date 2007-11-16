@@ -1,15 +1,5 @@
 <h2>Papers Tagged with '<%=@tag.name%>'...</h2>
-<%for paper in @papers%> 
-  <%= link_to paper.title, {:action=>"show_paper_detail",:id=>paper.id} %>
-  <br />
-<% end %>
 
-<hr />
-
-<h2>Related Tags...</h2>
-<%for tag in @related_tags%> 
-  <%= link_to tag.name, {:action=>"list_tagged_paper",:id=>tag.id} %>
-  <% end %>
-  
+<%= render :partial=>"list_paper", :locals=>{:papers=>@papers, :related_tags=>@related_tags} %>
 
 
