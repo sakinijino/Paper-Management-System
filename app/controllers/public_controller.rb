@@ -5,9 +5,18 @@ class PublicController < ApplicationController
                                     :order => 'tag_amount desc',
                                     :group => 'tag_id',
                                     :limit => 60,
-                                    :joins => 'as c inner join tags as t on c.tag_id=t.id')
-    #@tags = @results.map {|t| t.name}
-    @tag_counts = @tags.map {|t| t.tag_amount.to_i}    
+                                    :joins => 'as c inner join tags as t on c.tag_id=t.id').sort_by{|item| item.id}
+    @tag_counts = @tags.map {|t| t.tag_amount.to_i} 
+    
+    @popular_papers = Paper.find_by_sql(
+                                                      "SELECT p.id, p.title
+                                  FROM (SELECT * FROM collections group by paper_id,user_id) 
+                                  as c inner join papers p on p.id=c.paper_id group by c.paper_id order by count(c.user_id) desc
+                                  ")
+                                    
+    @newest_papers = Paper.find(:all,
+                                             :order => 'id desc',
+                                             :limit => 10)                         
   end
   
   def contribute_paper
@@ -34,25 +43,14 @@ class PublicController < ApplicationController
       render :action => 'contribute_paper'
     end
   end
-
-#use the show_paper_detail method in personal controller
-  def show_paper_detail
-    @paper =  Paper.find(params[:id])
-    
-    @tag_counts = Array.new
-    @tags = @paper.tags
-    for tag in @tags
-      @tag_counts << tag.collections.count
-    end
-  end
   
   def list_tagged_paper
     @tag = Tag.find(params[:id])
     @papers = @tag.papers
     
-    #如果性能有问题的话
+    #这里需要用join重写，如果性能有问题的话
     @related_tags = Array.new
-    for other_tag in Tag.find_all
+    for other_tag in Tag.find_all - [@tag]
       if (@papers & other_tag.papers).empty? == false
         @related_tags << other_tag
       end

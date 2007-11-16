@@ -1,17 +1,12 @@
 <h2>To Read...</h2>
-<%for to_read_paper in @to_read_papers%> 
-  <%= link_to to_read_paper.title, {:action=>"show_paper_detail",:id=>to_read_paper.id} %>
-<% end %>
+<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
 
 <h2>Reading...</h2>
-<%for reading_paper in @reading_papers%> 
-  <%= link_to reading_paper.title, {:action=>"show_paper_detail",:id=>reading_paper.id} %>
-<% end %>
+<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
+
 
 <h2>Finished...</h2>
-<%for finished_paper in @finished_papers%> 
-  <%= link_to finished_paper.title, {:action=>"show_paper_detail",:id=>finished_paper.id} %>
-<% end %>
+<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
 
 <hr />
 <h2>My Tags...</h2>

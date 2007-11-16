@@ -1,3 +1,5 @@
 <h2>Search Results with '<%=params[:query]%>'...</h2>
+<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
 
-<%= render :partial=>"list_paper", :locals=>{:papers=>@papers, :related_tags=>@related_tags} %>
+<h2>Related Tags...</h2>
+<%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>

@@ -1,0 +1,3 @@
+<%for tag in related_tags%> 
+  <%= link_to tag.name, {:controller=>"public", :action=>"list_tagged_paper",:id=>tag.id} %>
+<% end %>

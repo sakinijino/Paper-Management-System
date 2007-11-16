@@ -7,7 +7,6 @@ class PersonalController < ApplicationController
   
   def add_to_collection
     paper = Paper.find(params[:id])
-    puts current_user.papers
 
     if current_user.papers.find_by_id(paper.id)
       flash[:notice] = 'You have already added this paper.'
@@ -56,9 +55,18 @@ class PersonalController < ApplicationController
   
   def show_paper_detail
     @paper = Paper.find(params[:id])
-    user_tags = current_user.tags
-    @tags = user_tags - (user_tags - @paper.tags)
-
+    @tags = Collection.find(:all,
+                                     :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id, :pid=>@paper.id}],
+                                    :select => 't.name,t.id, c.paper_id, c.user_id',
+                                    :joins => 'as c inner join tags as t on c.tag_id=t.id')
+    if @tags.empty?
+      @un_collected = true
+      return;
+    end
+    
+    #~ user_tags = current_user.tags
+    #~ @tags = user_tags & @paper.tags
+    #~ Collection.find
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
     @personal_notes = Note.find_all_by_paper_id_and_user_id(@paper.id, current_user.id)
   end

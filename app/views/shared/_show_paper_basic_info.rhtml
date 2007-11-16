@@ -16,10 +16,8 @@
 <%=h paper.identifier%>
 <br />
 
-<label for="paper_PMID">Author(s):</label>
-<% for author in paper.authors%>
-<%=h author.name%>
-<%end%>
+<label for="paper_author">Author(s):</label>
+<%= paper.author_list %>
 <br />
 
 <label for="paper_source">Source:</label>

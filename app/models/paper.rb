@@ -9,6 +9,6 @@ class Paper < ActiveRecord::Base
   acts_as_ferret :fields => [:title, :abstract, :identifier, :author_list]
   
   def author_list
-    (self.authors.map {|a| a.name}).join
+    (self.authors.map {|a| a.name}).join(" ")
   end
 end

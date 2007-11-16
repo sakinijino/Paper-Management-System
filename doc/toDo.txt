@@ -1,0 +1,12 @@
+1 搜索不对：author不能搜，其他不能分词
+2 url溢出没做
+3 各种检查（各种model层的检查）
+4 parse网页和上传paper没有连接
+5 修改用户阅读状态没做
+6 布局
+7 css和html
+8 管理员
+9 notes删除、collection删除、关联删除
+10 权限判断
+11 个人首页中my notes加上到paper的link
+end 删除本文件
