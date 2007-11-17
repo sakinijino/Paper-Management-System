@@ -54,6 +54,7 @@ body{
         float: right;
         background: white;
         padding: 5px;
+		padding-left: 10px;
         font-size: 14px;
         color: rgb(14, 48, 98);
         margin-bottom: 10px;

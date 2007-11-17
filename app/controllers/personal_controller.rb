@@ -25,7 +25,7 @@ class PersonalController < ApplicationController
         collection.status = params[:paper][:status]
         collection.save
       end
-    redirect_to :action=>'list_my_paper',:id=>current_user.id
+    redirect_to :action=>'list_collection',:id=>current_user.id
     end
   end
   

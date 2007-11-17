@@ -40,7 +40,7 @@ class PublicController < ApplicationController
         end
       end      
       flash[:notice] = 'Paper has been successfully uploaded.'
-      redirect_to :action => 'show_paper_detail', :id => @paper.id 
+      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
     
     else
       render :action => 'contribute_paper'
