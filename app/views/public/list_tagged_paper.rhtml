@@ -1,7 +1,12 @@
+<div class='index-papers'>
 <h2>Papers Tagged with '<%=@tag.name%>'...</h2>
 <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+</div>
 
+<div class='popular-tags'>
 <h2>Related Tags...</h2>
 <%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
+</div>
 
+<div class="clearElement"></div>
 
