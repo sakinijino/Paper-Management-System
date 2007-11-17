@@ -10,14 +10,16 @@
     <% end %>
 </div>
 
-<div index-papers>
+<div class="index-papers">
+
   <div class="popular-papers">
     <h2>Popular Papers...</h2>
     <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@popular_papers} %>
   </div>
 
-  <div>
+  <div class="newest-papers">
     <h2>Newest Papers...</h2>
     <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@newest_papers} %>
   </div>
+  
 </div>
