@@ -12,6 +12,10 @@
       <%= link_to "Edit", {:action => :edit_note, :id => note.id} %>
    <% end %>
    <br />
-    <%= link_to note.content, {:controller => :personal, :action => :show_paper_detail, :id => note.paper_id}%>
+   <% if in_my_collection == true %>
+    <%= link_to note.paper.title, {:controller => :personal, :action => :show_paper_detail, :id => note.paper_id}%>
+    <br />
+   <% end %>
+   <%= h(note.content) %>
    <br /><br /><br />
 <% end %>

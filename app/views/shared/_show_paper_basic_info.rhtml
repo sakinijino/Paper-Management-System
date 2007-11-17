@@ -1,36 +1,3 @@
-<table class="speech-detail">
-        <colgroup>
-                <col class="title"/>
-                <col />
-        </colgroup>
-        <tr>
-                <td>Topic:</td>
-                <td class="long-text"><%=h @speech.topic %></td>
-        </tr>
-        <tr>
-                <td>Date:</td>
-                <td><%=h @speech.date %></td>
-        </tr>
-        <tr>
-                <td>Speaker:</td>
-                <td><%= @speech.speaker ? link_to(@speech.speaker.realname, {:controller=>'account', :action=>'show', :id=>@speech.speaker.id}) : h(@speech.speaker_name) %></td>
-  </tr>
-        <tr>
-                <td>Abstract:</td>
-                <td class="long-text"><%=simple_format @speech.abstract %></td>
-        </tr>
-        <tr>
-                <td>Attachment:</td>
-                <td class="long-text">
-        <%if(@speech.attachment!=nil)%>
-          <%= image_tag(@speech.attachment.split('.')[@speech.attachment.split('.').length-1]+".jpg",:style=>'position:relative;top:3px')%>
-          <%= link_to ((@speech.topic && @speech.topic!="") ? @speech.topic : "Attachment"), url_for_file_column(:speech, :attachment) %>
-        <%end%>
-    </td>
-        </tr>
-</table>
-
-
 <% paper = show_paper_basic_info %>
 
 <table class="paper-basic-info">
@@ -66,7 +33,9 @@
                 <td>Attachment:</td>
                 <td class="long-text">
                   <%if(paper.attachment!=nil)%>
+                    <%= image_tag("pdf.jpg",:style=>'position:relative;top:3px')%>
                     <%= link_to paper.title, url_for_file_column(:paper, :attachment) %>
                   <%end%>
                 </td>
-        </tr>   
+        </tr>
+</table>
