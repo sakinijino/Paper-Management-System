@@ -53,12 +53,14 @@ class PublicController < ApplicationController
     
     #这里需要用join重写，如果性能有问题的话
     @related_tags = Array.new
+    @related_tags_counts = []
     for other_tag in Tag.find_all - [@tag]
       if (@papers & other_tag.papers).empty? == false
         @related_tags << other_tag
+        @related_tags_counts << other_tag.collections.count
       end
     end
-    @related_tags = @related_tags.sort
+    #@related_tags = @related_tags.sort
   end
 
   def list_searched_paper
@@ -66,12 +68,14 @@ class PublicController < ApplicationController
     @papers = getSearchResult(params[:query])
     
     @related_tags = Array.new
+    @related_tags_counts = []
     for other_tag in Tag.find_all
       if (@papers & other_tag.papers).empty? == false
         @related_tags << other_tag
+        @related_tags_counts << other_tag.collections.count
       end
     end
-    @related_tags = @related_tags.sort
+    #@related_tags = @related_tags.sort
   end
 
   private

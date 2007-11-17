@@ -1,34 +1,34 @@
 <h2>Paper Detail</h2>
-<table class="paper-basic-info">
+<table>
         <colgroup>
                 <col class="title"/>
                 <col />
         </colgroup>
-        <tr>
+        <tr class='list-line-even'>
                 <td>Title:</td>
                 <td class="long-text"><%=h paper.title %></td>
         </tr>     
-        <tr>
+        <tr class='list-line-odd'>
                 <td>Publish Time:</td>
                 <td><%=h paper.publish_time.strftime("%Y-%m")%></td>
         </tr>
-        <tr>
+        <tr class='list-line-even'>
                 <td>PMID:</td>
                 <td><%=h paper.identifier%></td>
         </tr>         
-        <tr>
+        <tr class='list-line-odd'>
                 <td>Author(s):</td>
                 <td><%=h paper.author_list_with_comma%></td>
         </tr>
-        <tr>
+        <tr class='list-line-even'>
                 <td>Source:</td>
                 <td><%=h paper.source%></td>
         </tr>
-         <tr>
+         <tr class='list-line-odd'>
                 <td>Abstract:</td>
                 <td class="long-text"><%=simple_format paper.abstract %></td>
         </tr>   
-        <tr>
+        <tr class='list-line-even' >
                 <td>Attachment:</td>
                 <td class="long-text">
                   <%if(paper.attachment!=nil)%>

@@ -32,3 +32,15 @@
 .content .note-entry div.note{
 	padding: 2px 5px;
 }
+
+.content .result-papers {
+	width: 580px;
+	padding-right: 15px;
+	float: left;
+}
+
+.content .related-tags {
+	width: 270px;
+	padding-left: 10px;
+	float: right;
+}

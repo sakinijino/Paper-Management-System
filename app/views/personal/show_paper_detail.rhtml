@@ -1,4 +1,19 @@
-<%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
+<div class="paper-basic-info">
+  <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
+</div>
+
+<div class="all-notes">
+  <h2>Public Notes...</h2>
+  <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
+  
+  <% if @un_collected != true%>
+    <h2>My Notes...</h2>
+    <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
+
+    <hr />
+    <%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>
+  <% end %>
+</div>
 
 <div class="collection-status">
   <% if  @un_collected == true%>
@@ -14,19 +29,6 @@
       <%= link_to tag.name, { :controller=>:public, :action => :list_tagged_paper, :id => tag.id } %>
     <%end%>
   <%end%>
-</div>
-
-<div class="all-notes">
-  <h2>Public Notes...</h2>
-  <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
-  
-  <% if @un_collected != true%>
-    <h2>Personal Notes...</h2>
-    <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
-
-    <hr />
-    <%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>
-  <% end %>
 </div>
 
 <div class="clearElement"></div>
