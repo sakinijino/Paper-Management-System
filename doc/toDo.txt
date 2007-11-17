@@ -10,4 +10,6 @@
 10 权限判断
 11 个人首页中my notes加上到paper的link
 12 tag搜索，用ferret
+13 高级搜索
+14 paper list 概要信息
 end 删除本文件
