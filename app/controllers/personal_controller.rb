@@ -1,5 +1,6 @@
 class PersonalController < ApplicationController
-  include AuthenticatedSystem  
+  layout 'frame'
+  include AuthenticatedSystem
   
   def add_personal_info
     #当推荐其他相关标签时有用

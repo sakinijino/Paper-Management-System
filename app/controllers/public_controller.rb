@@ -1,4 +1,7 @@
 class PublicController < ApplicationController
+  layout 'frame'
+  include AuthenticatedSystem  
+  
   def index
     @tags = Collection.find(:all,
                                     :select => 'name, count(tag_id) as tag_amount, t.id as id',
