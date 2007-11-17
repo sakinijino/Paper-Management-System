@@ -25,7 +25,10 @@ class AccountController < ApplicationController
   end
 
   def signup
+    @no_admin = (User.find_by_role('Administator') == nil)
+    redirect_to(:action => 'login') unless @no_admin
     @user = User.new(params[:user])
+    @user.role = 'Administrator'
     return unless request.post?
     @user.save!
     self.current_user = @user

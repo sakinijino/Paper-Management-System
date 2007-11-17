@@ -1,0 +1,22 @@
+<%= error_messages_for 'user' %>
+<div class="clearElement"></div>
+<!--[form:user]-->
+<label for="user_login">Login Name (* must not be empty)</label>
+<%= text_field 'user', 'login'  %> 
+
+<label for="user_email">E-mail</label>
+<%= text_field 'user', 'email'  %>
+
+<label for="user_realname">Real Name (* default as login name if left blank)</label>
+<%= text_field 'user', 'realname'  %>
+
+<label for="user_type">Role (*)</label>
+<%= select :user,:role, @roles%>
+
+<label for="password">Password <%= "(* default as login name if left blank)" if params[:action] == 'new'%></label>
+<%= password_field :user, :password %>
+
+<label for="password_confirmation">Confirm Password</label>
+<%= password_field :user, :password_confirmation %>
+<!--[eoform:user]-->
+

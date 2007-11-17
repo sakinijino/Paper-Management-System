@@ -28,6 +28,10 @@
       <li><%= link_to 'Homepage', {:controller =>'public', :action=>'index'}%></li>
       <span><a> | </a></span>
       <li><%= link_to 'My Papers', {:controller =>'personal', :action=>'list_collection', :id=>current_user.id}%></li>
+      <%if is_admin? %>
+        <span><a> | </a></span>
+        <li><%= link_to 'User Management', {:controller =>'admin', :action=>'list_user'}%></li>
+      <%end%>
   </ul>
   <%end%>
 </div>

@@ -13,4 +13,9 @@
 13 高级搜索
 14 paper list 概要信息
 15 分页
+16 collection加日期
+17 分页
+18 规范http请求类型
+19 show_paper_detail页面，basic info部分加最多的tag，加当前collection状态和修改
+20 将菜单向下放一列
 end 删除本文件

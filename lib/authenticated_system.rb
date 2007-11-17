@@ -53,6 +53,10 @@ module AuthenticatedSystem
       logged_in? && authorized? ? true : access_denied
     end
     
+    def admin_required
+      logged_in? && (current_user.role=='Administrator') ? true : access_denied
+    end    
+    
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.

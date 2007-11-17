@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
   has_many :tags, :through => :collections, :select => "distinct tags.*"
   has_many :notes
 
+  def self.role_list
+    return ['Common User', 'Administrator']
+  end
+
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
     u = find_by_login(login) # need to get the salt

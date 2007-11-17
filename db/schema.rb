@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "authors", :force => true do |t|
     t.column "name", :string
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "remember_token",            :string
     t.column "remember_token_expires_at", :datetime
     t.column "realname",                  :string
+    t.column "role",                      :string
   end
 
 end
