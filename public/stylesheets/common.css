@@ -14,10 +14,32 @@ textarea{
         height: 250px;
 }
 h1{
-        font-size: 16px;
+        font-size: 20px;
         font-family: georgia;
         color: rgb(14, 48, 98);
         font-weight: bold;
+}
+
+
+h2{
+	font-family: normal Arial,Helvetica,sans-serif;
+	font-size: 20px;
+	font-variant: normal;
+	font-weight: normal;
+	font-size-adjust: normal;
+	line-height: 150%;
+	color: rgb(0 ,102, 0);
+	margin:5px 0;
+}
+
+h3{
+	font-family: normal Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	font-variant: normal;
+	font-style: italic;
+	color: rgb(0 ,102, 0);
+	margin:5px 0;
+	padding: 0 5px;
 }
 
 a { color:#06c;}
@@ -35,7 +57,7 @@ body{
 }
 
 .container{
-        width: 775px;
+        width: 950px;
         margin-top: 1em;
         margin-left: auto;
         margin-right: auto;
@@ -57,7 +79,6 @@ body{
 		padding-left: 10px;
         font-size: 14px;
         color: rgb(14, 48, 98);
-        margin-bottom: 10px;
 }
 
 .menu{
@@ -69,15 +90,11 @@ body{
         list-style-image: none;
 }
 
-.menu h1{
-        margin-bottom: 15px;
-}
-
 .menu li{
         font-weight: bold;
         padding-right: 10px;
         display: inline;
-        float: left
+        float: left;
 }
 
 .menu li a {
@@ -97,10 +114,12 @@ body{
 }
 
 .content{
-        width: 100%;
+		margin-top: 10px;
+        width: 925px;
         border: 1px solid rgb(137, 213, 239);
         background: white;
-        margin-right: 0px;
+		margin-left: 10px;
+        /*margin-right: 0px;*/
         padding-top: 15px;
         padding-bottom: 20px;
         padding-right: 10px;
@@ -108,7 +127,7 @@ body{
 
 }
 
-.content .headline{
+/*.content .headline{
         margin-bottom: 30px;
 }
 
@@ -124,7 +143,7 @@ body{
         font-weight: bold;
         font-size: 14px;
         font-family: Verdana;
-}
+}*/
 
 .content table{
         margin: 5px;

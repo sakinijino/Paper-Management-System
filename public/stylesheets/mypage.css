@@ -1,0 +1,17 @@
+.content .my-papers-list,
+.content .my-notes{
+	width: 580px;
+	padding-right: 15px;
+	float: left;
+}
+
+.content .my-tags {
+	margin-top: 10px;
+	width: 290px;
+	padding-left: 5px;
+	float: right;
+}
+
+.content .my-tags div{
+	padding: 0 5px;
+}

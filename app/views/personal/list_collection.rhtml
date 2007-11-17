@@ -1,20 +1,32 @@
-<h2>To Read...</h2>
-<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
+<div class="my-papers-list">
+  <h2><%= @user.login.capitalize %>'s Collections</h2>
+  <h3>To Read...</h3>
+  <ul>
+  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
+  </ul>
+  <h3>Reading...</h3>
+  <ul>
+  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
+  </ul>
+  <h3>Finished...</h3>
+  <ul>
+  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
+  </ul>
+</div>
 
-<h2>Reading...</h2>
-<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
-
-
-<h2>Finished...</h2>
-<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
-
-<hr />
-<h2>My Tags...</h2>
-  <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
-    <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
-  <% end %>
+<div class="my-tags">
+  <h2>Tags Used by <%= @user.login.capitalize %>...</h2>
+  <div>
+    <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+    <% end %>
+  </div>
+</div>
   
-<hr />
-<h2>My Notes...</h2>
-<%= render :partial=>"list_note", :locals=>{:show_notes=>@my_notes, :in_my_collection=>true} %>
+<div class="my-notes">
+  <h2><%= @user.login.capitalize %>'s Notes...</h2>
+  <%= render :partial=>"list_note", :locals=>{:show_notes=>@my_notes, :in_my_collection=>true} %>
+</div>
+
+<div class="clearElement"></div>
 

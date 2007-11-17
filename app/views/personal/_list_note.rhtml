@@ -1,21 +1,18 @@
-<%if show_notes == nil%>
-<%
-  return "No notes"
-  end
-%>
-
+<div class="note-entry">
 <% for note in show_notes%>
-    <%= link_to note.user.realname, {:controller => :personal, :action => :list_collection, :id => note.user_id}%>
-    -
-    <%= h(note.publish_time.strftime("%Y-%m-%d %H:%M"))%>
-    <% if note.user.id == current_user.id%>
-      <%= link_to "Edit", {:action => :edit_note, :id => note.id} %>
-   <% end %>
-   <br />
-   <% if in_my_collection == true %>
-    <%= link_to note.paper.title, {:controller => :personal, :action => :show_paper_detail, :id => note.paper_id}%>
-    <br />
-   <% end %>
-   <%= h(note.content) %>
-   <br /><br /><br />
+    <div class="topic">
+      <span class="name"><%= link_to note.user.realname, {:controller => :personal, :action => :list_collection, :id => note.user_id}%></span>
+      -
+      <span class="time"><%= h(note.publish_time.strftime("%Y-%m-%d %H:%M"))%></span>
+      <% if note.user.id == current_user.id%>
+        <span class="edit"><%= link_to "Edit", {:action => :edit_note, :id => note.id} %></span>
+      <% end %>
+    </div>
+    <% if in_my_collection == true %>
+      <span class="title"><%= link_to note.paper.title, {:controller => :personal, :action => :show_paper_detail, :id => note.paper_id}%></span>
+    <% end %>
+    <div class="note">
+      <%= simple_format(note.content) %>
+    </div>
 <% end %>
+</div>

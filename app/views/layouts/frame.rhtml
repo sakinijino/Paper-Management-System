@@ -6,8 +6,10 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Paper Management System</title>
     <%= stylesheet_link_tag 'common' %>
-    <%= stylesheet_link_tag 'tag' %>
+    <%= stylesheet_link_tag 'pms' %>
     <%= stylesheet_link_tag 'homepage' %>'
+    <%= stylesheet_link_tag 'mypage' %>'
+    <%= stylesheet_link_tag 'paperdetail' %>'
 </head>
 
 <body>
@@ -33,7 +35,6 @@
 <div class="clearElement"></div>
 
 <div class="content">
-<p class="flash"><%= flash[:notice] %></p>
 <%= yield  %>
 </div>
 

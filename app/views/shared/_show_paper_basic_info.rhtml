@@ -1,5 +1,4 @@
-<% paper = show_paper_basic_info %>
-
+<h2>Paper Detail</h2>
 <table class="paper-basic-info">
         <colgroup>
                 <col class="title"/>
@@ -8,11 +7,7 @@
         <tr>
                 <td>Title:</td>
                 <td class="long-text"><%=h paper.title %></td>
-        </tr>        
-        <tr>
-                <td>Abstract:</td>
-                <td class="long-text"><%=h paper.abstract %></td>
-        </tr>   
+        </tr>     
         <tr>
                 <td>Publish Time:</td>
                 <td><%=h paper.publish_time%></td>
@@ -29,6 +24,10 @@
                 <td>Source:</td>
                 <td><%=h paper.source%></td>
         </tr>
+         <tr>
+                <td>Abstract:</td>
+                <td class="long-text"><%=simple_format paper.abstract %></td>
+        </tr>   
         <tr>
                 <td>Attachment:</td>
                 <td class="long-text">

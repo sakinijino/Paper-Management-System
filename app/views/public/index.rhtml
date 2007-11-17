@@ -1,27 +1,29 @@
 <div class="search">
   <% form_tag({:action => 'list_searched_paper'} ) do%>
-    <%= text_field_tag 'query', {}, {:size=>30}  %>
+    <%= text_field_tag 'query', {}, {:size=>35}  %>
     <%= submit_tag 'Search', {:class=>'formbutton'} %>
   <% end %>
 </div>
 
 <div class="popular-tags">
   <h2>Popular Tags...</h2>
-    <% tag_cloud @tags, @tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
-      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
-    <% end %>
+  <div>
+  <% tag_cloud @tags, @tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+    <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+  <% end %>
+  </div>
 </div>
 
 <div class="index-papers">
-
-  <div class="popular-papers">
+  <ul class="popular-papers">
     <h2>Popular Papers...</h2>
     <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@popular_papers} %>
-  </div>
+  </ul>
 
-  <div class="newest-papers">
+  <ul class="newest-papers" style="margin-top:20px">
     <h2>Newest Papers...</h2>
     <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@newest_papers} %>
-  </div>
-
+  </ul>
 </div>
+
+<div class="clearElement"></div>

@@ -1,0 +1,34 @@
+.tag_size_1 { font-size: 1.0em; }
+.tag_size_2 { font-size: 1.0em; color:rgb(36, 72, 108)}
+.tag_size_3 { font-size: 1.2em; }
+.tag_size_4 { font-size: 1.4em; color:rgb(36, 72, 108)}
+
+.content .note-entry{
+	padding-left: 5px;
+}
+
+.content .note-entry span.name{
+	font-size: larger;
+}
+
+.content .note-entry span.time{
+	color: rgb(153, 153, 153);
+}
+
+.content .note-entry span.title{
+	display: block;
+}
+
+.content .note-entry div.topic{
+	width:100%;
+	padding: 2px 5px;
+	background: url(/images/topicbar.gif) no-repeat
+}
+
+.content .note-entry span.title{
+	padding: 2px 5px;
+}
+
+.content .note-entry div.note{
+	padding: 2px 5px;
+}

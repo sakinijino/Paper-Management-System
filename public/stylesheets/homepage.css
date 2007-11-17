@@ -1,24 +1,26 @@
-.content .search {
-	width: 100%
+.content .search{
+	padding-left : 10px;
+	padding-bottom: 10px;
 }
 
-.content h2{
-	font-family: normal Arial,Helvetica,sans-serif;
-	font-size: normal;
-	font-variant: normal;
-	font-weight: normal;
-	font-size-adjust: normal;
-	line-height: 150%;
+.content .search input{
+	font-size: larger;
 }
 
-.content .index-paper {
-	width: 50%;
-	float: left;
+.content .index-papers {
+	width: 580px;
+	padding-right: 15px;
+	float: right;
 }
 
 .content .popular-tags {
-	width: 50%;
-	float: right;
+	width: 270px;
+	padding-left: 10px;
+	float: left;
+}
+
+.content .popular-tags div{
+	padding: 0 5px;
 }
 
 .content input {
@@ -27,11 +29,18 @@
 
 .content input.formbutton {
 	display:inline;
-	height:23px;
+/*	height:23px;
 	padding:0 1em;
 	border:1px solid;
 	border-color:#66acff #094fa1 #094fa1 #66acff;
 	background:#2680e9;
-	color:#fff;
+	color:#fff;*/
 	cursor:pointer;
+}
+
+li.paper{
+	list-style-image: url(/images/pdf.jpg);
+	list-style-position: outside;
+	margin-bottom: 5px;
+	margin-left:23px
 }
