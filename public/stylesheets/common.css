@@ -1,24 +1,23 @@
 *{
-	margin: 0;
-	padding: 0;
-	font-family: tahoma, helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        font-family: tahoma, helvetica, sans-serif;
 }
 
 textarea,input{
-	font-size: 12px;
-	display: block;
+        font-size: 12px;
+        display: block;
 }
 
 textarea{
-	width: 400px;
-	height: 250px;	
+        width: 400px;
+        height: 250px;
 }
-
 h1{
-	font-size: 16px;
-	font-family: georgia;
-	color: rgb(14, 48, 98);
-	font-weight: bold;
+        font-size: 16px;
+        font-family: georgia;
+        color: rgb(14, 48, 98);
+        font-weight: bold;
 }
 
 a { color:#06c;}
@@ -26,189 +25,174 @@ a { color:#06c;}
 a:hover { color:#ff7031;}
 
 img{
-	border: 0px none;
+        border: 0px none;
 }
 
 body{
-	background: white url(/images/background.gif) 0 0 repeat-x;;
-	font-size: 12px;
-	line-height: 150%;
+        background: white url(/images/background.gif) 0 0 repeat-x;;
+        font-size: 12px;
+        line-height: 150%;
 }
 
 .container{
-	width: 775px;
-	margin-top: 1em;
-	margin-left: auto;
-	margin-right: auto;
+        width: 775px;
+        margin-top: 1em;
+        margin-left: auto;
+        margin-right: auto;
 }
 
 .flash{
-	color : green;
+        color : green;
 }
 
 .logo{
-	float:left;
-	margin-left: 10px;	
+        float:left;
+        margin-left: 10px;
 }
 
 .header{
-	float: right;
-	background: white;
-	padding: 5px;
-	font-size: 14px;
-	color: rgb(14, 48, 98);
-	margin-bottom: 30px;	
+        float: right;
+        background: white;
+        padding: 5px;
+        font-size: 14px;
+        color: rgb(14, 48, 98);
+        margin-bottom: 10px;
 }
 
 .header a{
-	font-weight: bold;
+        font-weight: bold;
 }
 
 .menu{
-	width: 100px;
-	float: right;
-	display: inline;
-	border: 1px solid rgb(137, 213, 239);
-	background: white;
-	padding-top: 10px;
-	padding-bottom: 20px;
-	padding-right: 14px;
-	padding-left: 14px;
-	margin: 5px;		
-	list-style-type: none;
-	list-style-image: none;
-	line-height: 250%;
+        float: left;
+        background: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        list-style-type: none;
+        list-style-image: none;
 }
 
 .menu h1{
-	margin-bottom: 15px;
+        margin-bottom: 15px;
 }
 
 .menu li{
-	padding-left: 10px;
-	font-weight: bold;
-	display: inline;
+        font-weight: bold;
+        text-decoration: none;
+        padding-right: 10px;
+        display: inline;
+        float: left
 }
 
 .menu li:hover{
-	background: rgb(255, 255, 204);
-}
-
-.menu li.on-selected{
-	background: rgb(195, 217, 255);
-	color: rgb(0, 0, 204);	
-}
-
-.menu li.on-selected a{
-	text-decoration: none;	
+        background: rgb(255, 255, 204);
 }
 
 .clearElement{
-	clear: both;
+        clear: both;
 }
 
 .content{
-	width: 100%;
-	border: 1px solid rgb(137, 213, 239);
-	background: white;
-	margin: 5px;
-	margin-right: 0px;
-	padding-top: 15px;
-	padding-bottom: 20px;
-	padding-right: 10px;
-	padding-left: 18px;
-		
+        width: 100%;
+        border: 1px solid rgb(137, 213, 239);
+        background: white;
+        margin-right: 0px;
+        padding-top: 15px;
+        padding-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 18px;
+
 }
 
 .content .headline{
-	margin-bottom: 30px;
+        margin-bottom: 30px;
 }
 
 .content .headline h1{
-	display: inline;
-	padding-right: 50px;
+        display: inline;
+        padding-right: 50px;
 }
 
 .content .headline a{
-	float: right;
-	position: relative;
-	top: 8px;
-	font-weight: bold;
-	font-size: 14px;
-	font-family: Verdana;	
+        float: right;
+        position: relative;
+        top: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        font-family: Verdana;
 }
 
 .content table{
-	margin: 5px;
-	border: 1px solid rgb(195, 217, 255);
-	width: 100%;
+        margin: 5px;
+        border: 1px solid rgb(195, 217, 255);
+        width: 100%;
 }
 
 .content table th{
-	background: rgb(195, 217, 255);
-	font-weight: bold;
-	color: rgb(14, 48, 98);
-	padding-top: 5px;
-	padding-bottom: 5px;
+        background: rgb(195, 217, 255);
+        font-weight: bold;
+        color: rgb(14, 48, 98);
+        padding-top: 5px;
+        padding-bottom: 5px;
 }
 
 .content table tr.selected-table-item:hover{
-	background: rgb(255, 255, 204);
+        background: rgb(255, 255, 204);
 }
 
 .content table tr.list-line-odd, .content div.list-line-odd{
-	background: white;
+        background: white;
 }
 
 .content table tr.list-line-even, .content div.list-line-even{
-	background: rgb(232, 238, 247);
+        background: rgb(232, 238, 247);
 }
 
 .content table td, .content table th{
-	white-space: nowrap;
-	padding-left: 10px;
-	padding-right: 10px;	
+        white-space: nowrap;
+        padding-left: 10px;
+        padding-right: 10px;
 }
 
 .content table td.long-text{
-	word-break:break-all;
-	word-wrap:break-word;
-	white-space: normal;	
+        word-break:break-all;
+        word-wrap:break-word;
+        white-space: normal;
 }
 
 .content form label{
-	color: rgb(102,102,102);
-	padding-top: 5px;
-	display: block;
+        color: rgb(102,102,102);
+        padding-top: 5px;
+        display: block;
 }
 
 .content form input.submit, .content form input.checkbox{
-	width: auto;
+        width: auto;
 }
 
 .content form .fieldWithErrors input,
 .content form .fieldWithErrors textarea,
 .content form .fieldWithErrors select{
-	background: rgb(255, 197, 190);
+        background: rgb(255, 197, 190);
 }
 
 .content .errorExplanation {
-	float: left;
+        float: left;
 }
 
 .content .errorExplanation p, .content .errorExplanation h2{
-	display: none;
+        display: none;
 }
 
 .content .errorExplanation ul{
-	list-style-type: none;
-	list-style-image: none;
-	border: 1px solid red;
-	background: rgb(255, 197, 190);
-	color: rgb(204, 0, 0);
-	font-weight: bold;
-	padding: 3px 5px 3px 5px;
-	margin-top: 5px;
+        list-style-type: none;
+        list-style-image: none;
+        border: 1px solid red;
+        background: rgb(255, 197, 190);
+        color: rgb(204, 0, 0);
+        font-weight: bold;
+        padding: 3px 5px 3px 5px;
+        margin-top: 5px;
 }
 
 .footer { clear:both; padding:1em 0; text-align:center; color:#06c;}
