@@ -8,8 +8,9 @@
 8 管理员
 9 notes删除、collection删除、关联删除
 10 权限判断
-11 个人首页中my notes加上到paper的link
-12 tag搜索，用ferret
+11 个人首页中my notes加上到paper的link //done
+12 tag搜索，用ferret //done
 13 高级搜索
 14 paper list 概要信息
+15 分页
 end 删除本文件
