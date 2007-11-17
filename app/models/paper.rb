@@ -13,6 +13,10 @@ class Paper < ActiveRecord::Base
     (self.authors.map {|a| a.name}).join(" ")
   end
   
+  def author_list_with_comma
+    (self.authors.map {|a| a.name}).join(", ")
+  end  
+  
   def tag_list
     (self.tags.map {|a| a.name}).join(" ")
   end  
