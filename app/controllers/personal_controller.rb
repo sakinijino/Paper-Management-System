@@ -28,16 +28,16 @@ class PersonalController < ApplicationController
     end
   end
   
-  def list_my_paper
-    user_id = current_user.id
+  def list_collection
+    @user = User.find(params[:id])
     @to_read_papers = Array.new
     @reading_papers = Array.new
     @finished_papers = Array.new
     
-    for paper in current_user.papers
-      if Collection.find_by_user_id_and_paper_id(user_id,paper.id).status == 'To Read'
+    for paper in @user.papers
+      if Collection.find_by_user_id_and_paper_id(@user.id,paper.id).status == 'To Read'
         @to_read_papers << paper
-      elsif paper.collections.find_by_user_id(user_id).status == 'Reading'
+      elsif paper.collections.find_by_user_id(@user.id).status == 'Reading'
         @reading_papers << paper
       else
         @finished_papers << paper
@@ -45,13 +45,13 @@ class PersonalController < ApplicationController
     end
     
     @my_tag_counts = Array.new
-    @my_tags = current_user.tags
+    @my_tags = @user.tags
     for tag in @my_tags
       @my_tag_counts << tag.collections.count    
     end
     
-    @my_notes = Note.find_all_by_user_id(current_user.id)
-  end
+    @my_notes = Note.find_all_by_user_id(@user.id)
+  end  
   
   def show_paper_detail
     @paper = Paper.find(params[:id])
@@ -64,9 +64,6 @@ class PersonalController < ApplicationController
       return;
     end
     
-    #~ user_tags = current_user.tags
-    #~ @tags = user_tags & @paper.tags
-    #~ Collection.find
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
     @personal_notes = Note.find_all_by_paper_id_and_user_id(@paper.id, current_user.id)
   end

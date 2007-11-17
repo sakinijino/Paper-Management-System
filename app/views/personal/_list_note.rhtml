@@ -5,12 +5,13 @@
 %>
 
 <% for note in show_notes%>
-    <%= h(note.user.realname)%>
+    <%= link_to note.user.realname, {:controller => :personal, :action => :list_collection, :id => note.user_id}%>
     -
     <%= h(note.publish_time.strftime("%Y-%m-%d %H:%M"))%>
     <% if note.user.id == current_user.id%>
       <%= link_to "Edit", {:action => :edit_note, :id => note.id} %>
    <% end %>
    <br />
-    <%= h(note.content)%>
+    <%= link_to note.content, {:controller => :personal, :action => :show_paper_detail, :id => note.paper_id}%>
+   <br /><br /><br />
 <% end %>
