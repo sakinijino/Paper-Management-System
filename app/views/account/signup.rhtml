@@ -1,19 +1,21 @@
 <%= error_messages_for :user %>
 <% form_for :user do |f| -%>
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
+<label for="login">Login</label>
+<%= f.text_field :login %>
 
-<p><label for="realname">Realname</label><br/>
-<%= f.text_field :realname %></p>
+<label for="realname">Realname</label>
+<%= f.text_field :realname %>
 
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email %></p>
+<label for="email">Email</label>
+<%= f.text_field :email %>
 
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
+<label for="password">Password</label>
+<%= f.password_field :password %>
 
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
+<label for="password_confirmation">Confirm Password</label>
+<%= f.password_field :password_confirmation %>
 
-<p><%= submit_tag 'Sign up' %></p>
+<br/><br/>
+
+<%= submit_tag 'Sign up' %>
 <% end -%>
