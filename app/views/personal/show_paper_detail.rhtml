@@ -17,10 +17,10 @@
 
   <div>
   <h3>Public Notes...</h3>
-  <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes}%>
+  <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
     
   <h3>Personal Notes...</h3>
-  <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes}%>
+  <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
   </div>
 
   <hr />
