@@ -1,0 +1,37 @@
+.content .search {
+	width: 100%
+}
+
+.content h2{
+	font-family: normal Arial,Helvetica,sans-serif;
+	font-size: normal;
+	font-variant: normal;
+	font-weight: normal;
+	font-size-adjust: normal;
+	line-height: 150%;
+}
+
+.content .index-paper {
+	width: 50%;
+	float: left;
+}
+
+.content .popular-tags {
+	width: 50%;
+	float: right;
+}
+
+.content input {
+	display: inline;
+}
+
+.content input.formbutton {
+	display:inline;
+	height:23px;
+	padding:0 1em;
+	border:1px solid;
+	border-color:#66acff #094fa1 #094fa1 #66acff;
+	background:#2680e9;
+	color:#fff;
+	cursor:pointer;
+}

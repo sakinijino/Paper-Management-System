@@ -1,7 +1,7 @@
 <div class="search">
   <% form_tag({:action => 'list_searched_paper'} ) do%>
-    <%= text_field_tag 'query'  %>
-    <%= submit_tag 'Search' %>
+    <%= text_field_tag 'query', {}, {:size=>30}  %>
+    <%= submit_tag 'Search', {:class=>'formbutton'} %>
   <% end %>
 </div>
 
@@ -23,5 +23,5 @@
     <h2>Newest Papers...</h2>
     <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@newest_papers} %>
   </div>
-  
+
 </div>
