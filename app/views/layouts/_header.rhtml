@@ -1,0 +1,25 @@
+<img src="/images/logo.jpg" class="logo" style="width:450px;height:50px"/>
+<%if logged_in? %>
+<div class="header">
+  <ul class="menu">
+      <li><%= link_to 'Homepage', {:controller =>'public', :action=>'index'}%></li>
+      <span><a> | </a></span>
+      <li><%= link_to 'My Papers', {:controller =>'personal', :action=>'list_collection', :id=>current_user.id}%></li>
+      <%if is_admin? %>
+        <span><a> | </a></span>
+        <li><%= link_to 'Management', {:controller =>'admin', :action=>'list_user'}%></li>
+      <%end%>
+  </ul>
+</div>
+<%end%>
+
+<div class="welcome">
+  <%if !logged_in? %>
+    <span><%= link_to 'Login', :controller => 'account', :action => 'login' %></span>
+  <%else%>
+    <h>Welcome, <%=h current_user.login%></h> -
+    <span><%= link_to 'Logout', :controller => 'account', :action => 'logout' %></span>
+  <%end%>
+</div>
+
+<div class="clearElement"></div>

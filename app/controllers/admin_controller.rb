@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  layout 'frame'  
+  layout 'admin'  
   include AuthenticatedSystem
   before_filter :login_required
   before_filter :admin_required

@@ -1,8 +1,8 @@
 .content .paper-basic-info,
 .content .collection-status{
-	width: 490px;
+	width: 480px;
 	float: left;
-	padding: 2px 5px;
+	padding: 0 5px 0 15px;
 }
 
 .content .paper-basic-info table{

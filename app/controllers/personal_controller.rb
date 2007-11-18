@@ -62,7 +62,6 @@ class PersonalController < ApplicationController
                                     :joins => 'as c inner join tags as t on c.tag_id=t.id')
     if @tags.empty?
       @un_collected = true
-      return;
     end
     
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')

@@ -10,6 +10,7 @@ textarea,input{
 }
 
 textarea{
+		font-family: normal Arial,Helvetica,sans-serif;
         width: 400px;
         height: 250px;
 }
@@ -68,33 +69,37 @@ body{
 }
 
 .logo{
-        float:left;
+        float:right;
         margin-left: 10px;
+		display:none;
 }
 
-.header{
+.welcome{
+		font-size: 14px;
+        color: rgb(14, 48, 98);
         float: right;
         background: white;
-        padding: 5px;
-		padding-left: 10px;
-        font-size: 14px;
-        color: rgb(14, 48, 98);
+        padding: 10px 15px 10px 10px;
+		border: 1px solid rgb(137, 213, 239);
 }
 
 .menu{
-        float: left;
+		float: left;
         background: white;
-        padding-top: 10px;
-        padding-bottom: 10px;
+		border: 1px solid rgb(137, 213, 239);
+		font-size: 14px;
+        color: rgb(14, 48, 98);
+        background: white;
+		padding: 20px 15px 20px 10px;
         list-style-type: none;
         list-style-image: none;
+		white-space: nowrap;
 }
 
 .menu li{
         font-weight: bold;
         padding-right: 10px;
         display: inline;
-        float: left;
 }
 
 .menu li a {
@@ -113,54 +118,35 @@ body{
         clear: both;
 }
 
+.search{
+		float: left;
+		background: white;
+		margin: 0 10px 2px 10px;
+}
+
+.search input{
+	font-size: larger;
+}
+
+.search input {
+	display: inline;
+}
+
+.search input.formbutton {
+	display:inline;
+	cursor:pointer;
+}
+
 .content{
-		margin-top: 10px;
+		margin-top: 20px;
         width: 925px;
         border: 1px solid rgb(137, 213, 239);
         background: white;
-		margin-left: 10px;
-        /*margin-right: 0px;*/
         padding-top: 15px;
         padding-bottom: 20px;
         padding-right: 10px;
         padding-left: 18px;
 
-}
-
-/*.content .headline{
-        margin-bottom: 30px;
-}
-
-.content .headline h1{
-        display: inline;
-        padding-right: 50px;
-}
-
-.content .headline a{
-        float: right;
-        position: relative;
-        top: 8px;
-        font-weight: bold;
-        font-size: 14px;
-        font-family: Verdana;
-}*/
-
-.content table{
-        margin: 5px;
-        border: 1px solid rgb(195, 217, 255);
-        width: 100%;
-}
-
-.content table th{
-        background: rgb(195, 217, 255);
-        font-weight: bold;
-        color: rgb(14, 48, 98);
-        padding-top: 5px;
-        padding-bottom: 5px;
-}
-
-.content table tr.selected-table-item:hover{
-        background: rgb(255, 255, 204);
 }
 
 .content table tr.list-line-odd, .content div.list-line-odd{
@@ -169,18 +155,6 @@ body{
 
 .content table tr.list-line-even, .content div.list-line-even{
         background: rgb(232, 238, 247);
-}
-
-.content table td, .content table th{
-        white-space: nowrap;
-        padding-left: 10px;
-        padding-right: 10px;
-}
-
-.content table td.long-text{
-        word-break:break-all;
-        word-wrap:break-word;
-        white-space: normal;
 }
 
 .content form label{

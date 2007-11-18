@@ -13,7 +13,7 @@
 <label for="user_type">Role (*)</label>
 <%= select :user,:role, @roles%>
 
-<label for="password">Password <%= "(* default as login name if left blank)" if params[:action] == 'new'%></label>
+<label for="password">Password <%= "(* default as login name if left blank)" if params[:action] == 'new_user'%></label>
 <%= password_field :user, :password %>
 
 <label for="password_confirmation">Confirm Password</label>

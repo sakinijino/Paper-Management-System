@@ -1,0 +1,11 @@
+.content .result-papers {
+	width: 580px;
+	padding: 0 5px 0 15px;
+	float: left;
+}
+
+.content .related-tags {
+	width: 270px;
+	padding-left: 10px;
+	float: right;
+}

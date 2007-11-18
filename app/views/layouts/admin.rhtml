@@ -6,11 +6,7 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Paper Management System</title>
     <%= stylesheet_link_tag 'common' %>
-    <%= stylesheet_link_tag 'pms' %>
-    <%= stylesheet_link_tag 'homepage' %>
-    <%= stylesheet_link_tag 'mypage' %>
-    <%= stylesheet_link_tag 'paperdetail' %>
-    <%= stylesheet_link_tag 'result' %>
+    <%= stylesheet_link_tag 'admin' %>
 </head>
 
 <body>
@@ -19,16 +15,15 @@
 
 <%= render :partial => 'layouts/header' %>
 
-<div class="content">
-  <%if logged_in? %>
-  <div class="search">
-    <% form_tag({:action => 'list_searched_paper'} ) do%>
-      <%= text_field_tag 'query', {}, {:size=>35}  %>
-      <%= submit_tag 'Search', {:class=>'formbutton'} %>
-    <% end %>
-  </div>
+<ul class="menu2">
+        <h1>Menu</h1>
+  <%if logged_in? &&  is_admin? %>
+          <li><%= link_to 'Paper Management', :controller =>'admin_user', :action=>'index'%></li>
+          <li><%= link_to 'User Management', :controller =>'admin', :action=>'list_user'%></li>
   <%end%>
-  <div class="clearElement"></div>
+</ul>
+
+<div class="content">
   <%= yield  %>
 </div>
 

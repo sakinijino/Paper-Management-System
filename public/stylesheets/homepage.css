@@ -1,12 +1,3 @@
-.content .search{
-	padding-left : 10px;
-	padding-bottom: 10px;
-}
-
-.content .search input{
-	font-size: larger;
-}
-
 .content .index-papers {
 	width: 580px;
 	padding-right: 15px;
@@ -21,21 +12,6 @@
 
 .content .popular-tags div{
 	padding: 0 5px;
-}
-
-.content input {
-	display: inline;
-}
-
-.content input.formbutton {
-	display:inline;
-/*	height:23px;
-	padding:0 1em;
-	border:1px solid;
-	border-color:#66acff #094fa1 #094fa1 #66acff;
-	background:#2680e9;
-	color:#fff;*/
-	cursor:pointer;
 }
 
 li.paper{

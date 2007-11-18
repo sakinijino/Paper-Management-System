@@ -1,7 +1,7 @@
 .content .my-papers-list,
 .content .my-notes{
 	width: 580px;
-	padding-right: 15px;
+	padding: 0 5px 10px 15px;
 	float: left;
 }
 
