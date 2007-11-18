@@ -2,25 +2,25 @@
   <h2><%= @user.login.capitalize %>'s Collections</h2>
   <h3>To Read...</h3>
   <ul>
-  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
-  <% if @to_read_show_more%>
-    <%= link_to "<< More...", { :action => :list_all_paper, :status => 'To Read', :id=>@user.id}, {:class=>'more-link'} %>
-  <%end%>
+	  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
   </ul>
+  <% if @to_read_show_more%>
+	  <%= link_to "<< More...", { :action => :list_all_paper, :status => 'To Read', :id=>@user.id}, {:class=>'more-link'} %>
+	<%end%>
   <h3>Reading...</h3>
   <ul>
-  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
+  	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
+  </ul>
   <% if @reading_show_more%>
     <%= link_to "<< More...", { :action => :list_all_paper, :status => 'Reading', :id=>@user.id }, {:class=>'more-link'}%>
   <%end%>
-  </ul>
   <h3>Finished...</h3>
   <ul>
-  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
+  	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
+  </ul>
   <% if @finished_show_more%>
     <%= link_to "<< More...", { :action => :list_all_paper, :status => 'Finished', :id=>@user.id }, {:class=>'more-link'}%> 
   <%end%>
-  </ul>
 </div>
 
 <div class="my-tags">

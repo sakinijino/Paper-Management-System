@@ -1,6 +1,8 @@
 <div class='result-papers'>
-<h2>Search Results with '<%=params[:query]%>'...</h2>
-<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+	<h2>Search Results with '<%=params[:query]%>'...</h2>
+	<ul>
+		<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+	</ul>
 </div>
 
 <div class='related-tags'>

@@ -1,7 +1,8 @@
 <div class='result-papers'>
   <h2><%=@user.login.capitalize%>'s '<%=@status%>' Papers:</h2>
-  
-  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@all_papers} %>
+	<ul>
+  	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@all_papers} %>
+	</ul>
   
   <% if @all_papers.page_count > 1 %>
     <div class="pagenation-link">
