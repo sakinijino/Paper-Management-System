@@ -23,6 +23,7 @@ class PublicController < ApplicationController
   end
   
   def contribute_paper
+    render :layout=>"frame_no_search"
   end
   
   def create_paper
