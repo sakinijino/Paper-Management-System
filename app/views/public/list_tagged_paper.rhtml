@@ -1,6 +1,8 @@
 <div class='result-papers'>
   <h2>Papers Tagged with '<%=@tag.name%>'...</h2>
-  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+  <ul>
+  	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+  </ul>
   
   <% if @papers.page_count > 1 %>
     <div class="pagenation-link">

@@ -20,7 +20,7 @@
 }
 
 .content .note-entry div.topic{
-	width:100%;
+	width:80%;
 	padding: 2px 5px;
 	background: url(/images/topicbar.gif) no-repeat
 }
@@ -45,7 +45,15 @@ li.paper{
 }
 
 .content .pagenation-link{
-	margin : 15px 0 0 -20px;
+	margin : 15px 0 0 0px;
 	font-size : 14px;
 	font-family: normal Arial,Helvetica,sans-serif;
+}
+
+.content .more-link{
+	float: right;
+	text-decoration: none;
+	padding-right: 40px;
+	display: block;
+	font-style: italic;	
 }

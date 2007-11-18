@@ -1,3 +1,5 @@
+<ul>
 <%for paper in papers%> 
   <li class="paper"><%= link_to paper.title, {:controller=>"personal", :action=>"show_paper_detail",:id=>paper.id} %></li>
 <% end %>
+</ul>
