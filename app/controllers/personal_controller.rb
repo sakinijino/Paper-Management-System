@@ -107,15 +107,20 @@ class PersonalController < ApplicationController
 
   def list_all_my_note
     @user = User.find(params[:id])
-    @all_notes = Note.find(:all,
-                                  :conditions => ["user_id=:uid",{:uid=>@user.id}],
-                                  :order => 'id desc',
-                                  :page => {:size=>10,:current=>params[:page]})
-    if @user.id != current_user.id
-      @all_notes = @all_notes.find_all {|x| x.is_private == false}
+    if @user.id == current_user.id
+      @all_notes = Note.find(:all,
+                                    :conditions => ["user_id=:uid",{:uid=>@user.id}],
+                                    :order => 'id desc',
+                                    :page => {:size=>10,:current=>params[:page]})
+    else
+      @all_notes = Note.find(:all,
+                                    :conditions => ["user_id=:uid and is_private=:req",{:uid=>@user.id,:req=>'false'}],
+                                    :order => 'id desc',
+                                    :page => {:size=>10,:current=>params[:page]})      
     end
 
     @title = @user.login.capitalize + "'s Entire Notes:";
+    @show_paper_title = true
     render :action => :list_all_note
   end
   
@@ -126,8 +131,9 @@ class PersonalController < ApplicationController
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]})
     
-    @title = current_user.login.capitalize + "'s Entire Personal Notes on Paper '" + @paper.title + "':";
-    render :action => :list_all_note   
+    @title = current_user.login.capitalize + "'s Entire Personal Notes on Paper <br />'" + @paper.title + "':";
+    @show_paper_title = false
+    render :action => :list_all_note    
   end
   
   
@@ -139,8 +145,9 @@ class PersonalController < ApplicationController
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]}
                                   ) 
-    @title = "All Public Notes on Paper '" + @paper.title + "':"
-  render :action => :list_all_note                                    
+    @title = "All Public Notes on Paper <br />'" + @paper.title + "':"
+    @show_paper_title = false
+    render :action => :list_all_note                                    
  end                              
                                 
 
@@ -203,5 +210,12 @@ class PersonalController < ApplicationController
     else
       render :action => 'edit_note'
     end
+  end
+  
+  def destroy_note
+    note = Note.find(params[:id])
+    pid = note.paper_id
+    note.destroy
+    redirect_to :action => 'show_paper_detail', :id => pid
   end
 end

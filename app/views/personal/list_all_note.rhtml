@@ -1,7 +1,7 @@
 <div class="result-notes">
   <h2><%=@title%></h2>
     
-  <%= render :partial=>"list_note", :locals=>{:show_notes=>@all_notes, :in_my_collection=>true} %>
+  <%= render :partial=>"list_note", :locals=>{:show_notes=>@all_notes, :in_my_collection=>@show_paper_title} %>
 
     <% if @all_notes.page_count > 1 %>
       <div class="pagenation-link">

@@ -15,12 +15,12 @@ class PublicController < ApplicationController
                                                       "SELECT p.id, p.title
                                   FROM (SELECT * FROM collections group by paper_id,user_id) 
                                   as c inner join papers p on p.id=c.paper_id group by c.paper_id
-                                  order by count(c.user_id) desc limit 10
+                                  order by count(c.user_id) desc limit 5
                                   ")
                                     
     @newest_papers = Paper.find(:all,
                                              :order => 'id desc',
-                                             :limit => 10)                         
+                                             :limit => 5)                         
   end
   
   def contribute_paper

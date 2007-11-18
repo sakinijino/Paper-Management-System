@@ -10,15 +10,17 @@
   <%= text_field 'paper', 'source'  %>   
   
   <label for="paper_publish_time">Publish Time:</label>
-  <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true  %> 
+  <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true, :start_year=>1900, :end_year=>Time.now.year  %> 
   
-  <label for="paper_author">Author1:</label>
+  <label for="paper_author">Authors:</label>
   <%= text_field_tag 'author_name[]'%>
-   <label for="paper_author">Author2:</label>
   <%= text_field_tag 'author_name[]'%>  
-  
-  <label for="paper_PMID">ID:</label>
-  <%= text_field 'paper', 'identifier'  %>
+  <%= text_field_tag 'author_name[]'%>  
+  <%= text_field_tag 'author_name[]'%>  
+  <%= text_field_tag 'author_name[]'%>  
+  <%= text_field_tag 'author_name[]'%>  
+  <%= text_field_tag 'author_name[]'%>  
+  <%= text_field_tag 'author_name[]'%>  
 
   <label for="paper_abstract">Abstract:</label>
   <%= text_area 'paper', 'abstract'  %>
