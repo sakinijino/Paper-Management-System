@@ -39,3 +39,13 @@ li.paper{
 	margin-bottom: 5px;
 	margin-left:23px
 }
+
+.content .left-part-indent {
+	padding-left:15px;
+}
+
+.content .pagenation-link{
+	margin : 15px 0 0 -20px;
+	font-size : 14px;
+	font-family: normal Arial,Helvetica,sans-serif;
+}

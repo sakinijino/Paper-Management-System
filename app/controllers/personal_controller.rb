@@ -35,7 +35,7 @@ class PersonalController < ApplicationController
     show_num = 5
     @to_read_papers = Paper.find(:all,
                                     :select => 'p.id as id, p.title as title',
-                                    :conditions => "c.status='To Read'",
+                                    :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'To Read',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
                                     :joins => 'as p inner join collections as c on p.id=c.paper_id')
@@ -48,7 +48,7 @@ class PersonalController < ApplicationController
 
     @reading_papers = Paper.find(:all,
                                     :select => 'p.id as id, p.title as title',
-                                    :conditions => "c.status='Reading'",
+                                    :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'Reading',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
                                     :joins => 'as p inner join collections as c on p.id=c.paper_id')
@@ -61,7 +61,7 @@ class PersonalController < ApplicationController
     
     @finished_papers = Paper.find(:all,
                                     :select => 'p.id as id, p.title as title',
-                                    :conditions => "c.status='Finished'",
+                                    :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'Finished',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
                                     :joins => 'as p inner join collections as c on p.id=c.paper_id')
@@ -75,7 +75,7 @@ class PersonalController < ApplicationController
     @my_tag_counts = Array.new
     @my_tags = @user.tags
     for tag in @my_tags
-      @my_tag_counts << tag.collections.count    
+      @my_tag_counts << Collection.find_all_by_user_id_and_tag_id(@user.id, tag.id).size   
     end
     
     @my_notes = Note.find_all_by_user_id(@user.id)
