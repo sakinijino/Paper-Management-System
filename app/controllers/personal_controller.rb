@@ -31,18 +31,45 @@ class PersonalController < ApplicationController
   
   def list_collection
     @user = User.find(params[:id])
-    @to_read_papers = Array.new
-    @reading_papers = Array.new
-    @finished_papers = Array.new
     
-    for paper in @user.papers
-      if Collection.find_by_user_id_and_paper_id(@user.id,paper.id).status == 'To Read'
-        @to_read_papers << paper
-      elsif paper.collections.find_by_user_id(@user.id).status == 'Reading'
-        @reading_papers << paper
-      else
-        @finished_papers << paper
-      end
+    show_num = 5
+    @to_read_papers = Paper.find(:all,
+                                    :select => 'p.id as id, p.title as title',
+                                    :conditions => "c.status='To Read'",
+                                    :order => 'c.id desc',
+                                    :group => 'p.id',
+                                    :joins => 'as p inner join collections as c on p.id=c.paper_id')
+    if(@to_read_papers.size > show_num)
+      @to_read_papers = @to_read_papers[0,show_num]
+      @to_read_show_more = true
+    else
+      @to_read_show_more = false
+    end
+
+    @reading_papers = Paper.find(:all,
+                                    :select => 'p.id as id, p.title as title',
+                                    :conditions => "c.status='Reading'",
+                                    :order => 'c.id desc',
+                                    :group => 'p.id',
+                                    :joins => 'as p inner join collections as c on p.id=c.paper_id')
+    if(@reading_papers.size > show_num)
+      @reading_papers = @reading_papers[0,show_num]
+      @reading_show_more = true
+    else
+      @reading_show_more = false
+    end
+    
+    @finished_papers = Paper.find(:all,
+                                    :select => 'p.id as id, p.title as title',
+                                    :conditions => "c.status='Finished'",
+                                    :order => 'c.id desc',
+                                    :group => 'p.id',
+                                    :joins => 'as p inner join collections as c on p.id=c.paper_id')
+    if(@finished_papers.size > show_num)
+      @finished_papers = @finished_papers[0,show_num]
+      @finished_show_more = true
+    else
+      @finished_show_more = false
     end
     
     @my_tag_counts = Array.new
@@ -52,7 +79,18 @@ class PersonalController < ApplicationController
     end
     
     @my_notes = Note.find_all_by_user_id(@user.id)
-  end  
+  end
+  
+  def list_all_paper
+    @status = params[:status]
+    @all_papers = Paper.find(:all,
+                                  :select => 'paper_id as id, title',
+                                  :conditions => ["c.status=:status",{:status=>@status}],
+                                  :order => 'c.id desc',
+                                  :group => 'paper_id',
+                                  :joins => 'inner join collections as c on papers.id=c.paper_id',
+                                  :page => {:size=>10,:current=>params[:page]})   
+  end
   
   def show_paper_detail
     @paper = Paper.find(params[:id])

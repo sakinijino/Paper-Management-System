@@ -61,7 +61,7 @@ class PublicController < ApplicationController
         @related_tags_counts << other_tag.collections.count
       end
     end
-    #@related_tags = @related_tags.sort
+    @papers = @tag.papers.find(:all,:page => {:size=>10,:current=>params[:page]})    
   end
 
   def list_searched_paper
