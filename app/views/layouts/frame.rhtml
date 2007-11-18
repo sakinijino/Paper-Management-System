@@ -22,7 +22,7 @@
 <div class="content">
   <%if logged_in? %>
   <div class="search">
-    <% form_tag({:action => 'list_searched_paper'} ) do%>
+    <% form_tag({:controller=>'public', :action => 'list_searched_paper'} ) do%>
       <%= text_field_tag 'query', {}, {:size=>35}  %>
       <%= submit_tag 'Search', {:class=>'formbutton'} %>
     <% end %>
