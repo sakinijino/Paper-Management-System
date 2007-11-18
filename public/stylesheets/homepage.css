@@ -13,10 +13,3 @@
 .content .popular-tags div{
 	padding: 0 5px;
 }
-
-li.paper{
-	list-style-image: url(/images/pdf.jpg);
-	list-style-position: outside;
-	margin-bottom: 5px;
-	margin-left:23px
-}

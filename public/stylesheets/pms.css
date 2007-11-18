@@ -32,3 +32,10 @@
 .content .note-entry div.note{
 	padding: 2px 5px;
 }
+
+li.paper{
+	list-style-image: url(/images/pdf.jpg);
+	list-style-position: outside;
+	margin-bottom: 5px;
+	margin-left:23px
+}
