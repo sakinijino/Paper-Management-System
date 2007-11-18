@@ -1,9 +1,11 @@
+<div class='result-papers'>
   <h2><%=current_user.login.capitalize%>'s '<%=@status%>' Papers:</h2>
   
   <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@all_papers} %>
   
   <% if @all_papers.page_count > 1 %>
     <div class="pagenation-link">
-    <%= paginating_links(@all_papers, :params=>{:status=>@status}) %>
+    Pages: <%= paginating_links(@all_papers, :params=>{:status=>@status}) %>
     </div>
   <%end%>
+</div>
