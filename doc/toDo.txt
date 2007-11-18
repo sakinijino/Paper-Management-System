@@ -3,6 +3,7 @@ Plan for 2007-11-18
 1 搜索结果的排序和分页
 2 能改collection的状态
 3 to read，reading，finished，notes能显示更多
+4 改搜索的post、get
 
 1 搜索不对：author不能搜，其他不能分词 //done
 2 url溢出没做

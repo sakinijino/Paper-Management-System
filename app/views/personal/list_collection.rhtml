@@ -3,14 +3,26 @@
   <h3>To Read...</h3>
   <ul>
   <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
+  <% if @to_read_show_more%>
+    <br />
+    <%= link_to "<< More...", { :action => :list_all_paper, :status => 'To Read'}, {:class=>'more-link'} %>
+  <%end%>
   </ul>
   <h3>Reading...</h3>
   <ul>
   <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@reading_papers} %>
+  <% if @reading_show_more%>
+    <br />
+    <%= link_to "<< More...", { :action => :list_all_paper, :status => 'Reading' }, {:class=>'more-link'}%>
+  <%end%>
   </ul>
   <h3>Finished...</h3>
   <ul>
   <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@finished_papers} %>
+  <% if @finished_show_more%>
+    <br />
+    <%= link_to "<< More...", { :action => :list_all_paper, :status => 'Finished'}, {:class=>'more-link'}%> 
+  <%end%>
   </ul>
 </div>
 
@@ -18,7 +30,7 @@
   <h2>Tags Used by <%= @user.login.capitalize %>...</h2>
   <div>
     <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
-      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }%>
     <% end %>
   </div>
 </div>
