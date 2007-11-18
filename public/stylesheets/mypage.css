@@ -5,10 +5,11 @@
 	float: left;
 }
 
-.content .my-papers-list .more-link{
+.content .my-papers-list .more-link, .content .my-notes .more-link{
 	float: right;
 	text-decoration: none;
 	padding-right: 40px;
+	display: block;
 	font-style: italic;
 }
 

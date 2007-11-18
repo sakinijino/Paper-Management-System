@@ -78,19 +78,72 @@ class PersonalController < ApplicationController
       @my_tag_counts << Collection.find_all_by_user_id_and_tag_id(@user.id, tag.id).size   
     end
     
-    @my_notes = Note.find_all_by_user_id(@user.id)
+    @my_notes = Note.find(:all,
+                                    :conditions => ["user_id=:uid",{:uid=>@user.id}],
+                                    :order => 'id desc'
+                                    )
+    if @user.id != current_user.id
+      @my_notes = @my_notes.find_all {|x| x.is_private == false}
+    end
+    if(@my_notes.size > show_num)
+      @my_notes = @my_notes[0,show_num]
+      @my_notes_show_more = true
+    else
+      @my_notes_show_more = false
+    end                                  
   end
   
   def list_all_paper
     @status = params[:status]
+    @user = User.find(params[:id])
     @all_papers = Paper.find(:all,
                                   :select => 'paper_id as id, title',
-                                  :conditions => ["c.status=:status",{:status=>@status}],
+                                  :conditions => ["c.user_id=:uid and c.status=:status",{:uid=>@user.id, :status=>@status}],
                                   :order => 'c.id desc',
                                   :group => 'paper_id',
                                   :joins => 'inner join collections as c on papers.id=c.paper_id',
                                   :page => {:size=>10,:current=>params[:page]})   
   end
+
+  def list_all_my_note
+    @user = User.find(params[:id])
+    @all_notes = Note.find(:all,
+                                  :conditions => ["user_id=:uid",{:uid=>@user.id}],
+                                  :order => 'id desc',
+                                  :page => {:size=>10,:current=>params[:page]})
+    if @user.id != current_user.id
+      @all_notes = @all_notes.find_all {|x| x.is_private == false}
+    end
+
+    @title = @user.login.capitalize + "'s Entire Notes:";
+    render :action => :list_all_note
+  end
+  
+  def list_all_personal_note
+    @paper = Paper.find(params[:id])
+    @all_notes = Note.find(:all,
+                                  :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id,:pid=>@paper.id}],
+                                  :order => 'id desc',
+                                  :page => {:size=>10,:current=>params[:page]})
+    
+    @title = current_user.login.capitalize + "'s Entire Personal Notes on Paper '" + @paper.title + "':";
+    render :action => :list_all_note   
+  end
+  
+  
+                                
+  def list_all_public_note
+    @paper = Paper.find(params[:id])
+    @all_notes = Note.find(:all,
+                                  :conditions => ["paper_id=:pid and is_private=:req",{:pid=>@paper.id,:req=>'false'}],
+                                  :order => 'id desc',
+                                  :page => {:size=>10,:current=>params[:page]}
+                                  ) 
+    @title = "All Public Notes on Paper '" + @paper.title + "':"
+  render :action => :list_all_note                                    
+ end                              
+                                
+
   
   def show_paper_detail
     @paper = Paper.find(params[:id])
@@ -102,8 +155,22 @@ class PersonalController < ApplicationController
       @un_collected = true
     end
     
+    show_num = 5
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
+    if(@public_notes.size > show_num)
+      @public_notes = @public_notes[0,show_num]
+      @public_notes_show_more = true
+    else
+      @public_notes_show_more = false
+    end      
+    
     @personal_notes = Note.find_all_by_paper_id_and_user_id(@paper.id, current_user.id)
+    if(@personal_notes.size > show_num)
+      @personal_notes = @personal_notes[0,show_num]
+      @personal_notes_show_more = true
+    else
+      @personal_notes_show_more = false
+    end       
   end
 
   def new_note

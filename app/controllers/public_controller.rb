@@ -77,13 +77,11 @@ class PublicController < ApplicationController
         @related_tags_counts << other_tag.collections.count
       end
     end
-    #@related_tags = @related_tags.sort
   end
 
   private
   def getSearchResult(query)
     Paper.find_by_contents(query)
-    #render :text => 'hello'#Paper.find_id_by_contents(query)
   end
 
 end
