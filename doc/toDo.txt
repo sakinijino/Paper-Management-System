@@ -1,10 +1,10 @@
 Plan for 2007-11-18
-0 sms的自建speech
+0 sms的自建speech //done
 1 搜索结果的排序和分页
 2 能改collection的状态
 3 to read，reading，finished，notes能显示更多
 
-1 搜索不对：author不能搜，其他不能分词 // done
+1 搜索不对：author不能搜，其他不能分词 //done
 2 url溢出没做
 3 各种检查（各种model层的检查）
 4 parse网页和上传paper没有连接
