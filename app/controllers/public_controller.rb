@@ -51,8 +51,16 @@ class PublicController < ApplicationController
   
   def list_tagged_paper
     @tag = Tag.find(params[:id])
-    @papers = @tag.papers
+    #~ @related_tags = Tag.find(:all,
+                                    #~ :select => 't.id, t.name, count',
+                                    #~ :conditions => ["c.=:status and c.user_id=:uid",{:status=>'Reading',:uid=>@tag.id}],
+                                    #~ :order => 'c.id desc',
+                                    #~ :group => 'p.id',
+                                    #~ :joins => 'as t inner join collections as c on t.id=c.tag_id')
+    #~ @related_tags_counts << @related_tags.map {|x| x.count_num}
+    #~ @papers = @tag.papers.find(:all, :page => {:size=>10,:current=>params[:page]})    
     
+    @papers = @tag.papers    
     #这里需要用join重写，如果性能有问题的话
     @related_tags = Array.new
     @related_tags_counts = []
@@ -62,12 +70,31 @@ class PublicController < ApplicationController
         @related_tags_counts << other_tag.collections.count
       end
     end
-    @papers = @tag.papers.find(:all,:page => {:size=>10,:current=>params[:page]})    
+    if params[:sort] == 'date'
+      @papers = @tag.papers.find(:all,
+                                            :order => 'publish_time desc',
+                                            :page => {:size=>10,:current=>params[:page]})
+    else
+      @papers = Paper.find(:all,
+                                    :select => 'papers.id, title, count(paper_id) as tagged_count',
+                                    :conditions => ["c.tag_id=:tag_id",{:tag_id=>@tag.id}],
+                                    :order => 'tagged_count desc',
+                                    :group => 'paper_id',
+                                    :joins => 'inner join collections as c on c.paper_id=papers.id',                                    
+                                    :page => {:size=>10,:current=>params[:page]})
+    end
   end
 
   def list_searched_paper
-    #这里有可能要扩展
-    @papers = getSearchResult(params[:query])
+    @query = params[:query]
+    
+    if params[:sort] == 'date'
+      s = Ferret::Search::SortField.new(:publish_time_f, :reverse => true)        
+      @total, @papers = Paper.full_text_search(params[:query], {:page => (params[:page]||1),:sort => s})
+    else
+      @total, @papers = Paper.full_text_search(params[:query], :page => (params[:page]||1))
+    end    
+    @pages = pages_for(@total)    
     
     @related_tags = Array.new
     @related_tags_counts = []
@@ -79,9 +106,5 @@ class PublicController < ApplicationController
     end
   end
 
-  private
-  def getSearchResult(query)
-    Paper.find_by_contents(query)
-  end
 
 end

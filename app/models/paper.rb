@@ -6,7 +6,15 @@ class Paper < ActiveRecord::Base
   has_and_belongs_to_many :authors
   
   file_column :attachment
-  acts_as_ferret :fields => [:title, :abstract, :identifier, :author_list, :tag_list, :source],
+  acts_as_ferret :fields => {
+                                        :title => {},
+                                        :abstract => {},
+                                        :identifier => {},
+                                        :author_list => {},
+                                        :tag_list => {}, 
+                                        :source => {},
+                                        :publish_time_f => {:index => :untokenized}
+                                      },
                       :analyzer => 'Ferret::Analysis::StandardAnalyzer'
   
   def author_list
@@ -19,5 +27,21 @@ class Paper < ActiveRecord::Base
   
   def tag_list
     (self.tags.map {|a| a.name}).join(" ")
+  end
+  
+  def publish_time_f
+    self.publish_time.strftime("%Y%m")
+  end
+  
+  def self.full_text_search(q, options = {})
+     return nil if q.nil? or q==""
+     default_options = {:limit => 10, :page => 1}
+     options = default_options.merge options
+     
+     options[:offset] = options[:limit] * (options.delete(:page).to_i-1)  
+     
+     results = Paper.find_by_contents(q, options)
+     return [results.total_hits, results]
   end  
+  
 end

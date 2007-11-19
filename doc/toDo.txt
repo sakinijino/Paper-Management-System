@@ -1,11 +1,11 @@
 Plan for 2007-11-18
 0 sms的自建speech //done
-1.1 搜索结果的排序 
+1.1 搜索结果的排序 //done
 1.2 搜索结果的分页//done
 2 能改collection的状态
 3.2 to read，reading，finished显示更多 //done
 3.2 notes能显示更多 //done
-4 改搜索的post、get
+4 改搜索的post、get //done
 
 1 搜索不对：author不能搜，其他不能分词 //done
 2 url溢出没做

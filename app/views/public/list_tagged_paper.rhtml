@@ -1,12 +1,15 @@
 <div class='result-papers'>
   <h2>Papers Tagged with '<%=@tag.name%>'...</h2>
+  <%= link_to 'Sort by Relevance', {:sort=>:score, :query => @query}, {:class=>'sort-by'}%>
+  <%= link_to 'Sort by Publish Time', {:sort=>:date, :query => @query}, {:class=>'sort-by'}%>  
+  
   <ul>
-  	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+    <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
   </ul>
   
   <% if @papers.page_count > 1 %>
     <div class="pagenation-link">
-      Pages: <%= paginating_links(@papers) %>
+      Pages: <%= paginating_links(@papers, :params => { :query=> @query, :sort=>params[:sort] }) %>
     </div>
   <%end%>
 </div>
@@ -17,4 +20,3 @@
 </div>
 
 <div class="clearElement"></div>
-

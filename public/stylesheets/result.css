@@ -3,6 +3,13 @@
 	padding: 0 5px 0 15px;
 	float: left;
 }
+
+.content .result-papers .sort-by{
+	text-decoration: none;
+	padding-right: 40px;
+	font-style: italic;
+	/*margin-bottom: 50px;*?
+}
 .content .result-notes{
 	width: 80%;
 	padding: 0 5px 0 15px;
