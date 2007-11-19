@@ -1,13 +1,22 @@
 <div class='result-papers'>
-	<h2>Search Results with '<%=params[:query]%>'...</h2>
-	<ul>
-		<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
-	</ul>
+  <h2>Search Results with '<%= @query%>'...</h2>
+  <%= link_to 'Sort by Relevance', {:sort=>:score, :query => @query}, {:class=>'sort-by'}%>
+  <%= link_to 'Sort by Publish Time', {:sort=>:date, :query => @query}, {:class=>'sort-by'}%>
+  
+  <ul>
+    <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+  </ul>
+  
+  <div class='pagenation-link'>
+    <%= link_to 'Previous page', { :page => @pages.current.previous, :query => @query} if @pages.current.previous %>
+    <%= pagination_links(@pages, :params => { :query=> @query }) %>
+    <%= link_to 'Next page', { :page => @pages.current.next, :query => @query} if @pages.current.next %>
+  </div>
 </div>
 
 <div class='related-tags'>
-<h2>Related Tags...</h2>
-<%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
+  <h2>Related Tags...</h2>
+  <%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
 </div>
 
 <div class="clearElement"></div>
