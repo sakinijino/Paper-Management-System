@@ -8,9 +8,9 @@
   </ul>
   
   <div class='pagenation-link'>
-    <%= link_to 'Previous page', { :page => @pages.current.previous, :query => @query} if @pages.current.previous %>
-    <%= pagination_links(@pages, :params => { :query=> @query }) %>
-    <%= link_to 'Next page', { :page => @pages.current.next, :query => @query} if @pages.current.next %>
+    <%= link_to 'Previous page', { :page => @pages.current.previous, :query => @query, :sort=>params[:sort]} if @pages.current.previous %>
+    <%= pagination_links(@pages, :params => { :query=> @query, :sort=>params[:sort] }) %>
+    <%= link_to 'Next page', { :page => @pages.current.next, :query => @query, :sort=>params[:sort]} if @pages.current.next %>
   </div>
 </div>
 
