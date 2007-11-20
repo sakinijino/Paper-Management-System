@@ -2,6 +2,8 @@
   <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
 </div>
 
+<%= render :partial=>"shared/modify_collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
+
 <div class="all-notes">
   <h2>Public Notes...</h2>
   <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
@@ -9,7 +11,7 @@
     <%= link_to "<< More...", { :action => :list_all_public_note, :id=>@paper.id}, {:class=>'more-link'} %>
   <%end%>
   
-  <% if @un_collected != true%>
+  <% if @collected_status != nil%>
     <h2>My Personal Notes...</h2>
     <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
   <% if @personal_notes_show_more%>
@@ -19,22 +21,6 @@
     <hr />
     <%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>
   <% end %>
-</div>
-
-<div class="collection-status">
-  <% if  @un_collected == true%>
-    <%= link_to "Add to My Collection", 
-                    { :controller => 'personal',
-                      :action     => 'add_personal_info',
-                      :id          => @paper.id
-                    }
-    %>
-  <%else%>
-    <label for="personal_tags">Personal Tags:</label>
-    <%for tag in @tags%>
-      <%= link_to tag.name, { :controller=>:public, :action => :list_tagged_paper, :id => tag.id } %>
-    <%end%>
-  <%end%>
 </div>
 
 <div class="clearElement"></div>

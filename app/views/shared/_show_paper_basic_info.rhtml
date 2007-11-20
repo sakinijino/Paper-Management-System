@@ -17,7 +17,7 @@
                 <td><%=h paper.identifier%></td>
         </tr>         
         <tr class='list-line-odd'>
-                <td>Author(s):</td>
+                <td>Authors:</td>
                 <td><%=h paper.author_list_with_comma%></td>
         </tr>
         <tr class='list-line-even'>
@@ -27,7 +27,7 @@
          <tr class='list-line-odd'>
                 <td>Abstract:</td>
                 <td class="long-text"><%=simple_format paper.abstract %></td>
-        </tr>   
+        </tr>
         <tr class='list-line-even' >
                 <td>Attachment:</td>
                 <td class="long-text">
@@ -37,4 +37,16 @@
                   <%end%>
                 </td>
         </tr>
+        <tr class='list-line-odd'>
+                <td>Popular Tags:</td>
+                <td>
+                  <%for t in paper.popular_tags %>
+                    <%= link_to "#{t.name}(#{t.tag_amount})", :controller=>"public", :action=>"list_tagged_paper", :id=>t.id %>
+                <%end%>
+              </td>
+        </tr>   
+        <!--<tr class='list-line-even' style="height:1.5em">
+                <td></td>
+                <td></td>
+        </tr>-->
 </table>

@@ -18,7 +18,6 @@
 <ul class="menu2">
         <h1>Menu</h1>
   <%if logged_in? &&  is_admin? %>
-          <li><%= link_to 'Paper Management', :controller =>'admin_user', :action=>'index'%></li>
           <li><%= link_to 'User Management', :controller =>'admin', :action=>'list_user'%></li>
   <%end%>
 </ul>

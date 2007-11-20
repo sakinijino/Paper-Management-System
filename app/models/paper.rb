@@ -29,6 +29,16 @@ class Paper < ActiveRecord::Base
     (self.tags.map {|a| a.name}).join(" ")
   end
   
+  def popular_tags(limit=5)
+    tags = Collection.find(:all,
+                                    :select => 'name, count(tag_id) as tag_amount, t.id as id, c.paper_id as paper_id',
+                                    :order => 'tag_amount desc',
+                                    :group => 'tag_id',
+                                    :limit => limit,
+                                    :joins => 'as c inner join tags as t on c.tag_id=t.id',
+                                    :conditions => ["paper_id=:p_id",{:p_id=>self.id}])
+  end
+  
   def publish_time_f
     self.publish_time.strftime("%Y%m")
   end
