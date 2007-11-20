@@ -1,6 +1,7 @@
 class PersonalController < ApplicationController
   layout 'frame'
   include AuthenticatedSystem
+  before_filter :login_required
   
   def add_to_collection
     paper = Paper.find(params[:id])

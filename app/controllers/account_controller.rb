@@ -1,5 +1,5 @@
 class AccountController < ApplicationController
-  layout 'frame'
+  layout 'frame_no_search'
   
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem

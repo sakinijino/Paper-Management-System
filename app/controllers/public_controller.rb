@@ -1,6 +1,7 @@
 class PublicController < ApplicationController
   layout 'frame'
-  include AuthenticatedSystem  
+  include AuthenticatedSystem
+  before_filter :login_required  
   
   def index
     @tags = Collection.find(:all,
