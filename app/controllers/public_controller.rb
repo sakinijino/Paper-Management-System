@@ -27,22 +27,22 @@ class PublicController < ApplicationController
     render :layout=>"frame_no_search"
   end
   
-  def create_paper
-    @paper = Paper.new(params[:paper])
+  def create_checking_paper
+    @checking_paper = CheckingPaper.new(params[:paper])
     
-    if @paper.save
+    if @checking_paper.save
       for name in params[:author_name].uniq
         new_author = Author.find_by_name(name)
         if new_author == nil
           new_author = Author.create({:name=>name})
         end
 
-        if @paper.authors.find_by_name(new_author.name) == nil
-          @paper.authors << new_author
+        if @checking_paper.authors.find_by_name(new_author.name) == nil
+          @checking_paper.authors << new_author
         end
       end      
       flash[:notice] = 'Paper has been successfully uploaded.'
-      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
+      redirect_to :controller=>'personal', :action => 'list_collection', :id => current_user.id 
     
     else
       render :action => 'contribute_paper'

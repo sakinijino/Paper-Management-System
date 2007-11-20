@@ -12,6 +12,22 @@ class AdminController < ApplicationController
   #~ verify :method => :post, :only => [ :destroy, :create, :update ],
           #~ :redirect_to => { :action => :list }
 
+  def list_checking_paper
+    @paper_pages, @papers = paginate :checking_papers, :per_page => 10
+  end
+  
+  def update_checking_paper
+    for key in params.keys
+      if params[key] == 'Accept'
+        a_checked_paper = CheckingPaper.find(key)
+        a_checked_paper = Paper.clone_from_checked_paper(a_checked_paper)
+      elsif params[key] == 'Reject'
+        CheckingPaper.destroy(key)
+      end
+    end
+    redirect_to :action => 'list_checking_paper'
+  end
+
   def list_user
     @user_pages, @users = paginate :users, :per_page => 10
     @users.sort! {|u1, u2| Iconv.conv("GBK", "UTF-8", u1.realname)<=>Iconv.conv("GBK", "UTF-8", u2.realname)}

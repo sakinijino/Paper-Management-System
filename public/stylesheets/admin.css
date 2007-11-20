@@ -101,3 +101,7 @@
         white-space: normal;
 }
 
+.content table .choice-radio{
+	display:inline;
+}
+

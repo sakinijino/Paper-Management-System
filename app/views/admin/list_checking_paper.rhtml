@@ -1,0 +1,33 @@
+<div class="headline">
+	<h1>Listing Papers under Checking</h1>
+</div>
+
+<% form_tag( {:action => 'update_checking_paper'}, {:multipart => 'true'}) do %>
+    <table>
+      <tr>
+        <th>Paper</th>
+        <th>Decision</th>
+      </tr>
+      
+    <% for paper in @papers%>
+      <tr class="<%= cycle('list-line-odd', 'list-line-even') %> selected-table-item">
+        <td class='long-text'>
+          <%=h paper.title%>
+          <%= link_to 'Show Detail', :action => 'show_detail'%>
+          <div></div>
+        </td>
+        <td>
+          <%= radio_button_tag "#{paper.id}","Unchecked",true,{:id => 'choice#{paper.id}', :class=>'choice-radio'} %>Leave unchecked<br />
+          <%= radio_button_tag "#{paper.id}","Accept",false,{:id => 'choice#{paper.id}', :class=>'choice-radio'} %>Accept<br />
+          <%= radio_button_tag "#{paper.id}","Reject",false,{:id => 'choice#{paper.id}', :class=>'choice-radio'} %>Reject<br />    
+        </td>
+      </tr>
+    <% end %>
+    </table>
+
+  <%= submit_tag "Save", :class=>"submit" %>
+<%end%>
+
+
+<%= link_to 'Previous page', { :page => @paper_pages.current.previous } if @paper_pages.current.previous %>
+<%= link_to 'Next page', { :page => @paper_pages.current.next } if @paper_pages.current.next %> 

@@ -23,7 +23,7 @@ class Paper < ActiveRecord::Base
   
   def author_list_with_comma
     (self.authors.map {|a| a.name}).join(", ")
-  end  
+  end
   
   def tag_list
     (self.tags.map {|a| a.name}).join(" ")
@@ -42,6 +42,27 @@ class Paper < ActiveRecord::Base
      
      results = Paper.find_by_contents(q, options)
      return [results.total_hits, results]
-  end  
-  
+   end
+   
+  def self.clone_from_checked_paper(a_checked_paper)
+    a_created_paper = Paper.new(
+                                              'title'=>a_checked_paper.title,
+                                              'abstract'=>a_checked_paper.abstract,
+                                              'publish_time'=>a_checked_paper.publish_time,
+                                              'identifier'=>a_checked_paper.identifier,
+                                              'source'=>a_checked_paper.source
+                                              );
+    if a_checked_paper.attachment != nil
+      a_created_paper.attachment = File.open(a_checked_paper.attachment)
+      FileUtils.cp(a_created_paper.attachment, a_checked_paper.attachment)
+      FileUtils.remove_file(a_checked_paper.attachment, force = true)
+    end
+    
+    a_created_paper.save
+                              
+    if a_created_paper != nil
+      a_created_paper.authors = a_checked_paper.authors
+      CheckingPaper.destroy(a_checked_paper)
+    end
+  end
 end
