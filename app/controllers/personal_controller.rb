@@ -181,10 +181,6 @@ class PersonalController < ApplicationController
     end       
   end
 
-  def new_note
-    @paper = Paper.find(params[:id])
-  end
-
   def create_note
     note = Note.new(params[:note])
     note.user_id = current_user.id

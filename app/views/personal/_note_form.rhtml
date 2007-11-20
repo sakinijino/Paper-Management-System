@@ -1,6 +1,6 @@
 <label for="note">Content</label>
 <%= text_area 'note', 'content' %>
+<%= check_box 'note', 'is_private', {:style=>'display:inline'} %>
 <label for="note_is_private" style='display:inline;'>Private</label>
-<%= check_box 'note', 'is_private', {:class=>'checkbox'} %>
-
+<br/>
 <%= submit_tag "Save", :class=>"submit" %>

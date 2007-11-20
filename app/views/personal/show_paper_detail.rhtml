@@ -5,7 +5,7 @@
 <%= render :partial=>"shared/modify_collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
 
 <div class="all-notes">
-  <h2>Public Notes...</h2>
+  <h2>Notes...</h2>
   <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
   <% if @public_notes_show_more%>
     <%= link_to "<< More...", { :action => :list_all_public_note, :id=>@paper.id}, {:class=>'more-link'} %>
@@ -19,7 +19,9 @@
   <%end%>
   
     <hr />
-    <%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>
+    <% form_tag ({:action => 'create_note', :id => @paper.id}) do %>
+      <%= render :partial=>"note_form" %>
+    <% end %>
   <% end %>
 </div>
 

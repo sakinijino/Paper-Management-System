@@ -5,7 +5,7 @@
       -
       <span class="time"><%= h(note.publish_time.strftime("%Y-%m-%d %H:%M"))%></span>
       <% if note.user.id == current_user.id%>
-        <span class="edit"><%= link_to "Edit", {:action => :edit_note, :id => note.id} %></span>
+        <!--<span class="edit"><%= link_to "Edit", {:action => :edit_note, :id => note.id} %></span>-->
         <span class="edit"><%= link_to "Delete", {:action => :destroy_note, :id => note.id}, :confirm => 'Are you sure?', :method => :post %></span>
       <% end %>
     </div>
