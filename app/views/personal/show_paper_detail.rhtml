@@ -3,39 +3,44 @@
   <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
 </div>
 
-<div class="all-notes">
-  <h2>Public Notes...</h2>
-  <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
-  <% if @public_notes_show_more%>
-    <%= link_to "<< More...", { :action => :list_all_public_note, :id=>@paper.id}, {:class=>'more-link'} %>
-  <%end%>
-  
-  <% if @un_collected != true%>
-    <h2>My Personal Notes...</h2>
-    <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
-  <% if @personal_notes_show_more%>
-    <%= link_to "<< More...", { :action => :list_all_personal_note, :id=>@paper.id}, {:class=>'more-link'} %>
-  <%end%>
-  
-    <hr />
-    <%= link_to "New Note", {:controller=>'',:action=>'new_note',:id=>@paper.id} %>
-  <% end %>
-</div>
+<%= render :partial=>"shared/modify_collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
 
-<div class="collection-status">
-  <% if  @un_collected == true%>
-    <%= link_to "Add to My Collection", 
-                    { :controller => 'personal',
-                      :action     => 'add_personal_info',
-                      :id          => @paper.id
-                    }
-    %>
-  <%else%>
-    <label for="personal_tags">Personal Tags:</label>
-    <%for tag in @tags%>
-      <%= link_to tag.name, { :controller=>:public, :action => :list_tagged_paper, :id => tag.id } %>
+<div class="all-notes">
+  <h2>Notes...</h2>
+  <div class="tab">
+    <span id="public-notes-tab" class="selected" onclick="$('public-notes-div').show();$('my-notes-div').hide();$('public-notes-tab').className='selected';$('my-notes-tab').className=''">Public notes</span>
+    <span id="my-notes-tab" onclick="$('public-notes-div').hide();$('my-notes-div').show();$('public-notes-tab').className='';$('my-notes-tab').className='selected'">My notes</span>
+  </div>
+  
+  <div id="public-notes-div">
+    <% if @public_notes.length > 0%>
+      <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
+    <%else%>
+      <span style="margin-left:8px;">No public notes...</span>
     <%end%>
-  <%end%>
+    <% if @public_notes_show_more%>
+      <%= link_to "<< More...", { :action => :list_all_public_note, :id=>@paper.id}, {:class=>'more-link'} %>
+    <%end%>
+  </div>
+  
+  <% if @collected_status != nil%>
+  
+  <div id="my-notes-div" style="display:none">
+    <% if @personal_notes.length > 0%>
+      <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
+    <%else%>
+      <span style="margin-left:8px;">No personal notes...</span>
+    <%end%>
+    <% if @personal_notes_show_more%>
+      <%= link_to "<< More...", { :action => :list_all_personal_note, :id=>@paper.id}, {:class=>'more-link'} %>
+    <%end%>
+  </div>
+  
+    <h2>New Note</h2>
+    <% form_tag ({:action => 'create_note', :id => @paper.id}, :style=>'margin-left:5px; margin-top:-5px') do %>
+      <%= render :partial=>"note_form" %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="clearElement"></div>

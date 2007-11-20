@@ -12,8 +12,8 @@
     <% for paper in @papers%>
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %> selected-table-item">
         <td class='long-text'>
-          <%= link_to paper.title, :action => 'show_detail'%>
-          <div>
+          <%= link_to paper.title, "javascript:void(0);", :onclick=>"Effect.toggle($('checking_paper_#{paper.id}'), 'slide')"%>
+          <div id=<%="checking_paper_#{paper.id}"%> style="display:none">
              <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>paper}%>
           </div>
         </td>

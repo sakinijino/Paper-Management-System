@@ -1,19 +1,19 @@
 class PersonalController < ApplicationController
   layout 'frame'
   include AuthenticatedSystem
-  
-  def add_personal_info
-    #当推荐其他相关标签时有用
-  end
+  before_filter :login_required
   
   def add_to_collection
     paper = Paper.find(params[:id])
+    params[:tags] = "" if params[:tags] ==nil
+    params[:status] = params[:commit]
 
-    if current_user.papers.find_by_id(paper.id)
-      flash[:notice] = 'You have already added this paper.'
-      redirect_to :action => 'show_paper_detail', :id => paper.id
-    else
-      for tag_name in params[:paper][:tags].split.uniq
+    Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
+    #~ if current_user.papers.find_by_id(paper.id)
+      #~ flash[:notice] = 'You have already added this paper.'
+      #~ redirect_to :action => 'show_paper_detail', :id => paper.id
+    #~ else
+      for tag_name in params[:tags].split.uniq
         collection = Collection.new
         collection.paper = paper
         collection.user = current_user
@@ -22,11 +22,11 @@ class PersonalController < ApplicationController
           tag = Tag.create({:name => tag_name})
         end
         collection.tag = tag
-        collection.status = params[:paper][:status]
+        collection.status = params[:status]
         collection.save
       end
-    redirect_to :action=>'list_collection',:id=>current_user.id
-    end
+    redirect_to :action=>'show_paper_detail',:id=> paper.id, :anchor=>"collection-status"
+    #~ end
   end
   
   def list_collection
@@ -156,13 +156,15 @@ class PersonalController < ApplicationController
     @paper = Paper.find(params[:id])
     @tags = Collection.find(:all,
                                      :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id, :pid=>@paper.id}],
-                                    :select => 't.name,t.id, c.paper_id, c.user_id',
+                                    :select => 't.name,t.id, c.paper_id, c.user_id, c.status',
                                     :joins => 'as c inner join tags as t on c.tag_id=t.id')
     if @tags.empty?
-      @un_collected = true
+      @collected_status = nil
+    else
+      @collected_status = @tags[0].status
     end
     
-    show_num = 5
+    show_num = 3
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
     if(@public_notes.size > show_num)
       @public_notes = @public_notes[0,show_num]
@@ -178,10 +180,6 @@ class PersonalController < ApplicationController
     else
       @personal_notes_show_more = false
     end       
-  end
-
-  def new_note
-    @paper = Paper.find(params[:id])
   end
 
   def create_note

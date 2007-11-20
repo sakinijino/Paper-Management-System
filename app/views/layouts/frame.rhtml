@@ -11,6 +11,7 @@
     <%= stylesheet_link_tag 'mypage' %>
     <%= stylesheet_link_tag 'paperdetail' %>
     <%= stylesheet_link_tag 'result' %>
+    <%= javascript_include_tag :defaults %>
 </head>
 
 <body>
@@ -20,14 +21,14 @@
 <%= render :partial => 'layouts/header' %>
 
 <div class="content">
-  <%if logged_in? %>
+
   <div class="search">
     <% form_tag({:controller=>'public', :action => 'list_searched_paper'}, {:method=>:get} ) do%>
       <%= text_field_tag 'query', {}, {:size=>35}  %>
       <%= submit_tag 'Search', {:class=>'formbutton'} %>
     <% end %>
   </div>
-  <%end%>
+
   <div class="clearElement"></div>
   <%= yield  %>
 </div>

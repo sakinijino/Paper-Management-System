@@ -1,9 +1,12 @@
 class Paper < ActiveRecord::Base
-  has_many :collections
   has_many :users, :through => :collections, :select => "distinct users.*"
   has_many :tags, :through => :collections, :select => "distinct tags.*"
-  has_many :notes
+  has_many :notes, :dependent => :destroy
+  has_many :collections, :dependent => :destroy
+  
   has_and_belongs_to_many :authors
+  
+  validates_uniqueness_of   :identifier, :allow_nil=>true
   
   file_column :attachment
   acts_as_ferret :fields => {
@@ -27,6 +30,16 @@ class Paper < ActiveRecord::Base
   
   def tag_list
     (self.tags.map {|a| a.name}).join(" ")
+  end
+  
+  def popular_tags(limit=5)
+    tags = Collection.find(:all,
+                                    :select => 'name, count(tag_id) as tag_amount, t.id as id, c.paper_id as paper_id',
+                                    :order => 'tag_amount desc',
+                                    :group => 'tag_id',
+                                    :limit => limit,
+                                    :joins => 'as c inner join tags as t on c.tag_id=t.id',
+                                    :conditions => ["paper_id=:p_id",{:p_id=>self.id}])
   end
   
   def publish_time_f

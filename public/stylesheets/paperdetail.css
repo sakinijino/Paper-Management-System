@@ -1,5 +1,4 @@
-.content .paper-basic-info,
-.content .collection-status{
+.content .paper-basic-info{
 	width: 480px;
 	float: left;
 	padding: 0 5px 0 15px;
@@ -10,12 +9,67 @@
 	margin: 0px;
 }
 
-.content .paper-basic-info .title{
+.content .paper-basic-info td{
+	padding: 2px;
+}
+
+.content .paper-basic-info td.title{
 	color: rgb(102,102,102);
 }
 
-.content .all-notes{
+.content .all-notes,
+.content .collection-status{
 	width: 380px;
 	float: right;
 	padding: 2px 10px 2px 5px;
+}
+
+.content .collection-status input.submitbutton {
+	background: white;
+	border: none 0px;
+	text-decoration: underline;
+	padding:0px;
+	margin:0px;
+	color:rgb(0,102,204);
+	display:inline;
+	cursor:pointer;
+}
+
+.content .collection-status span.tag,
+.content .all-notes div.tab span {
+	text-decoration: none;
+	font-size: 12px;
+	text-align: center;
+	border-right: 1px solid #AAFFAA;
+	border-bottom: 1px solid #AAFFAA;
+	background-color: #EEFFEE;
+	padding: 3px 3px 2px 3px;
+	margin: 0 2px 0 2px;
+	cursor:pointer;
+	display:inline-block;
+}
+
+.content .collection-status span.unselected {
+	color: #006600;
+}
+.content .collection-status span.selected {
+	color: #BBBBBB;
+}
+
+.content .all-notes div.tab {
+	margin-left:3px;
+}
+.content .all-notes div.tab span{
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;
+	border: none 0px;
+/*	background-color: rgb(232,238,247);*/
+	background-color: #fff;
+	color: #006600;
+}
+.content .all-notes div.tab span.selected {
+	font-size: 13px;
+	background-color: #EEFFEE;
+	color: #006600;
 }

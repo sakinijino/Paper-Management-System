@@ -18,6 +18,18 @@ class User < ActiveRecord::Base
   has_many :tags, :through => :collections, :select => "distinct tags.*"
   has_many :notes
 
+  def popular_tags(limit=5)
+    #~ tags = Collection.find(:all,
+                                    #~ :select => 'name, count(tag_id) as tag_amount, t.id as id, c.paper_id as paper_id',
+                                    #~ :order => 'tag_amount desc',
+                                    #~ :group => 'tag_id',
+                                    #~ :limit => limit,
+                                    #~ :joins => 'as c inner join tags as t on c.tag_id=t.id',
+                                    #~ :conditions => ["paper_id=:p_id",{:p_id=>self.id}])
+    #performance problem
+    tags = (self.tags.map{|t| {:name=>t.name, :id=>t.id, :tag_amount=>t.collections.count}}).sort {|t1,t2| t2[:tag_amount]<=>t1[:tag_amount]} [0,limit]
+  end
+                                  
   def self.role_list
     return ['Common User', 'Administrator']
   end
