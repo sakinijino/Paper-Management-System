@@ -1,5 +1,5 @@
 <label for="note">Content</label>
-<%= text_area 'note', 'content' %>
+<%= text_area 'note', 'content', :cols=>60, :style=>"width:auto" %>
 <%= check_box 'note', 'is_private', {:style=>'display:inline'} %>
 <label for="note_is_private" style='display:inline;'>Private</label>
 <br/>

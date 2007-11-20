@@ -4,12 +4,28 @@
 	float: left;
 }
 
+.content .result-papers div.sort {
+	background: rgb(255, 246, 238);
+	padding:5px;
+	margin: 0 10px 10px 20px;
+	text-align: right;
+}
+
 .content .result-papers .sort-by{
 	text-decoration: none;
-	padding-right: 40px;
-	font-style: italic;
-	/*margin-bottom: 50px;*?
+	padding:7px 5px 7px 5px;
+	margin-right: 40px;
 }
+
+.content .result-papers .sort-by:hover{
+	background: rgb(0, 51, 153);
+	color: #fff;
+}
+
+.content .result-papers .selected{
+	background-color: rgb(232,238,247);
+}
+
 .content .result-notes{
 	width: 80%;
 	padding: 0 5px 0 15px;

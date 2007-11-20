@@ -35,7 +35,8 @@
 	cursor:pointer;
 }
 
-.content .collection-status span.tag {
+.content .collection-status span.tag,
+.content .all-notes div.tab span {
 	text-decoration: none;
 	font-size: 12px;
 	text-align: center;
@@ -51,7 +52,24 @@
 .content .collection-status span.unselected {
 	color: #006600;
 }
-
 .content .collection-status span.selected {
 	color: #BBBBBB;
+}
+
+.content .all-notes div.tab {
+	margin-left:3px;
+}
+.content .all-notes div.tab span{
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;
+	border: none 0px;
+/*	background-color: rgb(232,238,247);*/
+	background-color: #fff;
+	color: #006600;
+}
+.content .all-notes div.tab span.selected {
+	font-size: 13px;
+	background-color: #EEFFEE;
+	color: #006600;
 }

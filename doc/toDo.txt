@@ -2,30 +2,41 @@ Plan for 2007-11-18
 0 sms的自建speech //done
 1.1 搜索结果的排序 //done
 1.2 搜索结果的分页//done
-2 能改collection的状态
+2 能改collection的状态//done
 3.2 to read，reading，finished显示更多 //done
 3.2 notes能显示更多 //done
 4 改搜索的post、get //done
 
 1 搜索不对：author不能搜，其他不能分词 //done
-2 url溢出没做
-3 各种检查（各种model层的检查）
+3 各种检查（各种model层的检查）//done
 4 parse网页和上传paper没有连接 //done
-5 管理员日常管理(paper详情)
+5 管理员日常管理(paper详情)//done
 6 布局 //done
 7 css和html //done
-8 管理员审核paper
+8 管理员审核paper//done
 9.1 notes删除 //done
-9.2 collection删除、关联删除
+9.2 collection删除、关联删除//done
 10 权限判断 //done
 11 个人首页中my notes加上到paper的link //done
 12 tag搜索，用ferret //done
-13 高级搜索
-14 paper list 概要信息
-15 search结果的分页
-16 collection加日期
+15 search结果的分页//done
 17 分页 //done
-19 show_paper_detail页面，basic info部分加最多的tag
+19 show_paper_detail页面，basic info部分加最多的tag//done
 20 将菜单向下放一列 //done
-21 personal页面中点tag显示自己的paper
+
+
+2007-11-20
+2 url溢出没做
+14 paper list概要信息以及收藏状态
+21 personal页面中点tag显示自己的paper（按状态排序）
+6 si-RNA Branch中的admin的转向
+
+4 collection tag能保存
+1 审核详情的下拉
+2 PMID bug （11111114，11111115）
+3 PMID检查（长度，内容）
+5 session datebase版本
+
+13 高级搜索
+16 collection加日期
 end 删除本文件

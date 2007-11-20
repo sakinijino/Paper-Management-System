@@ -164,7 +164,7 @@ class PersonalController < ApplicationController
       @collected_status = @tags[0].status
     end
     
-    show_num = 5
+    show_num = 3
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
     if(@public_notes.size > show_num)
       @public_notes = @public_notes[0,show_num]
