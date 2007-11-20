@@ -53,9 +53,11 @@ class Paper < ActiveRecord::Base
                                               'source'=>a_checked_paper.source
                                               );
     if a_checked_paper.attachment != nil
-      a_created_paper.attachment = File.open(a_checked_paper.attachment)
+      tempFile = File.open(a_checked_paper.attachment)
+      a_created_paper.attachment = tempFile
       FileUtils.cp(a_created_paper.attachment, a_checked_paper.attachment)
-      FileUtils.remove_file(a_checked_paper.attachment, force = true)
+      tempFile.close
+      #~ FileUtils.remove_file(a_checked_paper.attachment, force = true)
     end
     
     a_created_paper.save

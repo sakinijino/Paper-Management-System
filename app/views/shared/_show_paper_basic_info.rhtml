@@ -1,4 +1,3 @@
-<h2>Paper Detail</h2>
 <table>
         <colgroup>
                 <col class="title"/>
@@ -33,7 +32,7 @@
                 <td class="long-text">
                   <%if(paper.attachment!=nil)%>
                     <%= image_tag(paper.attachment.split('.')[paper.attachment.split('.').length-1]+".jpg",:style=>'position:relative;top:3px')%>
-                    <%= link_to paper.title+'.'+paper.attachment.split('.')[paper.attachment.split('.').length-1], url_for_file_column(:paper, :attachment) %>
+                    <%= link_to paper.title+'.'+paper.attachment.split('.')[paper.attachment.split('.').length-1], url_for_file_column(paper, :attachment) %>
                   <%end%>
                 </td>
         </tr>
