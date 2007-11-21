@@ -27,7 +27,7 @@
   <h2>Tags Used by <%= @user.login.capitalize %>...</h2>
   <div>
     <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
-      <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
+      <%= link_to tag.name, { :controller=>:personal,:action => :list_tagged_paper, :id => tag.id, :uid=>@user.id}, :class => css_class %>
     <% end %>
   </div>
 </div>

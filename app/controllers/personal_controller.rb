@@ -104,6 +104,46 @@ class PersonalController < ApplicationController
                                   :joins => 'inner join collections as c on papers.id=c.paper_id',
                                   :page => {:size=>10,:current=>params[:page]})   
   end
+                                
+  def list_tagged_paper
+    @tag = Tag.find(params[:id])
+    @user = User.find(params[:uid])
+    
+    unpaged_papers = Paper.find(
+                                      :all,
+                                      :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                      :joins => 'inner join collections as c on c.paper_id=papers.id'
+                                      )
+    
+    if params[:sort] == 'pub_date'
+      @papers = Paper.find(
+                                      :all,
+                                      :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                      :order => 'publish_time desc',
+                                      :joins => 'inner join collections as c on c.paper_id=papers.id',
+                                      :page => {:size=>10,:current=>params[:page]}
+                                    )
+    else
+      @papers = Paper.find(:all,
+                                    :select => 'paper_id as id, title',
+                                    :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                    :order => 'c.id desc',
+                                    :group => 'paper_id',
+                                    :joins => 'inner join collections as c on papers.id=c.paper_id',
+                                    :page => {:size=>10,:current=>params[:page]}
+                                  )
+    end                                    
+    #这里需要用join重写，如果性能有问题的话
+    @related_tags = Array.new
+    @related_tags_counts = []
+    for other_tag in @user.tags - [@tag]
+      if (unpaged_papers & other_tag.papers).empty? == false
+        @related_tags << other_tag
+        @related_tags_counts << other_tag.collections.count
+      end
+    end
+
+  end                                
 
   def list_all_my_note
     @user = User.find(params[:id])

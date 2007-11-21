@@ -28,7 +28,7 @@ Plan for 2007-11-18
 2007-11-20
 2 url溢出没做
 14 paper list概要信息以及收藏状态
-21 personal页面中点tag显示自己的paper（按状态排序）
+21 personal页面中点tag显示自己的paper（按状态排序）//done
 6 si-RNA Branch中的admin的转向 //done
 
 4 collection tag能保存 //done
