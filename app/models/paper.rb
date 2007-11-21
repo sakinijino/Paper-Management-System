@@ -7,6 +7,7 @@ class Paper < ActiveRecord::Base
   has_and_belongs_to_many :authors
   
   validates_uniqueness_of   :identifier, :allow_nil=>true
+  validates_presence_of :title
   
   file_column :attachment
   acts_as_ferret :fields => {

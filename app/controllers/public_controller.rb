@@ -25,11 +25,13 @@ class PublicController < ApplicationController
   end
   
   def contribute_paper
+    @authors = []
     render :layout=>"frame_no_search"
   end
   
   def create_paper
     @paper = Paper.new(params[:paper])
+    @authors = params[:author_name]
     
     if @paper.save
       for name in params[:author_name].uniq

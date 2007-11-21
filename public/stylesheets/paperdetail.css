@@ -63,13 +63,12 @@
 	font-size: 13px;
 	font-weight: bold;
 	padding: 5px;
-	border: none 0px;
-/*	background-color: rgb(232,238,247);*/
+	border: 2px solid #EEFFEE;
+	border-bottom: none 0px;
 	background-color: #fff;
 	color: #006600;
 }
 .content .all-notes div.tab span.selected {
 	font-size: 13px;
 	background-color: #EEFFEE;
-	color: #006600;
 }

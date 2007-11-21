@@ -2,7 +2,7 @@
 
 <% form_tag({:action => 'create_paper'}, {:multipart => 'true'}) do%>
   <%= error_messages_for 'paper' %>
-
+  <div class="clearElement"></div>
   <label for="paper_title">Title:</label>
   <%= text_field 'paper', 'title'  %>
   
@@ -13,14 +13,9 @@
   <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true, :start_year=>1900, :end_year=>Time.now.year  %> 
   
   <label for="paper_author">Authors:</label>
-  <%= text_field_tag 'author_name[]'%>
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
-  <%= text_field_tag 'author_name[]'%>  
+  <% 8.times do |i|%>
+  <%= text_field_tag 'author_name[]', @authors[i]%>
+  <%end%>
 
   <label for="paper_abstract">Abstract:</label>
   <%= text_area 'paper', 'abstract'  %>
