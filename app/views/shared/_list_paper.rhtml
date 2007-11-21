@@ -1,5 +1,11 @@
 <ul>
 <%for paper in papers%> 
-  <li class="paper"><%= link_to paper.title, {:controller=>"personal", :action=>"show_paper_detail",:id=>paper.id} %></li>
+  <li class="paper">
+    <%= link_to paper.title, {:controller=>"personal", :action=>"show_paper_detail",:id=>paper.id} %>
+    <br/>
+    <span><%= paper.authors[0].name if paper.authors[0]%> <%=" ..." if paper.authors.length > 1%></span> - 
+    <span><%= paper.publish_time_f %></span> - 
+    <span><%= paper.source %></span>
+  </li>
 <% end %>
 </ul>

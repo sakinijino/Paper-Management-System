@@ -44,7 +44,7 @@ class Paper < ActiveRecord::Base
   end
   
   def publish_time_f
-    self.publish_time.strftime("%Y%m")
+    self.publish_time.strftime("%Y.%m")
   end
   
   def self.full_text_search(q, options = {})

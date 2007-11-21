@@ -34,7 +34,7 @@ class PersonalController < ApplicationController
     
     show_num = 5
     @to_read_papers = Paper.find(:all,
-                                    :select => 'p.id as id, p.title as title',
+                                    :select => 'p.*',
                                     :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'To Read',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
@@ -47,7 +47,7 @@ class PersonalController < ApplicationController
     end
 
     @reading_papers = Paper.find(:all,
-                                    :select => 'p.id as id, p.title as title',
+                                    :select => 'p.*',
                                     :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'Reading',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
@@ -60,7 +60,7 @@ class PersonalController < ApplicationController
     end
     
     @finished_papers = Paper.find(:all,
-                                    :select => 'p.id as id, p.title as title',
+                                    :select => 'p.*',
                                     :conditions => ["c.status=:status and c.user_id=:uid",{:status=>'Finished',:uid=>@user.id}],
                                     :order => 'c.id desc',
                                     :group => 'p.id',
@@ -97,7 +97,7 @@ class PersonalController < ApplicationController
     @status = params[:status]
     @user = User.find(params[:id])
     @all_papers = Paper.find(:all,
-                                  :select => 'paper_id as id, title',
+                                  :select => 'papers.*',
                                   :conditions => ["c.user_id=:uid and c.status=:status",{:uid=>@user.id, :status=>@status}],
                                   :order => 'c.id desc',
                                   :group => 'paper_id',
@@ -117,15 +117,15 @@ class PersonalController < ApplicationController
     
     if params[:sort] == 'pub_date'
       @papers = Paper.find(
-                                      :all,
+                                      :all, :select => 'papers.*',
                                       :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
                                       :order => 'publish_time desc',
                                       :joins => 'inner join collections as c on c.paper_id=papers.id',
                                       :page => {:size=>10,:current=>params[:page]}
                                     )
     else
-      @papers = Paper.find(:all,
-                                    :select => 'paper_id as id, title',
+      @papers = Paper.find(:all, 
+                                    :select => 'papers.*',
                                     :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
                                     :order => 'c.id desc',
                                     :group => 'paper_id',

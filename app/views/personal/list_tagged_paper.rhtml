@@ -18,7 +18,15 @@
 
 <div class='related-tags'>
 <h2>Related Tags...</h2>
-<%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
+<%if @user!=nil%>
+  <div>
+    <% tag_cloud @related_tags, @related_tags_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+      <%= link_to tag.name, { :controller=>:personal,:action => :list_tagged_paper, :id => tag.id, :uid=>@user.id}, :class => css_class %>
+    <% end %>
+  </div>
+<%else%>
+  <%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
+<%end%>
 </div>
 
 <div class="clearElement"></div>
