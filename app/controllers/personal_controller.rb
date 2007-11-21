@@ -6,27 +6,27 @@ class PersonalController < ApplicationController
   def add_to_collection
     paper = Paper.find(params[:id])
     params[:tags] = "" if params[:tags] ==nil
-    params[:status] = params[:commit]
 
     Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
-    #~ if current_user.papers.find_by_id(paper.id)
-      #~ flash[:notice] = 'You have already added this paper.'
-      #~ redirect_to :action => 'show_paper_detail', :id => paper.id
-    #~ else
-      for tag_name in params[:tags].split.uniq
-        collection = Collection.new
-        collection.paper = paper
-        collection.user = current_user
-        tag = Tag.find_by_name(tag_name)
-        if tag == nil
-          tag = Tag.create({:name => tag_name})
-        end
-        collection.tag = tag
-        collection.status = params[:status]
-        collection.save
+    for tag_name in params[:tags].split.uniq
+      collection = Collection.new
+      collection.paper = paper
+      collection.user = current_user
+      tag = Tag.find_by_name(tag_name)
+      if tag == nil
+        tag = Tag.create({:name => tag_name})
       end
-    redirect_to :action=>'show_paper_detail',:id=> paper.id, :anchor=>"collection-status"
-    #~ end
+      collection.tag = tag
+      collection.status = params[:status]
+      collection.save
+    end
+    redirect_to :action=>'show_paper_detail',:id=> paper.id
+  end
+  
+  def remove_from_collection
+    paper = Paper.find(params[:id])
+    Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
+    redirect_to :action=>'show_paper_detail',:id=> paper.id
   end
   
   def list_collection
@@ -104,6 +104,46 @@ class PersonalController < ApplicationController
                                   :joins => 'inner join collections as c on papers.id=c.paper_id',
                                   :page => {:size=>10,:current=>params[:page]})   
   end
+                                
+  def list_tagged_paper
+    @tag = Tag.find(params[:id])
+    @user = User.find(params[:uid])
+    
+    unpaged_papers = Paper.find(
+                                      :all,
+                                      :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                      :joins => 'inner join collections as c on c.paper_id=papers.id'
+                                      )
+    
+    if params[:sort] == 'pub_date'
+      @papers = Paper.find(
+                                      :all,
+                                      :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                      :order => 'publish_time desc',
+                                      :joins => 'inner join collections as c on c.paper_id=papers.id',
+                                      :page => {:size=>10,:current=>params[:page]}
+                                    )
+    else
+      @papers = Paper.find(:all,
+                                    :select => 'paper_id as id, title',
+                                    :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
+                                    :order => 'c.id desc',
+                                    :group => 'paper_id',
+                                    :joins => 'inner join collections as c on papers.id=c.paper_id',
+                                    :page => {:size=>10,:current=>params[:page]}
+                                  )
+    end                                    
+    #这里需要用join重写，如果性能有问题的话
+    @related_tags = Array.new
+    @related_tags_counts = []
+    for other_tag in @user.tags - [@tag]
+      if (unpaged_papers & other_tag.papers).empty? == false
+        @related_tags << other_tag
+        @related_tags_counts << other_tag.collections.count
+      end
+    end
+
+  end                                
 
   def list_all_my_note
     @user = User.find(params[:id])

@@ -5,10 +5,14 @@
                           :before=>"$('loading').show();document.getElementById('jsubmit').disabled = true;$('paper_form').hide();",
                           :complete=>"$('loading').hide();document.getElementById('jsubmit').disabled = false;" + visual_effect(:slide_down, 'paper_form')) do%>  
   <label for="paper_PMID" style="display:inline">PMID:</label>
-  <%= text_field_tag 'pmid', '', :style=>'display:inline'  %>
+  <%= text_field_tag 'pmid', @checking_paper!=nil ? @checking_paper.identifier : '', :style=>'display:inline'  %>
   <%= submit_tag 'Rertive Paper Intomation from NCBI', :style=>'display:inline', :id=>'jsubmit' %>
   <%= image_tag("loading.gif",:style=>'width:30px;height:30px;display:none;position:relative;top:10px;', :id=>'loading')%>
 <% end %>
 
-<div id='paper_form' style="display:none">
+<div id='paper_form' <%='style="display:none"' if @checking_paper==nil%>>
+  
+  <%if @checking_paper!=nil%>
+    <%= render :partial=>"shared/paper_form", :locals=>{:paper=>@checking_paper, :authors=>@authors}%>
+  <%end%>
 </div>

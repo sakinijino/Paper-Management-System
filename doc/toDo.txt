@@ -28,15 +28,17 @@ Plan for 2007-11-18
 2007-11-20
 2 url溢出没做
 14 paper list概要信息以及收藏状态
-21 personal页面中点tag显示自己的paper（按状态排序）
+21 personal页面中点tag显示自己的paper（按状态排序）//done
 6 si-RNA Branch中的admin的转向 //done
 
-4 collection tag能保存
+4 collection tag能保存 //done
 1 审核详情的下拉 //done
-2 PMID bug （11111114，11111115）
+2 PMID bug （11111114，11111115）//done
 3 PMID检查（长度，内容）//done
-5 session datebase版本
+5 session datebase版本 //done
 
+1 空tag收藏的bug
+2 paper detail中短table的浮动bug
 13 高级搜索
 16 collection加日期
 end 删除本文件

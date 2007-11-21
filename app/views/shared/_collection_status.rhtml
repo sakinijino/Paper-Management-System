@@ -1,0 +1,98 @@
+<script type="text/javascript">
+  PMS = {}
+  PMS.tags = {}
+  PMS.register_tag = function(tag){
+    if (PMS.tags[tag]==null) PMS.tags[tag] = {selected:false, nodes:[]}
+    var span = document.createElement('span');
+    span.innerHTML = tag;
+    span.className = 'tag unselected'
+    span.onclick = function(){PMS.tag_click(this.innerHTML);PMS.update_tags_input()}
+    PMS.tags[tag].nodes.push(span)
+    return span;
+  }
+  PMS.tags_input_update = function() {
+    var value = $('my_tags_input').value
+    var tags = value.split(' ');
+    for (t in PMS.tags) PMS.tag_unselected(t)
+    for (var i=0; i<tags.length; ++i) PMS.tag_selected(tags[i])
+  }
+  PMS.update_tags_input = function(){
+    var value = $('my_tags_input').value
+    var tags = value.split(' ');
+    for (t in PMS.tags) {
+      if (PMS.tags[t].selected) tags.push(t)
+      else tags = tags.without(t)//performance problem
+    }
+    $('my_tags_input').value = tags.uniq().join(' ')
+  }
+  PMS.tag_click = function(tag) {
+    if (PMS.tags[tag].selected) PMS.tag_unselected(tag)
+    else PMS.tag_selected(tag)
+  }
+  PMS.tag_selected = function(tag) {
+    if (!PMS.tags[tag] || PMS.tags[tag].selected) return;
+    PMS.tags[tag].nodes.each(function(t){t.className = 'tag selected'})
+    PMS.tags[tag].selected = true;
+  }
+  PMS.tag_unselected = function(tag) {
+    if (!PMS.tags[tag] || !PMS.tags[tag].selected) return;
+    PMS.tags[tag].nodes.each(function(t){t.className = 'tag unselected'})
+    PMS.tags[tag].selected = false;
+  }
+</script>
+
+<%if collected_status != nil%>
+  <%= "<h2>Current Status: '#{collected_status}'</h2>" %>
+<% else %>
+  <%= "<h2>Add it to My Collections</h2>" %>
+<%end%>
+
+<% form_tag({:action => 'add_to_collection', :id =>paper.id}) do%>
+  <%if collected_status != nil%>
+    Tags:
+    <% for t in @tags%>
+      <span><%= t.name %></span>
+    <%end%>
+    <br/>
+    <%= link_to "Edit Collection Status", "javascript:void(0);", :onclick=>"Effect.toggle($('edit-div-"+paper.id.to_s+"'), 'slide')" %>
+    <a>|</a>
+    <%= link_to "Remove from My Collections", :action=>"remove_from_collection", :id=>paper.id %>
+  <%end%>
+  
+  <div id='<%="edit-div-#{paper.id}"%>' <%= 'style="display:none"' if collected_status != nil%>>
+    <div style="margin: 10px 0 5px 0">
+      Status:
+      <%= radio_button_tag "status", "To Read", checked = collected_status == "To Read" || collected_status == nil, :id=>"status", :class=>"radio_button" %> To Read
+      <%= radio_button_tag "status", "Reading", checked = collected_status == "Reading", :id=>"status", :class=>"radio_button"%> Reading
+      <%= radio_button_tag "status", "Finished", checked = collected_status == "Finished", :id=>"status", :class=>"radio_button" %> Finished
+    </div>
+    <div style="margin: 5px 0 10px 0">
+      Tags: <%= text_field_tag 'tags', (tags.map{|t| t.name}).join(' '), :id=>"my_tags_input", :onkeydown=>"PMS.tags_input_update()", :size=>40 if tags %>
+      <div id="popular-tags-div">
+        <span>Popular Tags with this Paper:</span><br/>
+        <%for tag in paper.popular_tags(10)%>
+          <script type="text/javascript">
+          <%= "var tag_name = '#{tag.name}'"%>
+          var span = PMS.register_tag(tag_name)
+          $('popular-tags-div').appendChild(span)
+        </script>
+        <%end%>
+      </div>
+      <div id="my-tags-div" style="line-height:180%">
+        <span>My Favourite Tags:</span> <br/>
+        <%for tag in current_user.popular_tags(10)%>
+          <script type="text/javascript">
+          <%= "var tag_name = '#{tag[:name]}'"%>
+          var span = PMS.register_tag(tag_name)
+          $('my-tags-div').appendChild(span)
+        </script>
+        <%end%>
+      </div>
+    </div>
+    <%= submit_tag "Save" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  PMS.tags_input_update()
+</script>

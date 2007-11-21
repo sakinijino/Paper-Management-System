@@ -9,7 +9,7 @@
       <li><%= link_to 'Paper Contribution', {:controller =>'public', :action=>'contribute_paper'}%></li>
       <%if is_admin? %>
         <span><a> | </a></span>
-        <li><%= link_to 'Management', {:controller =>'admin', :action=>'list_user'}%></li>
+        <li><%= link_to 'Management', {:controller =>'admin', :action=>'index'}%></li>
       <%end%>
   </ul>
 </div>

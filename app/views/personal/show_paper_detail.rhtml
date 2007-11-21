@@ -2,9 +2,9 @@
   <h2>Paper Detail</h2>
   <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
 </div>
-
-<%= render :partial=>"shared/modify_collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
-
+<div class="collection-status" id="collection-status">
+  <%= render :partial=>"shared/collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
+</div>
 <div class="all-notes">
   <h2>Notes...</h2>
   <div class="tab">
@@ -12,7 +12,7 @@
     <span id="my-notes-tab" onclick="$('public-notes-div').hide();$('my-notes-div').show();$('public-notes-tab').className='';$('my-notes-tab').className='selected'">My notes</span>
   </div>
   
-  <div id="public-notes-div">
+  <div id="public-notes-div" class="notes">
     <% if @public_notes.length > 0%>
       <%= render :partial=>"list_note", :locals=>{:show_notes=>@public_notes, :in_my_collection=>false}%>
     <%else%>
@@ -23,9 +23,7 @@
     <%end%>
   </div>
   
-  <% if @collected_status != nil%>
-  
-  <div id="my-notes-div" style="display:none">
+  <div id="my-notes-div" style="display:none" class="notes">
     <% if @personal_notes.length > 0%>
       <%= render :partial=>"list_note", :locals=>{:show_notes=>@personal_notes, :in_my_collection=>false}%>
     <%else%>
@@ -40,7 +38,6 @@
     <% form_tag ({:action => 'create_note', :id => @paper.id}, :style=>'margin-left:5px; margin-top:-5px') do %>
       <%= render :partial=>"note_form" %>
     <% end %>
-  <% end %>
 </div>
 
 <div class="clearElement"></div>

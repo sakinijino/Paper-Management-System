@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   before_filter :admin_required
 
  def index
-    render :action => 'list_user'
+    redirect_to :action => 'list_checking_paper'
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -69,7 +69,7 @@ class AdminController < ApplicationController
       @roles = User.role_list
       @user.password = ""
       @user.password_confirmation = ""
-      render :action => 'edit'
+      render :action => 'edit_user'
     end
   end
 

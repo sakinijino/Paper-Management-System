@@ -25,11 +25,13 @@ class PublicController < ApplicationController
   end
   
   def contribute_paper
+    @authors = []
     render :layout=>"frame_no_search"
   end
   
   def create_checking_paper
     @checking_paper = CheckingPaper.new(params[:paper])
+    @authors = params[:author_name]!=nil ? params[:author_name] : []
     
     if @checking_paper.save
       for name in params[:author_name].uniq
@@ -44,9 +46,9 @@ class PublicController < ApplicationController
       end      
       flash[:notice] = 'Paper has been successfully uploaded.'
       redirect_to :controller=>'personal', :action => 'list_collection', :id => current_user.id 
-    
     else
-      render :action => 'contribute_paper'
+      @paper = @checking_paper
+      render :action => 'contribute_paper', :layout=>"frame_no_search"
     end
   end
   

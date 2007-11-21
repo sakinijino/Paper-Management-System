@@ -19,7 +19,8 @@ class AccountController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default(:controller => '/public', :action => 'index')
+      redirect_back_or_default(:controller => 'admin', :action => 'index') if current_user.role == 'Administrator'
+      redirect_back_or_default(:controller => 'public', :action => 'index') if current_user.role != 'Administrator'
       flash[:notice] = "Logged in successfully"
     end
   end
@@ -32,7 +33,7 @@ class AccountController < ApplicationController
     return unless request.post?
     @user.save!
     self.current_user = @user
-    redirect_back_or_default(:controller => '/public', :action => 'index')
+    redirect_back_or_default(:controller => 'admin', :action => 'index')
     flash[:notice] = "Thanks for signing up!"
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
@@ -43,6 +44,6 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller => '/public', :action => 'index')
+    redirect_back_or_default(:action => 'login')
   end
 end

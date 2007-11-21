@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 0..100
   validates_uniqueness_of   :login, :case_sensitive => false
   before_save :encrypt_password
-  
-  has_many :collections
+
+  has_many :collections, :dependent => :destroy
   has_many :papers, :through => :collections, :select => "distinct papers.*"
   has_many :tags, :through => :collections, :select => "distinct tags.*"
-  has_many :notes
+  has_many :notes, :dependent => :destroy
 
   def popular_tags(limit=5)
     #~ tags = Collection.find(:all,

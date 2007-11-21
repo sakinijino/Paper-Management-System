@@ -1,0 +1,24 @@
+<div class='result-papers'>
+  <h2>Papers Tagged with '<%=@tag.name%>' in <%= @user.login.capitalize %>'s Collections...</h2>
+  <div class="sort">
+     <%= link_to 'Sort by Collection Time', {:sort=>:col, :query => @query, :uid=>@user.id}, {:class=>'sort-by' + (params[:sort]!='pub_date'?' selected':'')}%>
+    <%= link_to 'Sort by Publish Time', {:sort=>:pub_date, :query => @query, :uid=>@user.id}, {:class=>'sort-by' + (params[:sort]=='pub_date'?' selected':'')}%>
+  </div>
+  
+  <ul>
+    <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@papers} %>
+  </ul>
+  
+  <% if @papers.page_count > 1 %>
+    <div class="pagenation-link">
+      Pages: <%= paginating_links(@papers, :params => { :query=> @query, :sort=>params[:sort], :uid=>@user.id }) %>
+    </div>
+  <%end%>
+</div>
+
+<div class='related-tags'>
+<h2>Related Tags...</h2>
+<%= render :partial=>"shared/list_related_tag", :locals=>{:related_tags=>@related_tags} %>
+</div>
+
+<div class="clearElement"></div>

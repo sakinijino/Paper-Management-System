@@ -59,7 +59,11 @@ class NCBIGetter < Getter
     abstract = article.elements["//dd[@class='abstract']/p[@class='abstract']"]
     pmid = article.elements["//dd[@class='abstract']/p[@class='pmid']"]
     
-    publishedtime = publishedtime!=nil ? Date.parse(publishedtime.text.split(';')[0]) : nil
+    if (publishedtime!=nil)
+      date = publishedtime.text.split(';')[0]
+      publishedtime = Date.parse(date) if !date.match(/\d+/)
+      publishedtime = Date.new(date.to_i) if date.match(/\d+/)
+    end
     source = source!=nil ? source.text : nil
     title = title!=nil ? title.text : nil
     authors = authors!=nil ? authors.map {|n| n.text} : nil

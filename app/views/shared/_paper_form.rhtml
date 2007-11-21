@@ -1,6 +1,7 @@
 <% form_tag({:controller=>'public' ,:action => 'create_checking_paper'}, {:multipart => 'true'}) do%>
   <%= error_messages_for 'paper' %>
-
+  <div class="clearElement"></div>
+  
   <label for="paper_title">Title:</label>
   <%= text_field 'paper', 'title', :size=>60%>
   
@@ -11,16 +12,16 @@
   <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true  %> 
   
   <label for="paper_author">Authors:</label>
-  <%if @authors.length == 0%>
+  <%if authors.length == 0%>
     <%= text_field_tag 'author_name[]'%>
   <%else%>
-    <%for author in @authors%>
+    <%for author in authors%>
       <%= text_field_tag 'author_name[]', author%>
     <%end%>
   <%end%>
   
   <label for="paper_PMID">PMID:</label>
-  <%= text_field 'paper', 'identifier', :size=>15  %>
+  <%= text_field 'paper', 'identifier', :size=>15, :readonly=>true  %>
 
   <label for="paper_abstract">Abstract:</label>
   <%= text_area 'paper', 'abstract'  %>
