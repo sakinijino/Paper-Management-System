@@ -1,13 +1,13 @@
-.content .my-papers-list,
-.content .my-notes{
-	width: 580px;
+.content .my-papers-list {
+	width: 500px;
 	padding: 0 5px 10px 15px;
 	float: left;
 }
 
-.content .my-tags {
+.content .my-tags,
+.content .my-notes {
 	margin-top: 10px;
-	width: 290px;
+	width: 370px;
 	padding-left: 5px;
 	float: right;
 }

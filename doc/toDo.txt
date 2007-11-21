@@ -27,7 +27,7 @@ Plan for 2007-11-18
 
 2007-11-20
 14 paper list概要信息以及收藏状态 //done
-21 personal页面中点tag显示自己的paper（按状态排序）//done
+21 personal页面中点tag显示自己的paper //done
 6 si-RNA Branch中的admin的转向 //done
 
 4 collection tag能保存 //done
@@ -39,7 +39,9 @@ Plan for 2007-11-18
 1 空tag收藏的bug
 2 paper detail中短table的浮动bug
 3 url溢出没做
+21 personal页面中点tag显示自己的paper, 按状态排序
 4 check checking_paper，如果create paper时失败怎么提示
+5 中文搜索bug
 13 高级搜索
 16 collection加日期
 end 删除本文件
