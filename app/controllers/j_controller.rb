@@ -6,7 +6,8 @@ class JController < ApplicationController
     #~ re = {:OK=>true}
     #~ re = {:OK=>false, :Error=>:Net}
     #~ re = {:OK=>false, :Error=>:Parse}
-    if (params[:pmid].match(/\d{8}/) == nil)
+    params[:pmid].strip!
+    if (params[:pmid].match(/\d+/) == nil || params[:pmid].length >8)
       render :text=>"<div class='errorExplanation' id='errorExplanation'><ul><li>Wrong PMID</li></ul></div>"
       return
     end

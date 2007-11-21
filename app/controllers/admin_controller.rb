@@ -13,7 +13,7 @@ class AdminController < ApplicationController
           #~ :redirect_to => { :action => :list }
 
   def list_checking_paper
-    @paper_pages, @papers = paginate :checking_papers, :per_page => 10
+    @paper_pages, @papers = paginate :checking_papers, :per_page => 5
   end
   
   def update_checking_paper
