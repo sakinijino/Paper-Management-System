@@ -111,6 +111,7 @@ class PersonalController < ApplicationController
     
     unpaged_papers = Paper.find(
                                       :all,
+                                      :select => 'papers.*',
                                       :conditions => ["c.user_id=:uid and c.tag_id=:tag_id",{:uid=>@user.id, :tag_id=>@tag.id}],
                                       :joins => 'inner join collections as c on c.paper_id=papers.id'
                                       )
