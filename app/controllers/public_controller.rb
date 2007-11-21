@@ -12,12 +12,16 @@ class PublicController < ApplicationController
                                     :joins => 'as c inner join tags as t on c.tag_id=t.id').sort_by{|item| item.id}
     @tag_counts = @tags.map {|t| t.tag_amount.to_i} 
     
-    @popular_papers = Paper.find_by_sql(
-                                                      "SELECT p.id, p.title
+    @popular_papers_id = Paper.find_by_sql(
+                                                      "SELECT p.id
                                   FROM (SELECT * FROM collections group by paper_id,user_id) 
                                   as c inner join papers p on p.id=c.paper_id group by c.paper_id
                                   order by count(c.user_id) desc limit 5
                                   ")
+    @popular_papers = []
+    for p in @popular_papers_id
+      @popular_papers << Paper.find(p.id)
+    end
                                     
     @newest_papers = Paper.find(:all,
                                              :order => 'id desc',
@@ -79,7 +83,7 @@ class PublicController < ApplicationController
                                             :page => {:size=>10,:current=>params[:page]})
     else
       @papers = Paper.find(:all,
-                                    :select => 'papers.id, title, count(paper_id) as tagged_count',
+                                    :select => 'papers.*, count(paper_id) as tagged_count',
                                     :conditions => ["c.tag_id=:tag_id",{:tag_id=>@tag.id}],
                                     :order => 'tagged_count desc',
                                     :group => 'paper_id',

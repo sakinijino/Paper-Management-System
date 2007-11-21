@@ -40,6 +40,11 @@ li.paper{
 	margin-left:23px
 }
 
+li.paper span{
+	font-size: 10px;
+	color: rgb(102, 102, 102);
+}
+
 .content .left-part-indent {
 	padding-left:15px;
 }

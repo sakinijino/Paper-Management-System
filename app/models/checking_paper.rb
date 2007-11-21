@@ -8,6 +8,10 @@ class CheckingPaper < ActiveRecord::Base
   
   def author_list_with_comma
     (self.authors.map {|a| a.name}).join(", ")
-  end  
+  end
+  
+  def publish_time_f
+    self.publish_time.strftime("%Y.%m")
+  end
 
 end
