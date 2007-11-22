@@ -36,6 +36,7 @@ Plan for 2007-11-18
 3 PMID检查（长度，内容） //done
 5 session datebase版本 //done
 
+0 paper,checking_paper（title,source,id,attachment）author（name）长度bug
 1 空tag收藏的bug
 2 paper detail中短table的浮动bug
 3 url溢出没做
