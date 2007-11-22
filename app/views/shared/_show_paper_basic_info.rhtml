@@ -11,22 +11,14 @@
         <tr class='list-line-odd'>
                 <td>Publish Time:</td>
                 <td><%=h paper.publish_time_f%></td>
-        </tr>
+        </tr> 
         <tr class='list-line-even'>
-                <td>PMID:</td>
-                <td><%=h paper.identifier%></td>
-        </tr>         
-        <tr class='list-line-odd'>
                 <td>Authors:</td>
                 <td><%=h paper.author_list_with_comma%></td>
         </tr>
-        <tr class='list-line-even'>
+        <tr class='list-line-odd'>
                 <td>Source:</td>
                 <td><%=h paper.source%></td>
-        </tr>
-         <tr class='list-line-odd'>
-                <td>Abstract:</td>
-                <td class="long-text"><%=simple_format paper.abstract %></td>
         </tr>
         <tr class='list-line-even' >
                 <td>Attachment:</td>
@@ -38,6 +30,10 @@
                 </td>
         </tr>
         <tr class='list-line-odd'>
+                <td>Abstract:</td>
+                <td class="long-text"><%=simple_format paper.abstract %></td>
+        </tr>
+        <tr class='list-line-even'>
                 <td>Popular Tags:</td>
                 <td>
                   <%for t in paper.popular_tags %>
