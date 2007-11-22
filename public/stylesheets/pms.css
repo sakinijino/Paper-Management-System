@@ -1,3 +1,10 @@
+.tag_size_1, .tag_size_2,
+.tag_size_3, .tag_size_4{
+	text-decoration: none;
+	padding: 0 5px 0 0;
+	line-height: 150%;
+}
+
 .tag_size_1 { font-size: 1.0em; }
 .tag_size_2 { font-size: 1.0em; color:rgb(36, 72, 108)}
 .tag_size_3 { font-size: 1.2em; }

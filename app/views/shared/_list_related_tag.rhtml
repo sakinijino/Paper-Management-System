@@ -1,3 +1,3 @@
-<% tag_cloud @related_tags, @related_tags_counts, %w(tag_size_1, tag_size_2, tag_size_3, tag_size_4) do |tag, css_class| %>
+<% tag_cloud @related_tags, @related_tags_counts, %w(tag_size_1 tag_size_2 tag_size_3 tag_size_4) do |tag, css_class| %>
   <%= link_to tag.name, { :controller=>:public,:action => :list_tagged_paper, :id => tag.id }, :class => css_class %>
 <% end %>
