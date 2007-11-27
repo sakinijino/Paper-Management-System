@@ -78,6 +78,8 @@ class AdminController < ApplicationController
       if author == nil
         author = Author.new({:name=>name})
         @authors <<author if author.save
+      else
+        @authors <<author
       end
     end
     if @paper.update_attributes(params[:paper])

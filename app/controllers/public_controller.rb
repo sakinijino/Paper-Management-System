@@ -45,13 +45,10 @@ class PublicController < ApplicationController
       author = Author.find_by_name(name)
       if author == nil
         author = Author.new({:name=>name})
-        if !author.save
-          render :action => 'contribute_paper', :layout=>"frame_no_search"
-          Author.clear_redundances
-          return
-        end
+        @authors <<author if author.save
+      else
+        @authors <<author
       end
-      @authors <<author
     end
     if @paper.save
       @paper.authors.concat(@authors)
