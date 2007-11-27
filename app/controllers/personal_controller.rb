@@ -3,7 +3,7 @@ class PersonalController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
   
-  verify :method => :post, :only => [ :add_to_collection, :remove_from_collection, :create_note, :update_note, :destroy_note],
+  verify :method => :post, :only => [ :add_to_collection, :remove_from_collection, :create_note, :destroy_note],
           :redirect_to => { :action => :list_collection }
   
   def add_to_collection
@@ -258,10 +258,9 @@ class PersonalController < ApplicationController
     note.publish_time = Time.now
     
     if note.save
-      flash[:notice] = 'Note has been successfully created.'
       redirect_to :action => 'show_paper_detail', :id => note.paper_id
     else
-      render :action => 'new_note'
+      redirect_to :action => 'show_paper_detail', :id => note.paper_id
     end      
   end
   
@@ -269,15 +268,15 @@ class PersonalController < ApplicationController
     #~ @note = Note.find(params[:id])
   #~ end
   
-  def update_note
-    @note = Note.find(params[:id])
-    if @note.update_attributes(params[:note])
-      flash[:notice] = 'Note has been successfully updated.'
-      redirect_to :action => 'show_paper_detail', :id => @note.paper_id
-    else
-      render :action => 'edit_note'
-    end
-  end
+  #~ def update_note
+    #~ @note = Note.find(params[:id])
+    #~ if @note.update_attributes(params[:note])
+      #~ flash[:notice] = 'Note has been successfully updated.'
+      #~ redirect_to :action => 'show_paper_detail', :id => @note.paper_id
+    #~ else
+      #~ redirect_to :action => 'show_paper_detail', :id => @note.paper_id
+    #~ end
+  #~ end
   
   def destroy_note
     note = Note.find(params[:id])
