@@ -43,6 +43,8 @@ class PublicController < ApplicationController
       if author == nil
         author = Author.new({:name=>name})
         @authors <<author if author.save
+      else
+        @authors <<author
       end
     end
     if @checking_paper.save
@@ -52,7 +54,7 @@ class PublicController < ApplicationController
     else
       render :action => 'contribute_paper', :layout=>"frame_no_search"
     end
-    #~ Author.clear_redundances
+    Author.clear_redundances
   end
   
   def list_tagged_paper

@@ -8,8 +8,8 @@ class Paper < ActiveRecord::Base
   
   validates_uniqueness_of   :identifier, :allow_nil=>true
   validates_presence_of :title
-  validates_length_of       :title,    :within => 0..1024
-  validates_length_of       :source,    :within => 0..1024
+  validates_length_of       :title,    :within => 0..1000
+  validates_length_of       :source,    :within => 0..1000
   
   file_column :attachment
 
@@ -88,6 +88,7 @@ class Paper < ActiveRecord::Base
                               
     if a_created_paper != nil
       a_created_paper.authors = a_checked_paper.authors
+      a_created_paper.save
       CheckingPaper.destroy(a_checked_paper)
     end
   end

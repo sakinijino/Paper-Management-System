@@ -94,6 +94,8 @@ class AdminController < ApplicationController
       if author == nil
         author = Author.new({:name=>name})
         @authors <<author if author.save
+      else
+        @authors <<author
       end
     end
     if @paper.update_attributes(params[:paper])
@@ -103,6 +105,7 @@ class AdminController < ApplicationController
     else
       render :action => 'edit_paper', :layout=>"frame_no_search"
     end
+    Author.clear_redundances
   end
   
   def destroy_paper

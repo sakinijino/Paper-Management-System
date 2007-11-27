@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(:version => 13) do
   end
 
   create_table "checking_papers", :force => true do |t|
-    t.column "title",        :string
-    t.column "abstract",     :text
+    t.column "title",        :string, :limit => 1024, :default => "", :null => false
+    t.column "abstract",     :text,                   :default => "", :null => false
     t.column "publish_time", :date
     t.column "identifier",   :string
-    t.column "source",       :string
-    t.column "attachment",   :string
+    t.column "source",       :string, :limit => 1024, :default => "", :null => false
+    t.column "attachment",   :string, :limit => 1024
   end
 
   create_table "collections", :force => true do |t|

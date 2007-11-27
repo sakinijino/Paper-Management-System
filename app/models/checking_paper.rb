@@ -5,8 +5,8 @@ class CheckingPaper < ActiveRecord::Base
   
   validates_uniqueness_of   :identifier, :allow_nil=>true
   validates_presence_of :title
-  validates_length_of       :title,    :within => 0..1024
-  validates_length_of       :source,    :within => 0..1024
+  validates_length_of       :title,    :within => 0..1000
+  validates_length_of       :source,    :within => 0..1000
   
   def author_list_with_comma
     (self.authors.map {|a| a.name}).join(", ")
