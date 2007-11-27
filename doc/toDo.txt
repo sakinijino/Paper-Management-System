@@ -41,10 +41,12 @@ Plan for 2007-11-18
 3 paper detail中短table的浮动bug //done
 4 url溢出没做 //done
 11 管理员能删能改paper // done
+1 paper,checking_paper（title,source,id,attachment）author（name）长度bug // done
+4 非8位的pmid bug //done
+8 中文搜索bug //done
 
-8 中文搜索bug //done, 不稳定
-1 paper,checking_paper（title,source,id,attachment）author（name）长度bug //改branch
-4 非8位的pmid bug
+1 多点点测试，不排除有bug
+2 中文搜索不稳定
 5 personal页面中点tag显示自己的paper, 按状态排序
 6 edit note
 7 check checking_paper，如果create paper时失败怎么提示
