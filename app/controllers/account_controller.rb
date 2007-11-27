@@ -46,4 +46,21 @@ class AccountController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default(:action => 'login')
   end
+  
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      @user.password = '';
+      @user.password_confirmation = '';
+      redirect_to :controller=>'personal', :action => 'list_collection', :id=>@user.id
+    else
+      @user.password = '';
+      @user.password_confirmation = '';
+      render :action => 'edit'
+    end
+  end
 end

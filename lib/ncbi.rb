@@ -68,7 +68,7 @@ class NCBIGetter < Getter
     title = title!=nil ? title.text : nil
     authors = authors!=nil ? authors.map {|n| n.text} : nil
     abstract = abstract!=nil ? abstract.text : nil
-    pmid = pmid!=nil ? pmid.text.match(/\d{8}/).to_s : nil
+    pmid = pmid!=nil ? pmid.text.match(/\d+/).to_s : nil
     return {:OK=>true, :publishedtime=>publishedtime, :source=>source, :title=>title, :authors => authors, :abstract => abstract, :pmid=>pmid}
   end
 end

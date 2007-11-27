@@ -9,8 +9,8 @@ class AdminController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  #~ verify :method => :post, :only => [ :destroy, :create, :update ],
-          #~ :redirect_to => { :action => :list }
+  verify :method => :post, :only => [ :create_user, :update_user, :destroy_user, :update_paper, :destroy_paper ],
+          :redirect_to => { :action => :index }
 
   def list_checking_paper
     @paper_pages, @papers = paginate :checking_papers, :per_page => 5
@@ -76,5 +76,38 @@ class AdminController < ApplicationController
   def destroy_user
     User.find(params[:id]).destroy
     redirect_to :action => 'list_user'
+  end
+  
+  def edit_paper
+    @paper = Paper.find(params[:id])
+    @author_names = @paper.authors.map{|a| a.name}
+    render :layout=>'frame_no_search'
+  end
+  
+  def update_paper
+    @paper = Paper.find(params[:id])
+    @author_names = params[:author_name].uniq
+    @authors = []
+    for name in @author_names
+      next if name==""
+      author = Author.find_by_name(name)
+      if author == nil
+        author = Author.new({:name=>name})
+        @authors <<author if author.save
+      end
+    end
+    if @paper.update_attributes(params[:paper])
+      @paper.authors = @authors;
+      @paper.save
+      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
+    else
+      render :action => 'edit_paper', :layout=>"frame_no_search"
+    end
+  end
+  
+  def destroy_paper
+    Paper.find(params[:id]).destroy
+    Author.clear_redundances
+    redirect_to :controller=>'personal', :action => 'list_collection', :id=>current_user
   end
 end

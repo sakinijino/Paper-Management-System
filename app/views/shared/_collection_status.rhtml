@@ -56,7 +56,7 @@
     <br/>
     <%= link_to "Edit Collection Status", "javascript:void(0);", :onclick=>"Effect.toggle($('edit-div-"+paper.id.to_s+"'), 'slide')" %>
     <a>|</a>
-    <%= link_to "Remove from My Collections", :action=>"remove_from_collection", :id=>paper.id %>
+    <%= link_to "Remove from My Collections", {:action=>"remove_from_collection", :id=>paper.id}, :method=>:post %>
   <%end%>
   
   <div id='<%="edit-div-#{paper.id}"%>' <%= 'style="display:none"' if collected_status != nil%>>

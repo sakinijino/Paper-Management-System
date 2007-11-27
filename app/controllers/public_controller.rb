@@ -29,31 +29,30 @@ class PublicController < ApplicationController
   end
   
   def contribute_paper
-    @authors = []
+    @author_names = []
     render :layout=>"frame_no_search"
   end
   
   def create_checking_paper
-    @checking_paper = CheckingPaper.new(params[:paper])
-    @authors = params[:author_name]!=nil ? params[:author_name] : []
-    
+    @checking_paper = CheckingPaper.new(params[:checking_paper])
+    @author_names = params[:author_name]!=nil ? params[:author_name].uniq : []
+    @authors = []
+    for name in @author_names
+      next if name==""
+      author = Author.find_by_name(name)
+      if author == nil
+        author = Author.new({:name=>name})
+        @authors <<author if author.save
+      end
+    end
     if @checking_paper.save
-      for name in params[:author_name].uniq
-        new_author = Author.find_by_name(name)
-        if new_author == nil
-          new_author = Author.create({:name=>name})
-        end
-
-        if @checking_paper.authors.find_by_name(new_author.name) == nil
-          @checking_paper.authors << new_author
-        end
-      end      
-      flash[:notice] = 'Paper has been successfully uploaded.'
-      redirect_to :controller=>'personal', :action => 'list_collection', :id => current_user.id 
+      @checking_paper.authors = @authors
+      @checking_paper.save
+      redirect_to :controller=>'personal', :action => 'list_collection'
     else
-      @paper = @checking_paper
       render :action => 'contribute_paper', :layout=>"frame_no_search"
     end
+    #~ Author.clear_redundances
   end
   
   def list_tagged_paper

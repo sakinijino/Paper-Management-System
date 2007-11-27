@@ -1,33 +1,33 @@
 <% form_tag({:controller=>'public' ,:action => 'create_checking_paper'}, {:multipart => 'true'}) do%>
-  <%= error_messages_for 'paper' %>
+  <%= error_messages_for 'checking_paper' %>
   <div class="clearElement"></div>
   
   <label for="paper_title">Title:</label>
-  <%= text_field 'paper', 'title', :size=>60%>
+  <%= text_field 'checking_paper', 'title', :size=>60%>
   
   <label for="paper_source">Source:</label>
-  <%= text_field 'paper', 'source', :size=>20%>   
+  <%= text_field 'checking_paper', 'source', :size=>20%>   
   
   <label for="paper_publish_time">Publish Time:</label>
-  <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true  %> 
+  <%= datetime_select 'checking_paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true  %> 
   
   <label for="paper_author">Authors:</label>
-  <%if authors.length == 0%>
+  <%if author_names.length == 0%>
     <%= text_field_tag 'author_name[]'%>
   <%else%>
-    <%for author in authors%>
-      <%= text_field_tag 'author_name[]', author%>
+    <%for name in author_names%>
+      <%= text_field_tag 'author_name[]', name%>
     <%end%>
   <%end%>
   
   <label for="paper_PMID">PMID:</label>
-  <%= text_field 'paper', 'identifier', :size=>15, :readonly=>true  %>
+  <%= text_field 'checking_paper', 'identifier', :size=>15, :readonly=>true  %>
 
   <label for="paper_abstract">Abstract:</label>
-  <%= text_area 'paper', 'abstract'  %>
+  <%= text_area 'checking_paper', 'abstract'  %>
 
   <label for="paper_attachment">Attachment:</label>
-  <%= file_column_field 'paper', "attachment" %>
+  <%= file_column_field 'checking_paper', "attachment" %>
   <br />
   <%= submit_tag 'Save' %>
 <% end %>

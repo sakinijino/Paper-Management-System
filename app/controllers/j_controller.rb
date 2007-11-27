@@ -36,8 +36,9 @@ class JController < ApplicationController
       @paper.abstract = re[:abstract]
       @paper.identifier = re[:pmid]
       
-      @authors = re[:authors]==nil ? [] : re[:authors]
-      render :partial=>"shared/paper_form", :locals=>{:paper=>@paper, :authors=>@authors}
+      @author_names = re[:authors]==nil ? [] : re[:authors]
+      @checking_paper = @paper
+      render :partial=>"shared/paper_form", :locals=>{:author_names=>@author_names}
     end
   end
   

@@ -33,15 +33,21 @@ Plan for 2007-11-18
 4 collection tag能保存 //done
 1 审核详情的下拉 //done
 2 PMID bug （11111114，11111115）//done
-3 PMID检查（长度，内容）//done
+3 PMID检查（长度，内容） //done
 5 session datebase版本 //done
 
-1 空tag收藏的bug
-2 paper detail中短table的浮动bug
-3 url溢出没做
-21 personal页面中点tag显示自己的paper, 按状态排序
-4 check checking_paper，如果create paper时失败怎么提示
-5 中文搜索bug
-13 高级搜索
-16 collection加日期
+0 user profile //done
+2 空tag收藏的bug //done
+3 paper detail中短table的浮动bug //done
+4 url溢出没做 //done
+11 管理员能删能改paper // done
+
+8 中文搜索bug //done, 不稳定
+1 paper,checking_paper（title,source,id,attachment）author（name）长度bug //改branch
+4 非8位的pmid bug
+5 personal页面中点tag显示自己的paper, 按状态排序
+6 edit note
+7 check checking_paper，如果create paper时失败怎么提示
+9 高级搜索
+10 collection加日期 
 end 删除本文件

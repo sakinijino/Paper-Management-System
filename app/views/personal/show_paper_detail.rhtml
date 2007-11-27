@@ -1,10 +1,17 @@
 <div class="paper-basic-info">
   <h2>Paper Detail</h2>
   <%= render :partial=>"shared/show_paper_basic_info", :locals=>{:paper=>@paper}%>
+  <%if is_admin? %>
+    <div style="float:right;margin-top:10px">
+    <%= link_to 'Edit Paper', :controller=>'admin', :action=>'edit_paper', :id=>@paper%> | 
+    <%= link_to 'Destroy Paper', { :controller=>'admin', :action => 'destroy_paper', :id => @paper }, :confirm => 'Are you sure?', :method => :post %>
+    </div>
+  <%end%>
 </div>
 <div class="collection-status" id="collection-status">
   <%= render :partial=>"shared/collection_status", :locals=>{:paper=>@paper, :collected_status=>@collected_status, :tags=>@tags}%>
 </div>
+<div style="clear:right"></div>
 <div class="all-notes">
   <h2>Notes...</h2>
   <div class="tab">

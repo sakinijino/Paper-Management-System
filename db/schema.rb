@@ -2,10 +2,10 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 13) do
 
   create_table "authors", :force => true do |t|
-    t.column "name", :string
+    t.column "name", :string, :default => "", :null => false
   end
 
   create_table "authors_checking_papers", :id => false, :force => true do |t|
@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(:version => 12) do
   end
 
   create_table "papers", :force => true do |t|
-    t.column "title",        :string
-    t.column "abstract",     :text
+    t.column "title",        :string, :limit => 1024, :default => "", :null => false
+    t.column "abstract",     :text,                   :default => "", :null => false
     t.column "publish_time", :date
     t.column "identifier",   :string
-    t.column "source",       :string
-    t.column "attachment",   :string
+    t.column "source",       :string, :limit => 1024, :default => "", :null => false
+    t.column "attachment",   :string, :limit => 1024
   end
 
   create_table "sessions", :force => true do |t|

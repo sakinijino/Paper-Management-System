@@ -13,6 +13,6 @@
 <div id='paper_form' <%='style="display:none"' if @checking_paper==nil%>>
   
   <%if @checking_paper!=nil%>
-    <%= render :partial=>"shared/paper_form", :locals=>{:paper=>@checking_paper, :authors=>@authors}%>
+    <%= render :partial=>"shared/paper_form", :locals=>{:paper=>@checking_paper, :author_names=>@author_names}%>
   <%end%>
 </div>
