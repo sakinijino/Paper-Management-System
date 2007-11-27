@@ -9,7 +9,7 @@ class Paper < ActiveRecord::Base
   validates_uniqueness_of   :identifier, :allow_nil=>true
   validates_presence_of :title
   validates_length_of       :title,    :within => 1..1024
-  validates_length_of       :source,    :within => 1..1024
+  validates_length_of       :source,    :within => 0..1024
   
   file_column :attachment
   acts_as_ferret :fields => {

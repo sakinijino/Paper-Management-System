@@ -61,4 +61,38 @@ class AdminController < ApplicationController
     User.find(params[:id]).destroy
     redirect_to :action => 'list_user'
   end
+  
+  def edit_paper
+    @paper = Paper.find(params[:id])
+    @authors = @paper.authors.map{|a| a.name}
+    render :layout=>'frame_no_search'
+  end
+  
+  def update_paper
+    @paper = Paper.find(params[:id])
+    @authors = params[:author_name]
+    
+    if @paper.update_attributes(params[:paper])
+      @paper.authors.clear #quick solution, poor performance
+      for name in params[:author_name].uniq
+        new_author = Author.find_by_name(name)
+        if new_author == nil
+          new_author = Author.create({:name=>name})
+        end
+
+        if @paper.authors.find_by_name(new_author.name) == nil
+          @paper.authors << new_author
+        end
+      end      
+      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
+    
+    else
+      render :action => 'edit_paper'
+    end
+  end
+  
+  def destroy_paper
+    Paper.find(params[:id]).destroy
+    redirect_to :controller=>'personal', :action => 'list_collection', :id=>current_user
+  end
 end
