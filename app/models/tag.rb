@@ -12,7 +12,7 @@ class Tag < ActiveRecord::Base
   end
   
   def Tag.clear_redundances
-    tags = Tag.find_by_sql("SELECT * FROM tags as t left join collections as c on t.id = c.tag_id where c.id is NULL;")
-    tags .each{|t| Tag.find(t.id).destroy}
+    tags = Tag.find_by_sql("SELECT t.id FROM tags as t left join collections as c on t.id = c.tag_id where c.id is NULL;")
+    tags.each{|t| Tag.find(t.id).destroy}
   end
 end

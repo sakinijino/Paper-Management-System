@@ -3,6 +3,9 @@ class PersonalController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
   
+  verify :method => :post, :only => [ :add_to_collection, :remove_from_collection, :create_note, :update_note, :destroy_note],
+          :redirect_to => { :action => :list_collection }
+  
   def add_to_collection
     paper = Paper.find(params[:id])
     params[:tags].strip!
@@ -35,6 +38,7 @@ class PersonalController < ApplicationController
         collection.save
       end
     end
+    Tag.clear_redundances
     paper.save
     redirect_to :action=>'show_paper_detail',:id=> paper.id
   end
@@ -42,11 +46,13 @@ class PersonalController < ApplicationController
   def remove_from_collection
     paper = Paper.find(params[:id])
     Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
+    Tag.clear_redundances
     redirect_to :action=>'show_paper_detail',:id=> paper.id
   end
   
   def list_collection
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) if params[:id]!=nil
+    @user = current_user if params[:id]==nil
     
     show_num = 5
     @to_read_papers = Paper.find(:all,

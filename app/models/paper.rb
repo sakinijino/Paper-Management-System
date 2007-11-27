@@ -13,9 +13,10 @@ class Paper < ActiveRecord::Base
   
   file_column :attachment
 
-  GENERIC_ANALYSIS_REGEX = /([a-zA-Z]|[\xc0-\xdf][\x80-\xbf])+|[0-9]+|[\xe0-\xef][\x80-\xbf][\x80-\xbf]/
-  GENERIC_ANALYZER = Ferret::Analysis::RegExpAnalyzer.new(GENERIC_ANALYSIS_REGEX, true)
-  #~ GENERIC_ANALYZER = MultilingualFerretTools::Analyzer.new
+  #~ GENERIC_ANALYSIS_REGEX = /([a-zA-Z]|[\xc0-\xdf][\x80-\xbf])+|[0-9]+|[\xe0-\xef][\x80-\xbf][\x80-\xbf]/
+  #~ GENERIC_ANALYZER = Ferret::Analysis::RegExpAnalyzer.new(GENERIC_ANALYSIS_REGEX, true)
+  GENERIC_ANALYZER = MultilingualFerretTools::Analyzer.new
+  #~ GENERIC_ANALYZER = Ferret::Analysis::StandardAnalyzer.new
   acts_as_ferret ({:fields => [
                                         :title,
                                         :abstract,

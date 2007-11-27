@@ -3,7 +3,7 @@ class PublicController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
   
-  verify :method => :post, :only => [ :create_user, :update_user, :destroy_user, :update_paper, :destroy_paper ],
+  verify :method => :post, :only => [ :create_paper],
           :redirect_to => { :action => :index }
   
   def index
