@@ -5,10 +5,12 @@ class PersonalController < ApplicationController
   
   def add_to_collection
     paper = Paper.find(params[:id])
+    params[:tags].strip!
     params[:tags] = "" if params[:tags] ==nil
 
     Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
     for tag_name in params[:tags].split.uniq
+      next if tag_name==""
       collection = Collection.new
       collection.paper = paper
       collection.user = current_user

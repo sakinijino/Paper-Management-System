@@ -37,7 +37,7 @@ Plan for 2007-11-18
 5 session datebase版本 //done
 
 0 user profile // done
-1 paper,checking_paper（title,source,id,attachment）author（name）长度bug
+1 paper,checking_paper（title,source,id,attachment）author（name）长度bug // 改branch
 2 空tag收藏的bug
 3 paper detail中短table的浮动bug
 4 非8位的pmid bug
