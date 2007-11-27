@@ -9,18 +9,31 @@ class PersonalController < ApplicationController
     params[:tags] = "" if params[:tags] ==nil
 
     Collection.destroy_all(:user_id=>current_user.id, :paper_id=>paper.id)
-    for tag_name in params[:tags].split.uniq
-      next if tag_name==""
-      collection = Collection.new
-      collection.paper = paper
-      collection.user = current_user
-      tag = Tag.find_by_name(tag_name)
-      if tag == nil
-        tag = Tag.create({:name => tag_name})
+    
+    if params[:tags] == ""
+        collection = Collection.new
+        collection.paper = paper
+        collection.user = current_user
+        collection.tag = nil
+        collection.status = params[:status]
+        collection.save
+    else
+      for tag_name in params[:tags].split.uniq
+        next if tag_name==""
+        tag = Tag.find_by_name(tag_name)
+        if tag == nil
+          tag = Tag.create({:name => tag_name})
+          if tag == nil
+            next
+          end
+        end
+        collection = Collection.new
+        collection.paper = paper
+        collection.user = current_user
+        collection.tag = tag
+        collection.status = params[:status]
+        collection.save
       end
-      collection.tag = tag
-      collection.status = params[:status]
-      collection.save
     end
     paper.save
     redirect_to :action=>'show_paper_detail',:id=> paper.id
@@ -198,12 +211,18 @@ class PersonalController < ApplicationController
   
   def show_paper_detail
     @paper = Paper.find(params[:id])
+
     @tags = Collection.find(:all,
                                      :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id, :pid=>@paper.id}],
                                     :select => 't.name,t.id, c.paper_id, c.user_id, c.status',
                                     :joins => 'as c inner join tags as t on c.tag_id=t.id')
     if @tags.empty?
-      @collected_status = nil
+      c= Collection.find_by_user_id_and_paper_id(current_user.id, @paper.id)
+      if c != nil
+        @collected_status = c.status
+      else
+        @collected_status = nil
+      end
     else
       @collected_status = @tags[0].status
     end
