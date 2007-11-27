@@ -36,10 +36,11 @@ Plan for 2007-11-18
 3 PMID检查（长度，内容） //done
 5 session datebase版本 //done
 
-0 user profile
+0 user profile // done
 1 paper,checking_paper（title,source,id,attachment）author（name）长度bug
 2 空tag收藏的bug
 3 paper detail中短table的浮动bug
+4 非8位的pmid bug
 4 url溢出没做
 5 personal页面中点tag显示自己的paper, 按状态排序
 6 edit note
