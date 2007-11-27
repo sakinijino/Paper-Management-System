@@ -240,9 +240,9 @@ class PersonalController < ApplicationController
     end      
   end
   
-  def edit_note
-    @note = Note.find(params[:id])
-  end
+  #~ def edit_note
+    #~ @note = Note.find(params[:id])
+  #~ end
   
   def update_note
     @note = Note.find(params[:id])

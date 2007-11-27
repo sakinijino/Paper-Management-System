@@ -13,8 +13,8 @@
   <%= datetime_select 'paper', 'publish_time', :discard_hour=>true, :discard_minute=>true, :discard_day=>true, :start_year=>1900, :end_year=>Time.now.year  %> 
   
   <label for="paper_author">Authors:</label>
-  <% (@authors.length>8 ? @authors.length : 8).times do |i|%>
-  <%= text_field_tag 'author_name[]', @authors[i]%>
+  <% (@author_names.length>8 ? @author_names.length : 8).times do |i|%>
+  <%= text_field_tag 'author_name[]', @author_names[i]%>
   <%end%>
 
   <label for="paper_abstract">Abstract:</label>

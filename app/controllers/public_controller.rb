@@ -1,7 +1,10 @@
 class PublicController < ApplicationController
   layout 'frame'
   include AuthenticatedSystem
-  before_filter :login_required  
+  before_filter :login_required
+  
+  verify :method => :post, :only => [ :create_user, :update_user, :destroy_user, :update_paper, :destroy_paper ],
+          :redirect_to => { :action => :index }
   
   def index
     @tags = Collection.find(:all,
@@ -29,31 +32,35 @@ class PublicController < ApplicationController
   end
   
   def contribute_paper
-    @authors = []
+    @author_names = []
     render :layout=>"frame_no_search"
   end
   
   def create_paper
     @paper = Paper.new(params[:paper])
-    @authors = params[:author_name]
-    
-    if @paper.save
-      for name in params[:author_name].uniq
-        new_author = Author.find_by_name(name)
-        if new_author == nil
-          new_author = Author.create({:name=>name})
+    @author_names = params[:author_name].uniq
+    @authors = []
+    for name in @author_names
+      next if name==""
+      author = Author.find_by_name(name)
+      if author == nil
+        author = Author.new({:name=>name})
+        if !author.save
+          render :action => 'contribute_paper', :layout=>"frame_no_search"
+          Author.clear_redundances
+          return
         end
-
-        if @paper.authors.find_by_name(new_author.name) == nil
-          @paper.authors << new_author
-        end
-      end      
-      flash[:notice] = 'Paper has been successfully uploaded.'
-      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
-    
-    else
-      render :action => 'contribute_paper'
+      end
+      @authors <<author
     end
+    if @paper.save
+      @paper.authors.concat(@authors)
+      @paper.save # for ferret index;
+      redirect_to :controller=>'personal', :action => 'show_paper_detail', :id => @paper.id 
+    else
+      render :action => 'contribute_paper', :layout=>"frame_no_search"
+    end
+    Author.clear_redundances
   end
   
   def list_tagged_paper
@@ -112,6 +119,4 @@ class PublicController < ApplicationController
       end
     end
   end
-
-
 end

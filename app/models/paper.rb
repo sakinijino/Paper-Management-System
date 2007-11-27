@@ -8,20 +8,27 @@ class Paper < ActiveRecord::Base
   
   validates_uniqueness_of   :identifier, :allow_nil=>true
   validates_presence_of :title
-  validates_length_of       :title,    :within => 1..1024
+  validates_length_of       :title,    :within => 0..1024
   validates_length_of       :source,    :within => 0..1024
   
   file_column :attachment
-  acts_as_ferret :fields => {
-                                        :title => {},
-                                        :abstract => {},
-                                        :identifier => {},
-                                        :author_list => {},
-                                        :tag_list => {}, 
-                                        :source => {},
-                                        :publish_time_f => {:index => :untokenized}
-                                      },
-                      :analyzer => 'Ferret::Analysis::StandardAnalyzer'
+
+  GENERIC_ANALYSIS_REGEX = /([a-zA-Z]|[\xc0-\xdf][\x80-\xbf])+|[0-9]+|[\xe0-\xef][\x80-\xbf][\x80-\xbf]/
+  GENERIC_ANALYZER = Ferret::Analysis::RegExpAnalyzer.new(GENERIC_ANALYSIS_REGEX, true)
+  #~ GENERIC_ANALYZER = MultilingualFerretTools::Analyzer.new
+  acts_as_ferret ({:fields => [
+                                        :title,
+                                        :abstract,
+                                        :identifier,
+                                        :author_list,
+                                        :tag_list, 
+                                        :source,
+                                        :publish_time_f
+                                      ]},
+               { :analyzer => GENERIC_ANALYZER })
+#~ Ferret::Analysis::RegExpAnalyzer.new(/./,false) })
+#~ MultilingualFerretTools::Analyzer.new })               
+
   
   def author_list
     (self.authors.map {|a| a.name}).join(" ")

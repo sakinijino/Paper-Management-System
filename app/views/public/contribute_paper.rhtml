@@ -14,7 +14,7 @@
   
   <label for="paper_author">Authors:</label>
   <% 8.times do |i|%>
-  <%= text_field_tag 'author_name[]', @authors[i]%>
+  <%= text_field_tag 'author_name[]', @author_names[i]%>
   <%end%>
 
   <label for="paper_abstract">Abstract:</label>

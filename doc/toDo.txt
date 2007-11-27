@@ -45,8 +45,8 @@ Plan for 2007-11-18
 5 personal页面中点tag显示自己的paper, 按状态排序
 6 edit note
 7 check checking_paper，如果create paper时失败怎么提示
-8 中文搜索bug
+8 中文搜索bug //done, 不稳定
 9 高级搜索
-10 collection加日期
+10 collection加日期 
 11 管理员能删能改paper // done, 效率问题
 end 删除本文件
