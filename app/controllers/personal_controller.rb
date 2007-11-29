@@ -22,6 +22,7 @@ class PersonalController < ApplicationController
         collection.save
     else
       for tag_name in params[:tags].split.uniq
+        tag_name.strip!
         next if tag_name==""
         tag = Tag.find_by_name(tag_name)
         if tag == nil
@@ -39,7 +40,6 @@ class PersonalController < ApplicationController
       end
     end
     Tag.clear_redundances
-    paper.save
     redirect_to :action=>'show_paper_detail',:id=> paper.id
   end
   

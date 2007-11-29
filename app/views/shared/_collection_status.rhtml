@@ -23,6 +23,7 @@
       if (PMS.tags[t].selected) tags.push(t)
       else tags = tags.without(t)//performance problem
     }
+    tags = tags.without("")
     $('my_tags_input').value = tags.uniq().join(' ')
   }
   PMS.tag_click = function(tag) {
