@@ -40,7 +40,6 @@ class PersonalController < ApplicationController
       end
     end
     Tag.clear_redundances
-    paper.save
     redirect_to :action=>'show_paper_detail',:id=> paper.id
   end
   
