@@ -12,18 +12,21 @@
   }
   PMS.tags_input_update = function() {
     var value = $('my_tags_input').value
-    var tags = value.split(' ');
+    var tags = value.split(';');
+    tags = tags.map(function(t){return t.strip()})
     for (t in PMS.tags) PMS.tag_unselected(t)
     for (var i=0; i<tags.length; ++i) PMS.tag_selected(tags[i])
   }
   PMS.update_tags_input = function(){
     var value = $('my_tags_input').value
-    var tags = value.split(' ');
+    var tags = value.split(';');
+    tags = tags.map(function(t){return t.strip()})
     for (t in PMS.tags) {
       if (PMS.tags[t].selected) tags.push(t)
       else tags = tags.without(t)//performance problem
     }
-    $('my_tags_input').value = tags.uniq().join(' ')
+    tags = tags.without('')
+    $('my_tags_input').value = tags.uniq().join(';')
   }
   PMS.tag_click = function(tag) {
     if (PMS.tags[tag].selected) PMS.tag_unselected(tag)
@@ -51,7 +54,7 @@
   <%if collected_status != nil%>
     Tags:
     <% for t in @tags%>
-      <span><%= t.name %></span>
+      <span><%= t.name %></span>;
     <%end%>
     <br/>
     <%= link_to "Edit Collection Status", "javascript:void(0);", :onclick=>"Effect.toggle($('edit-div-"+paper.id.to_s+"'), 'slide')" %>
@@ -67,7 +70,7 @@
       <%= radio_button_tag "status", "Finished", checked = collected_status == "Finished", :id=>"status", :class=>"radio_button" %> Finished
     </div>
     <div style="margin: 5px 0 10px 0">
-      Tags: <%= text_field_tag 'tags', (tags.map{|t| t.name}).join(' '), :id=>"my_tags_input", :onkeydown=>"PMS.tags_input_update()", :size=>40 if tags %>
+      Tags: <%= text_field_tag 'tags', (tags.map{|t| t.name}).join(';'), :id=>"my_tags_input", :onkeydown=>"PMS.tags_input_update()", :size=>40 if tags %>
       <div id="popular-tags-div">
         <span>Popular Tags with this Paper:</span><br/>
         <%for tag in paper.popular_tags(10)%>

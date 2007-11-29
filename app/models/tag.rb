@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
   
   validates_uniqueness_of   :name
   validates_presence_of   :name  
-  validates_length_of       :name,    :within => 1..200
+  validates_length_of       :name,    :within => 1..50
   
   def <=>(another_tag)
     another_tag.collections.count <=> self.collections.count

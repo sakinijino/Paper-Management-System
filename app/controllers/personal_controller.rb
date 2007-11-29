@@ -21,7 +21,8 @@ class PersonalController < ApplicationController
         collection.status = params[:status]
         collection.save
     else
-      for tag_name in params[:tags].split.uniq
+      for tag_name in params[:tags].split(";").uniq
+        tag_name.strip!
         next if tag_name==""
         tag = Tag.find_by_name(tag_name)
         if tag == nil

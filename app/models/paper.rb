@@ -22,7 +22,7 @@ class Paper < ActiveRecord::Base
                                         :abstract,
                                         :identifier,
                                         :author_list,
-                                        :tag_list, 
+                                        #~ :tag_list, 
                                         :source,
                                         :publish_time_f
                                       ]},
