@@ -1,55 +1,55 @@
-Plan for 2007-11-18
-0 smsµÄ×Ô½¨speech //done
-1.1 ËÑË÷½á¹ûµÄÅÅĞò //done
-1.2 ËÑË÷½á¹ûµÄ·ÖÒ³//done
-2 ÄÜ¸ÄcollectionµÄ×´Ì¬//done
-3.2 to read£¬reading£¬finishedÏÔÊ¾¸ü¶à //done
-3.2 notesÄÜÏÔÊ¾¸ü¶à //done
-4 ¸ÄËÑË÷µÄpost¡¢get //done
+ï»¿Plan for 2007-11-18
+0 smsçš„è‡ªå»ºspeech //done
+1.1 æœç´¢ç»“æœçš„æ’åº //done
+1.2 æœç´¢ç»“æœçš„åˆ†é¡µ//done
+2 èƒ½æ”¹collectionçš„çŠ¶æ€//done
+3.2 to readï¼Œreadingï¼Œfinishedæ˜¾ç¤ºæ›´å¤š //done
+3.2 notesèƒ½æ˜¾ç¤ºæ›´å¤š //done
+4 æ”¹æœç´¢çš„postã€get //done
 
-1 ËÑË÷²»¶Ô£ºauthor²»ÄÜËÑ£¬ÆäËû²»ÄÜ·Ö´Ê //done
-3 ¸÷ÖÖ¼ì²é£¨¸÷ÖÖmodel²ãµÄ¼ì²é£©//done
-4 parseÍøÒ³ºÍÉÏ´«paperÃ»ÓĞÁ¬½Ó //done
-5 ¹ÜÀíÔ±ÈÕ³£¹ÜÀí(paperÏêÇé)//done
-6 ²¼¾Ö //done
-7 cssºÍhtml //done
-8 ¹ÜÀíÔ±ÉóºËpaper//done
-9.1 notesÉ¾³ı //done
-9.2 collectionÉ¾³ı¡¢¹ØÁªÉ¾³ı//done
-10 È¨ÏŞÅĞ¶Ï //done
-11 ¸öÈËÊ×Ò³ÖĞmy notes¼ÓÉÏµ½paperµÄlink //done
-12 tagËÑË÷£¬ÓÃferret //done
-15 search½á¹ûµÄ·ÖÒ³//done
-17 ·ÖÒ³ //done
-19 show_paper_detailÒ³Ãæ£¬basic info²¿·Ö¼Ó×î¶àµÄtag//done
-20 ½«²Ëµ¥ÏòÏÂ·ÅÒ»ÁĞ //done
+1 æœç´¢ä¸å¯¹ï¼šauthorä¸èƒ½æœï¼Œå…¶ä»–ä¸èƒ½åˆ†è¯ //done
+3 å„ç§æ£€æŸ¥ï¼ˆå„ç§modelå±‚çš„æ£€æŸ¥ï¼‰//done
+4 parseç½‘é¡µå’Œä¸Šä¼ paperæ²¡æœ‰è¿æ¥ //done
+5 ç®¡ç†å‘˜æ—¥å¸¸ç®¡ç†(paperè¯¦æƒ…)//done
+6 å¸ƒå±€ //done
+7 csså’Œhtml //done
+8 ç®¡ç†å‘˜å®¡æ ¸paper//done
+9.1 notesåˆ é™¤ //done
+9.2 collectionåˆ é™¤ã€å…³è”åˆ é™¤//done
+10 æƒé™åˆ¤æ–­ //done
+11 ä¸ªäººé¦–é¡µä¸­my notesåŠ ä¸Šåˆ°paperçš„link //done
+12 tagæœç´¢ï¼Œç”¨ferret //done
+15 searchç»“æœçš„åˆ†é¡µ//done
+17 åˆ†é¡µ //done
+19 show_paper_detailé¡µé¢ï¼Œbasic infoéƒ¨åˆ†åŠ æœ€å¤šçš„tag//done
+20 å°†èœå•å‘ä¸‹æ”¾ä¸€åˆ— //done
 
 
 2007-11-20
-14 paper list¸ÅÒªĞÅÏ¢ÒÔ¼°ÊÕ²Ø×´Ì¬ //done
-21 personalÒ³ÃæÖĞµãtagÏÔÊ¾×Ô¼ºµÄpaper //done
-6 si-RNA BranchÖĞµÄadminµÄ×ªÏò //done
+14 paper listæ¦‚è¦ä¿¡æ¯ä»¥åŠæ”¶è—çŠ¶æ€ //done
+21 personalé¡µé¢ä¸­ç‚¹tagæ˜¾ç¤ºè‡ªå·±çš„paper //done
+6 si-RNA Branchä¸­çš„adminçš„è½¬å‘ //done
 
-4 collection tagÄÜ±£´æ //done
-1 ÉóºËÏêÇéµÄÏÂÀ­ //done
-2 PMID bug £¨11111114£¬11111115£©//done
-3 PMID¼ì²é£¨³¤¶È£¬ÄÚÈİ£© //done
-5 session datebase°æ±¾ //done
+4 collection tagèƒ½ä¿å­˜ //done
+1 å®¡æ ¸è¯¦æƒ…çš„ä¸‹æ‹‰ //done
+2 PMID bug ï¼ˆ11111114ï¼Œ11111115ï¼‰//done
+3 PMIDæ£€æŸ¥ï¼ˆé•¿åº¦ï¼Œå†…å®¹ï¼‰ //done
+5 session datebaseç‰ˆæœ¬ //done
 
 0 user profile //done
-2 ¿ÕtagÊÕ²ØµÄbug //done
-3 paper detailÖĞ¶ÌtableµÄ¸¡¶¯bug //done
-4 urlÒç³öÃ»×ö //done
-11 ¹ÜÀíÔ±ÄÜÉ¾ÄÜ¸Äpaper // done
-1 paper,checking_paper£¨title,source,id,attachment£©author£¨name£©³¤¶Èbug // done
-4 ·Ç8Î»µÄpmid bug //done
-8 ÖĞÎÄËÑË÷bug //done
+2 ç©ºtagæ”¶è—çš„bug //done
+3 paper detailä¸­çŸ­tableçš„æµ®åŠ¨bug //done
+4 urlæº¢å‡ºæ²¡åš //done
+11 ç®¡ç†å‘˜èƒ½åˆ èƒ½æ”¹paper // done
+1 paper,checking_paperï¼ˆtitle,source,id,attachmentï¼‰authorï¼ˆnameï¼‰é•¿åº¦bug // done
+4 é8ä½çš„pmid bug //done
+8 ä¸­æ–‡æœç´¢bug //done
 
-1 ¶àµãµã²âÊÔ£¬²»ÅÅ³ıÓĞbug
-2 ÖĞÎÄËÑË÷²»ÎÈ¶¨
-5 personalÒ³ÃæÖĞµãtagÏÔÊ¾×Ô¼ºµÄpaper, °´×´Ì¬ÅÅĞò
+1 å¤šç‚¹ç‚¹æµ‹è¯•ï¼Œä¸æ’é™¤æœ‰bug
+2 ä¸­æ–‡æœç´¢ä¸ç¨³å®š
+5 personalé¡µé¢ä¸­ç‚¹tagæ˜¾ç¤ºè‡ªå·±çš„paper, æŒ‰çŠ¶æ€æ’åº
 6 edit note
-7 check checking_paper£¬Èç¹ûcreate paperÊ±Ê§°ÜÔõÃ´ÌáÊ¾
-9 ¸ß¼¶ËÑË÷
-10 collection¼ÓÈÕÆÚ 
-end É¾³ı±¾ÎÄ¼ş
+7 check checking_paperï¼Œå¦‚æœcreate paperæ—¶å¤±è´¥æ€ä¹ˆæç¤º
+9 é«˜çº§æœç´¢
+10 collectionåŠ æ—¥æœŸ 
+end åˆ é™¤æœ¬æ–‡ä»¶
