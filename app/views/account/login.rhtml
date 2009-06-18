@@ -4,7 +4,10 @@
 
 <label for="password">Password</label>
 <%= password_field_tag 'password' %>
-
-<br/>
+<br />
+<%= check_box_tag 'remember_me','1',false,{:style=>"display:inline"} %>
+<label style="display:inline" for="remember_me">Remember me</label>
+<br />
+<br />
 <%= submit_tag 'Log in' %>
 <% end -%>
