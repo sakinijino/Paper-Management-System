@@ -1,0 +1,6 @@
+/db/schema.rb
+/db/*.sqlite3
+/index
+/log/*.log
+/public/paper/attachment
+/tmp
