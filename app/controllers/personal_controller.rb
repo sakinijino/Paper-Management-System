@@ -204,7 +204,7 @@ class PersonalController < ApplicationController
   def list_all_public_note
     @paper = Paper.find(params[:id])
     @all_notes = Note.find(:all,
-                                  :conditions => ["paper_id=:pid and is_private=:req",{:pid=>@paper.id,:req=>'false'}],
+                                  :conditions => ["paper_id=:pid and is_private=:req",{:pid=>@paper.id,:req=>0}],
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]}
                                   ) 
@@ -234,7 +234,7 @@ class PersonalController < ApplicationController
     end
     
     show_num = 3
-    @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 'false')
+    @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 0)
     if(@public_notes.size > show_num)
       @public_notes = @public_notes[0,show_num]
       @public_notes_show_more = true
