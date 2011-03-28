@@ -1,5 +1,5 @@
 <div class='result-papers'>
-  <h2><%=@user.login.capitalize%>'s '<%=@status%>' Papers:</h2>
+  <h2><%=@user.realname.capitalize%>'s '<%=@status%>' Papers:</h2>
 	<ul>
   	<%= render :partial=>"shared/list_paper", :locals=>{:papers=>@all_papers} %>
 	</ul>

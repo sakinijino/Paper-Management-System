@@ -1,5 +1,5 @@
 <div class='result-papers'>
-  <h2>Papers Tagged with '<%=@tag.name%>' in <%= @user.login.capitalize %>'s Collections...</h2>
+  <h2>Papers Tagged with '<%=@tag.name%>' in <%= @user.realname.capitalize %>'s Collections...</h2>
   <div class="sort">
      <%= link_to 'Sort by Collection Time', {:sort=>:col, :query => @query, :uid=>@user.id}, {:class=>'sort-by' + (params[:sort]!='pub_date'?' selected':'')}%>
     <%= link_to 'Sort by Publish Time', {:sort=>:pub_date, :query => @query, :uid=>@user.id}, {:class=>'sort-by' + (params[:sort]=='pub_date'?' selected':'')}%>

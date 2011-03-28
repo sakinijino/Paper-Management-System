@@ -1,5 +1,5 @@
 <div class="my-papers-list">
-  <h2><%= @user.login.capitalize %>'s Collections</h2>
+  <h2><%= @user.realname.capitalize %>'s Collections</h2>
   <h3>To Read...</h3>
   <ul>
 	  <%= render :partial=>"shared/list_paper", :locals=>{:papers=>@to_read_papers} %>
@@ -27,7 +27,7 @@
 </div>
 
 <div class="my-tags">
-  <h2>Tags Used by <%= @user.login.capitalize %>...</h2>
+  <h2>Tags Used by <%= @user.realname.capitalize %>...</h2>
   <div>
     <% tag_cloud @my_tags, @my_tag_counts, %w(tag_size_1 tag_size_2 tag_size_3 tag_size_4) do |tag, css_class| %>
       <%= link_to tag.name, { :controller=>:personal,:action => :list_tagged_paper, :id => tag.id, :uid=>@user.id}, :class => css_class %>
@@ -36,7 +36,7 @@
 </div>
   
 <div class="my-notes">
-  <h2><%= @user.login.capitalize %>'s Notes...</h2>
+  <h2><%= @user.realname.capitalize %>'s Notes...</h2>
   <%= render :partial=>"list_note", :locals=>{:show_notes=>@my_notes, :in_my_collection=>true} %>
   <% if @my_notes_show_more%>
     <%= link_to "<< More...", { :action => :list_all_my_note, :id=>@user.id}, {:class=>'more-link'}%> 

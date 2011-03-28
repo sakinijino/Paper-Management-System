@@ -184,7 +184,7 @@ class PersonalController < ApplicationController
                                     :page => {:size=>10,:current=>params[:page]})      
     end
 
-    @title = @user.login.capitalize + "'s Entire Notes:";
+    @title = @user.realname.capitalize + "'s Entire Notes:";
     @show_paper_title = true
     render :action => :list_all_note
   end
@@ -196,7 +196,7 @@ class PersonalController < ApplicationController
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]})
     
-    @title = current_user.login.capitalize + "'s Entire Personal Notes on '" + @paper.title + "':";
+    @title = current_user.realname.capitalize + "'s Entire Personal Notes on '" + @paper.title + "':";
     @show_paper_title = false
     render :action => :list_all_note    
   end
