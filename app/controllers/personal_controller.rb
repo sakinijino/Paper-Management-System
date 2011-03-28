@@ -1,7 +1,8 @@
 class PersonalController < ApplicationController
   layout 'frame'
   include AuthenticatedSystem
-  before_filter :login_required
+  before_filter :login_required, 
+    :except => [ :list_collection, :list_tagged_paper, :list_all_paper, :list_all_my_note, :list_all_public_note, :show_paper_detail]
   
   verify :method => :post, :only => [ :add_to_collection, :remove_from_collection, :create_note, :destroy_note],
           :redirect_to => { :action => :list_collection }
@@ -104,9 +105,10 @@ class PersonalController < ApplicationController
                                     :conditions => ["user_id=:uid",{:uid=>@user.id}],
                                     :order => 'id desc'
                                     )
-    if @user.id != current_user.id
-      @my_notes = @my_notes.find_all {|x| x.is_private == false}
+    if (!logged_in? || @user.id != current_user.id)
+      @my_notes = @my_notes.find_all {|x| x.is_private == 0}
     end
+
     if(@my_notes.size > show_num)
       @my_notes = @my_notes[0,show_num]
       @my_notes_show_more = true
@@ -177,7 +179,7 @@ class PersonalController < ApplicationController
                                     :page => {:size=>10,:current=>params[:page]})
     else
       @all_notes = Note.find(:all,
-                                    :conditions => ["user_id=:uid and is_private=:req",{:uid=>@user.id,:req=>'false'}],
+                                    :conditions => ["user_id=:uid and is_private=:req",{:uid=>@user.id,:req=>0}],
                                     :order => 'id desc',
                                     :page => {:size=>10,:current=>params[:page]})      
     end
@@ -194,7 +196,7 @@ class PersonalController < ApplicationController
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]})
     
-    @title = current_user.login.capitalize + "'s Entire Personal Notes on Paper <br />'" + @paper.title + "':";
+    @title = current_user.login.capitalize + "'s Entire Personal Notes on '" + @paper.title + "':";
     @show_paper_title = false
     render :action => :list_all_note    
   end
@@ -208,7 +210,7 @@ class PersonalController < ApplicationController
                                   :order => 'id desc',
                                   :page => {:size=>10,:current=>params[:page]}
                                   ) 
-    @title = "All Public Notes on Paper <br />'" + @paper.title + "':"
+    @title = "All Public Notes on '" + @paper.title + "':"
     @show_paper_title = false
     render :action => :list_all_note                                    
  end                              
@@ -218,21 +220,23 @@ class PersonalController < ApplicationController
   def show_paper_detail
     @paper = Paper.find(params[:id])
 
-    @tags = Collection.find(:all,
-                                     :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id, :pid=>@paper.id}],
-                                    :select => 't.name,t.id, c.paper_id, c.user_id, c.status',
-                                    :joins => 'as c inner join tags as t on c.tag_id=t.id')
-    if @tags.empty?
-      c= Collection.find_by_user_id_and_paper_id(current_user.id, @paper.id)
-      if c != nil
-        @collected_status = c.status
+    if logged_in?
+      @tags = Collection.find(:all,
+                              :conditions => ["user_id=:uid and paper_id=:pid",{:uid=>current_user.id, :pid=>@paper.id}],
+                              :select => 't.name,t.id, c.paper_id, c.user_id, c.status',
+                              :joins => 'as c inner join tags as t on c.tag_id=t.id')
+      if @tags.empty?
+        c= Collection.find_by_user_id_and_paper_id(current_user.id, @paper.id)
+        if c != nil
+          @collected_status = c.status
+        else
+          @collected_status = nil
+        end
       else
-        @collected_status = nil
+        @collected_status = @tags[0].status
       end
-    else
-      @collected_status = @tags[0].status
     end
-    
+
     show_num = 3
     @public_notes = Note.find_all_by_paper_id_and_is_private(@paper.id, 0)
     if(@public_notes.size > show_num)
@@ -242,13 +246,15 @@ class PersonalController < ApplicationController
       @public_notes_show_more = false
     end      
     
-    @personal_notes = Note.find_all_by_paper_id_and_user_id(@paper.id, current_user.id)
-    if(@personal_notes.size > show_num)
-      @personal_notes = @personal_notes[0,show_num]
-      @personal_notes_show_more = true
-    else
-      @personal_notes_show_more = false
-    end       
+    if logged_in?
+      @personal_notes = Note.find_all_by_paper_id_and_user_id(@paper.id, current_user.id)
+      if(@personal_notes.size > show_num)
+        @personal_notes = @personal_notes[0,show_num]
+        @personal_notes_show_more = true
+      else
+        @personal_notes_show_more = false
+      end       
+    end
   end
 
   def create_note

@@ -14,6 +14,6 @@ module ApplicationHelper
   end
   
   def is_admin?
-    current_user.role == 'Administrator'
+    logged_in? && current_user.role == 'Administrator'
   end
 end

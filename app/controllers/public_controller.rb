@@ -1,7 +1,7 @@
 class PublicController < ApplicationController
   layout 'frame'
   include AuthenticatedSystem
-  before_filter :login_required
+  before_filter :login_required, :only => [:create_paper, :contribute_paper]
   
   verify :method => :post, :only => [ :create_paper],
           :redirect_to => { :action => :index }

@@ -20,20 +20,11 @@
                 <td>Source:</td>
                 <td><%=h paper.source%></td>
         </tr>
-        <tr class='list-line-even' >
-                <td>Attachment:</td>
-                <td class="long-text">
-                  <%if(paper.attachment!=nil)%>
-                    <%= image_tag(paper.attachment.split('.')[paper.attachment.split('.').length-1]+".jpg",:style=>'position:relative;top:3px')%>
-                    <%= link_to paper.title+'.'+paper.attachment.split('.')[paper.attachment.split('.').length-1], url_for_file_column(:paper, :attachment) %>
-                  <%end%>
-                </td>
-        </tr>
-        <tr class='list-line-odd'>
+        <tr class='list-line-even'>
                 <td>Abstract:</td>
                 <td class="long-text"><%=simple_format paper.abstract %></td>
         </tr>
-        <tr class='list-line-even'>
+        <tr class='list-line-odd'>
                 <td>Popular Tags:</td>
                 <td>
                   <%for t in paper.popular_tags %>
@@ -41,8 +32,15 @@
                 <%end%>
               </td>
         </tr>   
-        <!--<tr class='list-line-even' style="height:1.5em">
-                <td></td>
-                <td></td>
-        </tr>-->
+        <%if logged_in? %>
+        <tr class='list-line-even'>
+          <td>Attachment:</td>
+          <td class="long-text">
+            <%if(paper.attachment!=nil)%>
+              <%= image_tag(paper.attachment.split('.')[paper.attachment.split('.').length-1]+".jpg",:style=>'position:relative;top:3px')%>
+              <%= link_to paper.title+'.'+paper.attachment.split('.')[paper.attachment.split('.').length-1], url_for_file_column(:paper, :attachment) %>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
 </table>

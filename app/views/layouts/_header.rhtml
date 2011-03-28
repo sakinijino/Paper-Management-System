@@ -1,18 +1,18 @@
-<%if logged_in? %>
 <div class="header">
   <ul class="menu">
       <li><%= link_to 'Homepage', {:controller =>'public', :action=>'index'}%></li>
-      <span><a> | </a></span>
-      <li><%= link_to 'My Papers', {:controller =>'personal', :action=>'list_collection', :id=>current_user.id}%></li>
-      <span><a> | </a></span>
-      <li><%= link_to 'Paper Contribution', {:controller =>'public', :action=>'contribute_paper'}%></li>
+      <%if logged_in? %>
+        <span><a> | </a></span>
+        <li><%= link_to 'My Papers', {:controller =>'personal', :action=>'list_collection', :id=>current_user.id}%></li>
+        <span><a> | </a></span>
+        <li><%= link_to 'Paper Contribution', {:controller =>'public', :action=>'contribute_paper'}%></li>
+      <%end%>
       <%if is_admin? %>
         <span><a> | </a></span>
         <li><%= link_to 'Management', {:controller =>'admin', :action=>'list_user'}%></li>
       <%end%>
   </ul>
 </div>
-<%end%>
 
 <div class="welcome">
   <%if !logged_in? %>

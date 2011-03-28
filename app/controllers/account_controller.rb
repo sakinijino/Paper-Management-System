@@ -5,10 +5,15 @@ class AccountController < ApplicationController
   include AuthenticatedSystem
   # If you want "remember me" functionality, add this before_filter to Application Controller
   before_filter :login_from_cookie
+  before_filter :login_required, :only => [:edit, :update]
 
   # say something nice, you goof!  something sweet.
   def index
-    redirect_to(:action => 'signup') unless logged_in? || User.count > 0
+    unless (logged_in? || User.count > 0)
+      redirect_to(:action => 'signup') 
+    else
+      redirect_to(:controller => '/public', :action => 'index')
+    end
   end
 
   def login
